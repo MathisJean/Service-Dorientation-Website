@@ -1,0 +1,88 @@
+
+html
+{
+    --main--bg--color: rgb(84, 11, 14);
+    --secondary--bg--color: rgb(103, 0, 0);
+    --bg--text--color: rgb(255, 243, 176);
+
+    --link--color: rgb(83, 83, 227);
+
+    overscroll-behavior: none;
+}
+
+body
+{
+    margin: 0%;
+    padding: 0%;
+
+    overflow-x: hidden;
+}
+
+*,
+*::after,
+*::before
+{
+    box-sizing: border-box;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+}
+
+h1, h2, h3, h4, h5, h6, a
+{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Standard */
+}
+
+h1
+{
+    font-size: 6rem;
+    font-weight: 700;
+}
+
+h2
+{
+    font-size: 3em;
+    font-weight: 700;
+}
+
+h3
+{
+    font-size: 2em;
+    font-weight: 400;
+}
+
+h4
+{
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+h5
+{
+    font-size: 1em;
+    font-weight: 500;
+}
+
+h6, a
+{
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.no_select 
+{
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Standard */
+}
+
+.no_input
+{
+    pointer-events: none;
+}
