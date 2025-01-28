@@ -1,3 +1,4 @@
-This is a website designed for orientation purposes
+This programme is a website design for "Services d'orientation ESN"
+Runs on a node.js server | To run server on localhost (Command Prompt) -> npm run start
 
-Author: Mathis Jean [27-01-2025]
+Author - Mathis Jean [21-01-2025]
