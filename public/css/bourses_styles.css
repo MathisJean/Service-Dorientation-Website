@@ -221,7 +221,8 @@ label:active
 
     transition: 
         box-shadow 0.2s ease,
-        transform 0.3s ease;
+        transform 0.2s ease,
+        background-color 0.2s ease;
 }
 
 .scholarship:hover, .scholarship:focus-within
@@ -242,6 +243,8 @@ label:active
     align-items: center;
 
     margin: 0%;
+
+    outline: none;
 }
 
 .scholarship_name
@@ -254,6 +257,8 @@ label:active
     grid-area: 2 / 1 / 3 / 4;
 
     padding-left: 0.5em;
+
+    align-self: baseline;
 }
 
 .scholarship_date
@@ -266,10 +271,13 @@ label:active
 .scholarship_criteria
 {
     justify-content: center;
+    align-self: baseline;
+
+    text-align: center;
 
     grid-area: 4 / 1 / -1 / -1;
 
-    word-break: break-all;
+    word-break: break-word;
 
     width: 100%;
 }
@@ -317,6 +325,7 @@ input[type="checkbox"]:checked + label > .active_checkbox
     align-items: center;
 
     color: var(--link--color);
+    background-color: transparent;
 
     text-decoration: none;
 

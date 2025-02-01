@@ -176,11 +176,15 @@ function edit_scholarship(checkbox, parent)
   if(checkbox.checked)
   {
     scholarship_values = []; //Reset values
+
+    parent.style.backgroundColor = "rgb(245, 245, 245)";
   }
   //Save mode
   else
   {
     edited_scholarship_values = []; //Reset values
+
+    parent.style.backgroundColor = "white";
   }
 
   //Get every element with information in scholarship
@@ -188,7 +192,7 @@ function edit_scholarship(checkbox, parent)
   {
     //Edit mode
     if(checkbox.checked)
-    {
+    {      
       //Hide link
       if(element.tagName === "A")
       {
