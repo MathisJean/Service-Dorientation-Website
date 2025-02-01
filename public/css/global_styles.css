@@ -4,7 +4,7 @@ html
     --main--bg--color: rgb(84, 11, 14);
     --secondary--bg--color: rgb(103, 0, 0);
     --bg--text--color: rgb(255, 243, 176);
-
+    --bg--grey--color: rgb(245, 245, 245);
     --link--color: rgb(83, 83, 227);
 
     overscroll-behavior: none;
@@ -34,6 +34,8 @@ h1, h2, h3, h4, h5, h6, a, p
     -moz-user-select: none;    /* Firefox */
     -ms-user-select: none;     /* Internet Explorer/Edge */
     user-select: none;         /* Standard */
+
+    margin: 0%;
 }
 
 h1
@@ -83,4 +85,79 @@ h6, a
 .no_input
 {
     pointer-events: none;
+}
+
+label:hover
+{
+    filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(0%);
+
+
+    transition: 
+        transform 0.1s ease
+}
+
+label:active
+{
+    transform: translateY(-1px);
+}
+
+.btn
+{
+    background-color: var(--secondary--bg--color);
+    color: var(--bg--text--color);
+
+    font-weight: 600;
+
+    border: none;
+    border-radius: 50px;
+
+    padding: 1em;
+    margin: 0.25em 0;
+}
+
+.popup
+{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+
+    justify-content: baseline;
+    align-items: center;
+
+    background-color: white;
+
+    border-radius: 50px;
+
+    padding: 1.5em 3em;
+
+    min-width: 15em;
+    max-width: 100%;
+
+    min-height: 30%;
+    max-height: 80%;
+
+    top: -50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    box-shadow: 
+        4px 3px 2.5px rgba(0, 0, 0, 0.4),
+        -4px -3px 2.5px rgba(0, 0, 0, 0.01);
+
+    z-index: 4;
+
+    transition: top 0.4s ease-in-out;
+
+    pointer-events: auto;
+}
+
+.popup > h4
+{
+    margin-top: -1em;
+}
+
+.close_btn
+{
+    align-self: end;
 }

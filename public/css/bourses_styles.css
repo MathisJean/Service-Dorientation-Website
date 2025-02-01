@@ -1,18 +1,4 @@
 
-label:hover
-{
-    filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(0%);
-
-
-    transition: 
-        transform 0.1s ease
-}
-
-label:active
-{
-    transform: translateY(-1px);
-}
-
 #background_gradient
 {
     position: relative;
@@ -270,7 +256,7 @@ label:active
 
 .scholarship_criteria
 {
-    justify-content: center;
+    justify-content: baseline;
     align-self: baseline;
 
     text-align: center;
@@ -338,5 +324,7 @@ input[type="checkbox"]:checked + label > .active_checkbox
     border: none;
 
     font-style: italic;
+
+    outline: none;
 }
 

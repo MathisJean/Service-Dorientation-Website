@@ -53,22 +53,66 @@
       </div>
 
       <div class="nav_right">
-        <div class="nav_icon_background">
+        <div class="nav_icon_background nav_logout" style="display: none;">
           <img src="/icons/account.svg" class="nav_icon" draggable="false"></img>
         </div>
+
+        <div class="nav_icon_background nav_login" onclick="popup('.login_popup', '')">
+          <h6>Connexion</h6>
+        </div>
+
         <div class="nav_icon_background">
           <img src="/icons/logo.svg" class="nav_icon" draggable="false"></img>
         </div>
       </div>
-  </nav>  
+    </nav>  
+
+    <input type="button" id="close_btn" style="display: none;" onclick="close_popup()">
   
-  <div class="error_popup">
-    <div>Error</div>
+    <div class="error_popup popup">
+      <label for="close_btn" class="close_btn">
+        <img src="/icons/close.svg">
+      </label>
 
-    <p></p>
+      <h4>Error</h4>
 
-    <input type="button" value="Close" onclick="error_popup('', true)">
-  </div>
-</body>
+      <p>Error:</p>
+    </div>
 
+    <div class="login_popup popup">
+      <label for="close_btn" class="close_btn">
+        <img src="/icons/close.svg">
+      </label>
+
+      <h4>Connexion</h4>
+
+      <form onsubmit="login()">
+        <input type="text" placeholder="Couriel">
+        <input type="password" placeholder="Mot de Passe">
+
+        <input type="submit" value="Se Connecter" class="btn">
+      </form>
+
+      <input type="button" value="Créer un Compte" class="switch_popup_btn" onclick="close_popup(); popup('.signup_popup', '')">
+    </div>
+
+    <div class="signup_popup popup">
+      <label for="close_btn" class="close_btn">
+        <img src="/icons/close.svg">
+      </label>
+
+      <h4>Inscription</h4>
+
+      <form onsubmit="signup()">
+        <input type="text" placeholder="Nom d'Utilisateur">
+        <input type="text" placeholder="Couriel">
+        <input type="password" placeholder="Mot de Passe">
+
+        <input type="submit" value="Créer un Compte" class="btn">
+      </form>
+
+      <input type="button" value="Se Connecter" class="switch_popup_btn" onclick="close_popup(); popup('.login_popup', '')">
+    </div>
+  </body>
+  
 </html>

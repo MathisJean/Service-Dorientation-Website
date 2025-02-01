@@ -71,11 +71,11 @@ function update_table()
         <div>
           <h2>${month}</h2>
 
-            <input type="button" id="add_button_${month.replaceSpecialChar()}" onclick="add_scholarship('${month.replaceSpecialChar()}')" style="display: none;">
+          <input type="button" id="add_button_${month.replaceSpecialChar()}" onclick="add_scholarship('${month.replaceSpecialChar()}')" style="display: none;">
 
-            <label for="add_button_${month.replaceSpecialChar()}" class="add_button admin">
-              <img src="/icons/add.svg" class="no_select" draggable="false"></img>
-            </label>
+          <label for="add_button_${month.replaceSpecialChar()}" class="add_button admin">
+            <img src="/icons/add.svg" class="no_select" draggable="false"></img>
+          </label>
         </div>
       `;
 
@@ -127,7 +127,7 @@ function update_table()
     //Hides month header and containers without any children
     hide_month_headers();
   })
-  .catch(err => {error_popup(String(err), false)});
+  .catch(err => {popup(".error_popup", String(err))});
 };
 
 //Admin feature to add scholarship
@@ -166,7 +166,7 @@ function add_scholarship(month)
     //Hides user elements
     admin(new_scholarship);
   })
-  .catch(err => {error_popup(String(err), false)});
+  .catch(err => {popup(".error_popup", String(err))});
 }
 
 //Admin feature to edit scholarship data
@@ -178,6 +178,8 @@ function edit_scholarship(checkbox, parent)
     scholarship_values = []; //Reset values
 
     parent.style.backgroundColor = "rgb(245, 245, 245)";
+
+    document.addEventListener("keydown", change_cell_focus);
   }
   //Save mode
   else
@@ -185,6 +187,8 @@ function edit_scholarship(checkbox, parent)
     edited_scholarship_values = []; //Reset values
 
     parent.style.backgroundColor = "white";
+
+    document.removeEventListener("keydown", change_cell_focus)
   }
 
   //Get every element with information in scholarship
@@ -212,13 +216,13 @@ function edit_scholarship(checkbox, parent)
         element.contentEditable = true;
         element.style.zIndex = "1";
 
-        scholarship_values.push(element.innerHTML);
+        scholarship_values.push(element.textContent);
       }
 
       //Add id to values list
       else if(Array.from(element.classList).includes("id"))
       {
-        scholarship_values.push(element.innerHTML);
+        scholarship_values.push(element.textContent);
       };
     }
 
@@ -243,13 +247,13 @@ function edit_scholarship(checkbox, parent)
       else if(Array.from(element.classList).includes("admin_edit"))
       {
         element.contentEditable = false;
-        edited_scholarship_values.push(element.innerHTML);
+        edited_scholarship_values.push(element.textContent);
       }
 
       //Add id to edited values list
       else if(Array.from(element.classList).includes("id"))
       {
-        edited_scholarship_values.push(element.innerHTML);
+        edited_scholarship_values.push(element.textContent);
       };
     };
   });
@@ -307,7 +311,7 @@ function edit_scholarship(checkbox, parent)
         //Loops through every scholarship
         for (let i = 0; i < scholarships.length; i++)
         {
-          let scholarship_date = scholarships[i].querySelector(".scholarship_date").innerHTML; //Get date from scholarship date field
+          let scholarship_date = scholarships[i].querySelector(".scholarship_date").textContent; //Get date from scholarship date field
           let dayA = scholarship_date.match(/\d+/g) == null ? [0] : scholarship_date.match(/\d+/g); //Get day from scholarship thats already there
           let dayB = date.match(/\d+/g) == null ? [0] : date.match(/\d+/g); //Get day of inserting scholarship
 
@@ -330,7 +334,7 @@ function edit_scholarship(checkbox, parent)
         hide_month_headers();
       };
     })
-    .catch(err => {error_popup(String(err), false)});
+    .catch(err => {popup(".error_popup", String(err))});
   };
 };
 
@@ -347,7 +351,7 @@ function delete_scholarship(scholarship_id)
     //Hide header and container if no more content inside it
     hide_month_headers();
   })
-  .catch(err => {error_popup(String(err), false)});
+  .catch(err => {popup(".error_popup", String(err))});
 };
 
 //Function to initialize a scholarship
@@ -370,6 +374,8 @@ function initiate_scholarship(scholarship)
       <input type="text" value="${scholarship.link}" style="display: none;">
     </div>
 
+    <p class="scholarship_criteria admin_edit">${scholarship.criteria}</p>
+
     <div class="scholarship_buttons">
       <input type="checkbox" id="subscribe_checkbox_${scholarship.id}" style="display: none;">
 
@@ -391,8 +397,6 @@ function initiate_scholarship(scholarship)
         <img src="/icons/delete.svg" class="no_select" draggable="false"></img>
       <label>
     </div>
-
-    <p class="scholarship_criteria admin_edit">${scholarship.criteria}</p>
   `;
 
   return new_scholarship;
@@ -417,3 +421,23 @@ function hide_month_headers()
     };
   });
 };
+
+function change_cell_focus(event)
+{
+  if(document.activeElement !== document.body && event.key === "Enter")
+  {
+    event.preventDefault()
+
+    // Example: Move focus to the next element (optional)
+    let next = document.activeElement.nextElementSibling ? document.activeElement.nextElementSibling : document.activeElement.parentElement.nextElementSibling
+
+    if(Array.from(next.classList).includes("scholarship_link")) 
+    {
+      next.querySelector("input").focus();
+    }
+    else if(!Array.from(next.classList).includes("scholarship_buttons"))
+    {      
+      next.focus();
+    };
+  };
+}

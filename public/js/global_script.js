@@ -130,7 +130,7 @@ const DELETE = async (resource, json_data) => //Data must be in object form
 //----Global-Constants----//
 
 //Admin is set based on account on log-in
-const is_admin = true;
+const is_admin = false;
 
 const background = document.querySelector("#background_gradient");
 
@@ -194,32 +194,48 @@ function scroll_to(query_selector, event)
   };
 };
 
-function error_popup(error_msg, clear)
+function popup(popup_class, txt_msg)
 {
-    let error_popup = document.querySelector(".error_popup");
-    let error_popup_text = document.querySelector(".error_popup > p");
+    let popup = document.querySelector(popup_class);
+    let popup_text = document.querySelector(popup_class + " > p");
 
-    if (clear)
+    //Freeze scroll
+    document.body.style.overflow = "hidden";
+
+    document.body.classList.add("no_input")
+
+    if(popup_text)
     {
-        //Freeze scroll
-        document.body.style.overflow = "auto";
-
-        document.body.classList.remove("no_input")
-
-        error_popup.style.top = "-50%";
-    }
-
-    else
-    {
-        //Freeze scroll
-        document.body.style.overflow = "hidden";
-
-        document.body.classList.add("no_input")
-
-        error_popup_text.innerHTML = String(error_msg);
-        error_popup.style.top = "5rem";
+        popup_text.textContent = String(txt_msg);        
     };
+
+    popup.style.top = "50%";
 };
+
+function close_popup()
+{
+    let popups = Array.from(document.querySelectorAll(".popup"));
+
+    popups.forEach(popup =>
+    {
+        popup.style.top = "-50%"
+    });
+
+    //Unfreeze scroll
+    document.body.style.overflow = "auto";
+
+    document.body.classList.remove("no_input")
+};
+
+function login()
+{
+    console.log("Logged In")
+}
+
+function signup()
+{
+    console.log("Signed Up")
+}
 
 //----Global-Methods----//
 

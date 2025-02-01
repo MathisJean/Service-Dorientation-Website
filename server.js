@@ -289,7 +289,6 @@ app.use('/cours', coursRouter);
 
 //Bourses
 const boursesRouter = require('./routes/bourses');
-const { error } = require('console');
 
 app.use('/bourses', boursesRouter);
 
