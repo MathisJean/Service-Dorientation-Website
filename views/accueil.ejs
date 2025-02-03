@@ -12,7 +12,46 @@
 <body>
     <%- include("navbar.ejs") %>
 
-    <h1>Accueil</h1> 
+    <div id="background_gradient">
+        <div id="background_img">
+            <div class="page_head">
+            <h1>Notre Mission</h1> 
+            <h3>T'aider à bâtir un projet de vie et de carrière personnalisé</h3> 
+            
+            <input type="button" value="Nos Services" class="btn">
+            </div>
+        </div>
+    </div>
+
+    <div class="select_container">
+        <input type="radio" name="services" id="orientation" style="display: none;" checked>
+
+        <label for="orientation" class="no_select select orientation">
+            <div>Services en Orientation</div>
+        </label>
+
+        <input type="radio" name="services" id="vie_carriere" style="display: none;">
+
+        <label for="vie_carriere" class="no_select select vie_carriere">
+            <div>Services en Vie-Carrière</div>
+        </label>
+    </div>
+
+    <div id="orientation_info" class="info">
+        <div class="orienters">
+            <div>
+                <div class="img_input">
+                    <input type="file" accept="image/" hidden>
+                </div>
+
+                <div>
+                    <input type="text" class="orienter_name" value="Gina M. Scichilone" readonly>
+                    <input type="text" class="orienter_role" value="Conseillère en orientation" readonly>
+                    <input type="email" value="GinaMaria.Scichilone@nbed.nb.ca" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script src="../js/global_script.js"></script>

@@ -1,0 +1,156 @@
+
+.page_head > input
+{
+    background-color: white;
+    color: black;
+
+    transition: 
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+.page_head > input:hover
+{
+    transform: translateY(-5px);
+
+    box-shadow: 
+        1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        -1px -3px 2.5px rgba(0, 0, 0, 0.01);
+}
+
+.page_head > input:active
+{
+    transform: translateY(-1px);
+}
+
+.select_container
+{
+    display: flex;
+
+    width: 100%;
+}
+
+.select
+{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    color: black;
+
+    font-size: 1.5em;
+    font-weight: 700;
+
+    border: none;
+    border-radius: 50px;
+
+    box-shadow: 
+        1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        -1px -3px 2.5px rgba(0, 0, 0, 0.01);
+
+    padding: 1em;
+    margin-top: -2em;
+
+
+    width: 50%;
+
+    z-index: 3;
+
+    transition:
+        background-color 0.1s ease,
+        color 0.1s ease;
+}
+
+#orientation:checked + .orientation
+{
+    background-color: var(--secondary--bg--color);
+    color: var(--bg--text--color);
+}
+
+#vie_carriere:checked + .vie_carriere
+{
+    background-color: var(--secondary--bg--color);
+    color: var(--bg--text--color);
+}
+
+.info
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.orienters
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.orienters > div
+{
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+
+    padding: 1em;
+}
+
+.orienters > div div
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: baseline;
+}
+
+.orienters input
+{
+    border: none;
+
+    outline: none;
+}
+
+.img_input
+{
+    display: flex;
+
+    justify-self: center;
+    align-self: center;
+
+    background-color: rgb(245, 245, 245);
+
+    border-radius: 500px;
+
+    min-width: 15em;
+
+    aspect-ratio: 1/1;
+}
+
+.orienters input[type="text"]
+{
+    width: 100%;
+}
+
+.orienter_name
+{
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.orienter_role
+{
+    font-size: 1.1em;
+    font-style: italic;
+}
+
+.orienters input[type="email"]
+{
+    font-style: italic;
+    text-decoration: underline;
+}

@@ -73,7 +73,7 @@ function update_table()
 
           <input type="button" id="add_button_${month.replaceSpecialChar()}" onclick="add_scholarship('${month.replaceSpecialChar()}')" style="display: none;">
 
-          <label for="add_button_${month.replaceSpecialChar()}" class="add_button admin">
+          <label for="add_button_${month.replaceSpecialChar()}" class="add_button admin icon">
             <img src="/icons/add.svg" class="no_select" draggable="false"></img>
           </label>
         </div>
@@ -380,21 +380,21 @@ function initiate_scholarship(scholarship)
     <div class="scholarship_buttons">
       <input type="checkbox" id="subscribe_checkbox_${scholarship.id}" style="display: none;">
 
-      <label for="subscribe_checkbox_${scholarship.id}" class="user">
+      <label for="subscribe_checkbox_${scholarship.id}" class="user icon">
         <img src="/icons/subscribe.svg" class="unactive_checkbox no_select" draggable="false"></img>
         <img src="/icons/unsubscribe.svg" class="active_checkbox no_select" draggable="false"></img>
       </label>
 
       <input type="checkbox" id="edit_checkbox_${scholarship.id}" onchange="edit_scholarship(this, this.parentNode.parentNode)" style="display: none;">
 
-      <label for="edit_checkbox_${scholarship.id}" class="admin">
+      <label for="edit_checkbox_${scholarship.id}" class="admin icon">
         <img src="/icons/edit.svg" class="unactive_checkbox no_select" draggable="false"></img>
         <img src="/icons/save.svg" class="active_checkbox no_select" draggable="false"></img>
       </label>
 
       <input type="button" id="delete_button_${scholarship.id}" onclick="delete_scholarship(${scholarship.id})" style="display: none;">
 
-      <label for="delete_button_${scholarship.id}" class="admin">
+      <label for="delete_button_${scholarship.id}" class="admin icon">
         <img src="/icons/delete.svg" class="no_select" draggable="false"></img>
       <label>
     </div>
