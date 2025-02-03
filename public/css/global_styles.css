@@ -93,7 +93,8 @@ label:hover
 
 
     transition: 
-        transform 0.1s ease
+        transform 0.1s ease,
+        filter 0.1s ease;
 }
 
 label:active

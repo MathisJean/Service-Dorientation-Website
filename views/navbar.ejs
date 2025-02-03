@@ -16,12 +16,12 @@
       <div class="nav_left">
         <div class="nav_menu">   
           <div>
-            <img src="/icons/menu.svg" class="nav_icon" draggable="false"></img>
+            <img src="/icons/menu.svg" class="nav_icon no_select" draggable="false"></img>
           </div>
             
           <aside class="nav_sidebar">
             <div>
-              <img src="/icons/menu.svg" class="nav_icon" draggable="false"></img>
+              <img src="/icons/menu.svg" class="nav_icon no_select" draggable="false"></img>
             </div>
 
             <ul>
@@ -54,7 +54,7 @@
 
       <div class="nav_right">
         <div class="nav_icon_background nav_logout" style="display: none;">
-          <img src="/icons/account.svg" class="nav_icon" draggable="false"></img>
+          <img src="/icons/account.svg" class="nav_icon no_select" draggable="false"></img>
         </div>
 
         <div class="nav_icon_background nav_login" onclick="popup('.login_popup', '')">
@@ -62,7 +62,7 @@
         </div>
 
         <div class="nav_icon_background">
-          <img src="/icons/logo.svg" class="nav_icon" draggable="false"></img>
+          <img src="/icons/logo.svg" class="nav_icon no_select" draggable="false"></img>
         </div>
       </div>
     </nav>  
@@ -70,7 +70,7 @@
     <input type="button" id="close_btn" style="display: none;" onclick="close_popup()">
   
     <div class="error_popup popup">
-      <label for="close_btn" class="close_btn">
+      <label for="close_btn" class="close_btn no_select">
         <img src="/icons/close.svg">
       </label>
 
@@ -80,15 +80,15 @@
     </div>
 
     <div class="login_popup popup">
-      <label for="close_btn" class="close_btn">
+      <label for="close_btn" class="close_btn no_select">
         <img src="/icons/close.svg">
       </label>
 
       <h4>Connexion</h4>
 
       <form onsubmit="login()">
-        <input type="text" placeholder="Couriel">
-        <input type="password" placeholder="Mot de Passe">
+        <input type="email" placeholder="Couriel" required>
+        <input type="password" placeholder="Mot de Passe" required>
 
         <input type="submit" value="Se Connecter" class="btn">
       </form>
@@ -97,16 +97,17 @@
     </div>
 
     <div class="signup_popup popup">
-      <label for="close_btn" class="close_btn">
+      <label for="close_btn" class="close_btn no_select">
         <img src="/icons/close.svg">
       </label>
 
       <h4>Inscription</h4>
 
       <form onsubmit="signup()">
-        <input type="text" placeholder="Nom d'Utilisateur">
-        <input type="text" placeholder="Couriel">
-        <input type="password" placeholder="Mot de Passe">
+        <input type="text" placeholder="Prénom" required>
+        <input type="text" placeholder="Nom" required>
+        <input type="email" placeholder="Couriel" required>
+        <input type="password" placeholder="Mot de Passe" required>
 
         <input type="submit" value="Créer un Compte" class="btn">
       </form>

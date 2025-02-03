@@ -130,7 +130,7 @@ const DELETE = async (resource, json_data) => //Data must be in object form
 //----Global-Constants----//
 
 //Admin is set based on account on log-in
-const is_admin = false;
+const is_admin = true;
 
 const background = document.querySelector("#background_gradient");
 

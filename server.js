@@ -1,8 +1,10 @@
 
 //Set up libraries
 const http = require('http');
-const lockfile = require('proper-lockfile')
-const os = require('os')
+const https = require('https');
+const lockfile = require('proper-lockfile');
+const os = require('os');
+const fs = require('fs');
 const {writeFile, readFile} = require('fs');
 const path = require('path');
 const express = require('express');
@@ -34,14 +36,6 @@ app.use(express.static('public'));
 //Set view engine
 app.set("view engine", "ejs");
 
-//Home page
-app.get('/' , (req, res) => 
-{
-  res.render("accueil");
-  res.status(200);
-  return res.end();
-});
-
 /***************************************************************************************************************************/
 
 //Handle HTTP requests
@@ -51,6 +45,8 @@ app.get("/scholarship_data", (req, res) =>
 {
   readFile("database/bourses_data.json", (err, data) =>
   {
+    parsed_data = JSON.parse(data)
+
     if(err)
     {
       console.error(err);
@@ -58,9 +54,24 @@ app.get("/scholarship_data", (req, res) =>
       //Set DELETE status to 404
       res.status(404).send("Reading JSON file");
     }
-    else if(data)
+    else if(parsed_data)
     {  
-      res.send(JSON.parse(data))
+      const response = 
+      { 
+        scholarships: parsed_data.scholarships.map(scholarship =>
+        ({
+          id: scholarship.id,
+          name: scholarship.name,
+          date: scholarship.date,
+          criteria: scholarship.criteria,
+          value: scholarship.value,
+          link: scholarship.link,
+          subscribedUsers: scholarship.subscribedUsers.length //Remove user email from res         
+        })) 
+      };
+
+      //Send if POST is complete
+      res.send(response);
     };
   });
 });
@@ -105,8 +116,22 @@ app.post("/scholarship_data", (req, res) =>
           }    
           else
           {
+            const response = 
+            { 
+              scholarships: parsed_data.scholarships.map(scholarship =>
+              ({
+                id: scholarship.id,
+                name: scholarship.name,
+                date: scholarship.date,
+                criteria: scholarship.criteria,
+                value: scholarship.value,
+                link: scholarship.link,
+                subscribedUsers: scholarship.subscribedUsers.length //Remove user email from res         
+              })) 
+            };
+
             //Send if POST is complete
-            res.send(scholarship_data);
+            res.send(response);
           };   
         });
 
@@ -167,8 +192,22 @@ app.put("/scholarship_data", (req, res) =>
                 }    
                 else
                 {
-                  //Send if PUT is complete
-                  res.send(parsed_data);
+                  const response = 
+                  { 
+                    scholarships: parsed_data.scholarships.map(scholarship =>
+                    ({
+                      id: scholarship.id,
+                      name: scholarship.name,
+                      date: scholarship.date,
+                      criteria: scholarship.criteria,
+                      value: scholarship.value,
+                      link: scholarship.link,
+                      subscribedUsers: scholarship.subscribedUsers.length //Remove user email from res         
+                    })) 
+                  };
+      
+                  //Send if POST is complete
+                  res.send(response);
                 };   
               });
                 
@@ -240,8 +279,22 @@ app.delete("/scholarship_data", (req, res) =>
                 }    
                 else
                 {
-                  //Send if DELETE is complete
-                  res.send(parsed_data);
+                  const response = 
+                  { 
+                    scholarships: parsed_data.scholarships.map(scholarship =>
+                    ({
+                      id: scholarship.id,
+                      name: scholarship.name,
+                      date: scholarship.date,
+                      criteria: scholarship.criteria,
+                      value: scholarship.value,
+                      link: scholarship.link,
+                      subscribedUsers: scholarship.subscribedUsers.length //Remove user email from res         
+                    })) 
+                  };
+      
+                  //Send if POST is complete
+                  res.send(response);
                 };   
               });
                 
@@ -277,6 +330,14 @@ app.post('/blog_data', (req, res) =>
   console.log("received post request");
 });
 
+//Home page
+app.get('/' , (req, res) => 
+  {
+    res.render("accueil");
+    res.status(200);
+    return res.end();
+  });
+
 //Expériences
 const experiencesRouter = require('./routes/experiences');
 
@@ -298,8 +359,14 @@ app.use((req, res) =>
   res.status(404).render("error");
 });
 
+const sslServer = https.createServer(
+  {
+    key: fs.readFileSync(path.join(__dirname, "cert", "key.pem")),
+    cert: fs.readFileSync(path.join(__dirname, "cert", "cert.pem"))
+  }, app)
+
 //Start up server
-app.listen(port, host, () =>  
+sslServer.listen(port, host, () =>  
 {
-  console.log(`Server running at http://${host}:${port} close it with CTRL + C`);
+  console.log(`Server running at https://${host}:${port} close it with CTRL + C`);
 });

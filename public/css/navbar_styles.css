@@ -218,7 +218,11 @@
     margin-bottom: 1em;
 }
 
-.login_popup form > input[type="text"], .login_popup form > input[type="password"], .signup_popup form > input[type="text"], .signup_popup form > input[type="password"]
+.login_popup form > input[type="email"],
+.login_popup form > input[type="password"],
+.signup_popup form > input[type="text"],
+.signup_popup form > input[type="email"],
+.signup_popup form > input[type="password"]
 {
     border: 2px solid var(--bg--grey--color);
     border-radius: 5px;

@@ -138,7 +138,7 @@ function add_scholarship(month)
     [{
       id: -1,
       name: "Nom",
-      date: "1" + String(month),
+      date: "0 " + String(month),
       criteria: "Critères",
       value: "Valeur",
       link: "#",
@@ -152,13 +152,14 @@ function add_scholarship(month)
   {      
     let scholarship_container = document.getElementById("month_container_" + String(month.replaceSpecialChar()));
 
-    let new_scholarship = initiate_scholarship(data.scholarships[0]);
+    let pos = data.scholarships.length - 1
+    let new_scholarship = initiate_scholarship(data.scholarships[pos]);
 
     //Adds new scholarship to container
     scholarship_container.appendChild(new_scholarship);
 
     //Sets the scholarship in edit mode
-    checkbox = document.getElementById("edit_checkbox_" + String(data.scholarships[0].id));
+    checkbox = document.getElementById("edit_checkbox_" + String(data.scholarships[pos].id));
     checkbox.checked = true;
 
     edit_scholarship(checkbox, new_scholarship);
