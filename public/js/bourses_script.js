@@ -34,24 +34,11 @@ update_table();
 
 //----Functions----//
 
-//Hides or shows elements based on .admin and .user class
-function admin(parent)
-{
-  Array.from(parent.querySelectorAll(".admin")).forEach(element =>
-  {
-    element.style.display = is_admin ? "inline_block" : "none";
-  });
-  Array.from(parent.querySelectorAll(".user")).forEach(element =>
-  {
-    element.style.display = !is_admin ? "inline-block" : "none";
-  });
-};
-
 //Adds month headers an containers dynamicly based on "months" array and scholarship data
 function update_table() 
 {
   //Get data from json database to populate scholarships
-  GET("/scholarship_data")
+  GET("/bourses/data")
   .then(data => 
   {
     //Creates month headers and containers
@@ -147,7 +134,7 @@ function add_scholarship(month)
   });
 
   //Adds scholarship to json database
-  POST("/scholarship_data", obj)
+  POST("/bourses/data", obj)
   .then(data => 
   {      
     let scholarship_container = document.getElementById("month_container_" + String(month.replaceSpecialChar()));
@@ -276,7 +263,7 @@ function edit_scholarship(checkbox, parent)
     });
 
     //Send a request to edit the data
-    PUT("/scholarship_data", obj)
+    PUT("/bourses/data", obj)
     .then(data => 
     {
       let date = String(edited_scholarship_values[3].replaceSpecialChar());
@@ -343,7 +330,7 @@ function edit_scholarship(checkbox, parent)
 function delete_scholarship(scholarship_id)
 {
   //Request to delete scholarship from json database based on sepcified id
-  DELETE("/scholarship_data", JSON.stringify({id: scholarship_id}))
+  DELETE("/bourses/data", JSON.stringify({id: scholarship_id}))
   .then(data => 
   {
     //When HTTP request is succesful, delete scholaship

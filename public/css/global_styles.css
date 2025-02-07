@@ -191,6 +191,8 @@ h6, a
         rgba(240, 240, 240, 0.5) 20%
     );
 
+    min-height: 100vh;
+
     overflow: hidden;
     margin: 0;
 }

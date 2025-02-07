@@ -2,7 +2,7 @@
 //----HTTP requests----//
 
 //Example GET
-//GET("/scholarship_data")
+//GET("/bourses/data")
 //  .then(data => {console.log("GET resolved:", data)})
 //  .catch(err => {console.error(err)})
 
@@ -154,6 +154,20 @@ observer.observe(background);
 
 //----Global-Functions----//
 
+//Hides or shows elements based on .admin and .user class
+function admin(parent)
+{
+  Array.from(parent.querySelectorAll(".admin")).forEach(element =>
+  {
+    element.style.display = is_admin ? "inline_block" : "none";
+  });
+  Array.from(parent.querySelectorAll(".user")).forEach(element =>
+  {
+    element.style.display = !is_admin ? "inline-block" : "none";
+  });
+};
+
+//Update the background
 function update_gradient()
 {
     const y = window.scrollY / window.innerHeight * 120 + 50;

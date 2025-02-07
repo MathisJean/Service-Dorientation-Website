@@ -1,8 +1,7 @@
 
 .page_head > input
 {
-    background-color: white;
-    color: black;
+    margin-top: 6rem;
 
     transition: 
         transform 0.1s ease,
@@ -50,7 +49,7 @@
         1px 3px 2.5px rgba(0, 0, 0, 0.4),
         -1px -3px 2.5px rgba(0, 0, 0, 0.01);
 
-    padding: 1em;
+    padding: 0.5em;
     margin-top: -2em;
 
 
@@ -98,6 +97,7 @@
     width: 100%;
 
     padding: 1em;
+    padding-top: 3em;
 }
 
 .orienters > div div
@@ -153,4 +153,6 @@
 {
     font-style: italic;
     text-decoration: underline;
+
+    width: 100%;
 }
