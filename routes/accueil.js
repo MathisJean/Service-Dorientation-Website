@@ -125,8 +125,16 @@ router.get("/data", (req, res) =>
             if(Number(parsed_data.orienters[i].id) === Number(orienter_data.orienters[0].id))
             {
               data_found = true;  
-  
-              parsed_data.orienters[i] = orienter_data.orienters[0];
+
+              Object.values(orienter_data.orienters[0]).forEach((key_value, index) =>
+              {
+                if(String(Object.values(parsed_data.orienters[i])[index]) !== String(key_value))
+                {
+                  key = Object.keys(parsed_data.orienters[i])[index];
+                  
+                  parsed_data.orienters[i][key] = key_value   ;           
+                };
+              });
   
               lockfile.lock(data_path, {retries: {retries: 5}})
               .then((release) =>

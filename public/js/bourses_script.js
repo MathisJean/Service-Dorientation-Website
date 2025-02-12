@@ -409,23 +409,3 @@ function hide_month_headers()
     };
   });
 };
-
-function change_cell_focus(event)
-{
-  if(document.activeElement !== document.body && event.key === "Enter")
-  {
-    event.preventDefault()
-
-    // Example: Move focus to the next element (optional)
-    let next = document.activeElement.nextElementSibling ? document.activeElement.nextElementSibling : document.activeElement.parentElement.nextElementSibling
-
-    if(Array.from(next.classList).includes("scholarship_link")) 
-    {
-      next.querySelector("input").focus();
-    }
-    else if(!Array.from(next.classList).includes("scholarship_buttons"))
-    {      
-      next.focus();
-    };
-  };
-}

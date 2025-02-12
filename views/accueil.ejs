@@ -18,19 +18,19 @@
                     <h1>Notre Mission</h1> 
                     <h3>T'aider à bâtir un projet de vie et de carrière personnalisé</h3> 
                     
-                    <input type="button" value="Nos Services" class="btn">
+                    <input type="button" value="Nos Services" class="btn" onclick="scroll_to('.info' , event)">
                 </div>
             </div>
         </div>
 
         <div class="select_container">
-            <input type="radio" name="services" id="orientation" style="display: none;" checked>
+            <input type="radio" name="services" id="orientation" style="display: none;" onchange="services(this)" checked>
 
             <label for="orientation" class="no_select select orientation">
                 <div>Services en Orientation</div>
             </label>
 
-            <input type="radio" name="services" id="vie_carriere" style="display: none;">
+            <input type="radio" name="services" id="vie_carriere" style="display: none;" onchange="services(this)">
 
             <label for="vie_carriere" class="no_select select vie_carriere">
                 <div>Services en Vie-Carrière</div>
@@ -39,14 +39,74 @@
 
         <div id="orientation_info" class="info">
             <div class="orienters orienters_orientation"></div>
+
+            <div class="services">
+                <div>
+                    <h3>Parcours Académique</h3>
+
+                    <h6>Accompagnement</h6>
+                    <h6>Renseignement des Possibilitées</h6>
+                    <h6>Changement de cours</h6>
+                </div>
+
+                <div>
+                    <h3>Préparation au Postsecondaire</h3>
+
+                    <h6>Explorer le Monde du Travail</h6>
+                    <h6>Contact des Établissements Postsecondaires</h6>
+                    <h6>Aide Financières et Bourses</h6>
+                </div>
+            </div>
         </div>
         
         <div id="vie_carriere_info" class="info">
             <div class="orienters orienters_vie_carriere"></div>
+
+            <div class="services">
+                <div>
+                    <h3>Exploration du travail</h3>
+
+                    <h6>Journées Carrière</h6>
+                    <h6>Entretien d'information</h6>
+                    <h6>Stages</h6>
+                </div>
+
+                <div>
+                    <h3>Aide à la Recherche d'Emploi</h3>
+
+                    <h6>Stratégies de Recherche</h6>
+                    <h6>CV et Lettre de Présentation</h6>
+                    <h6>Préparation à l'Entrevue</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="contacts">
+            <ul>
+                <li>
+                    <img src="/icons/teams.svg">
+                    <h5>Teams</h5>
+                </li>
+                <li>
+                    <img src="/icons/location.svg">
+                    <h5>Local F175</h5>
+                </li>
+                <li>
+                    <img src="/icons/instagram.svg">
+                    <h5>orientation_esn</h5>
+                </li>
+                <li>
+                    <img src="/icons/email.svg">
+                    <h5>Couriel</h5>
+                </li>                
+                <li>
+                    <img src="/icons/phone.svg">
+                    <h5>(506) 547-2785</h5>
+                </li>
+            </ul>
         </div>
     </body>
 
     <script src="../js/global_script.js"></script>
     <script src="../js/accueil_script.js"></script>
-
 </html>

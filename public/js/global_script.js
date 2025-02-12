@@ -130,7 +130,7 @@ const DELETE = async (resource, json_data) => //Data must be in object form
 //----Global-Constants----//
 
 //Admin is set based on account on log-in
-const is_admin = false;
+const is_admin = true;
 
 const background = document.querySelector("#background_gradient");
 
@@ -166,6 +166,26 @@ function admin(parent)
     element.style.display = !is_admin ? "inline-block" : "none";
   });
 };
+
+function change_cell_focus(event)
+{
+  if(document.activeElement !== document.body && event.key === "Enter")
+  {
+    event.preventDefault()
+
+    // Example: Move focus to the next element (optional)
+    let next = document.activeElement.nextElementSibling ? document.activeElement.nextElementSibling : document.activeElement.parentElement.nextElementSibling
+
+    if(Array.from(next.classList).includes("scholarship_link")) 
+    {
+      next.querySelector("input").focus();
+    }
+    else if(!Array.from(next.classList).includes("scholarship_buttons"))
+    {      
+      next.focus();
+    };
+  };
+}
 
 //Update the background
 function update_gradient()

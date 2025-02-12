@@ -25,6 +25,8 @@ for (const interfaceName in networkInterfaces)
     {
       host = interfaceInfo.address;
       port = process.env.PORT || 3000;
+
+      break
     }
   }
 }

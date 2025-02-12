@@ -128,8 +128,8 @@
     border-radius: 50px;
 
     box-shadow: 
-        inset 4px 3px 2.5px rgba(0, 0, 0, 0.4),
-        inset -4px -3px 2.5px rgba(0, 0, 0, 0.2),
+        inset 1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        inset -1px -3px 2.5px rgba(0, 0, 0, 0.1),
         4px 3px 2.5px rgba(0, 0, 0, 0.0),
         -4px -3px 2.5px rgba(0, 0, 0, 0.0);
 
@@ -150,8 +150,8 @@
     box-shadow: 
         inset 4px 3px 2.5px rgba(0, 0, 0, 0.0),
         inset -4px -3px 2.5px rgba(0, 0, 0, 0.0),
-        4px 3px 2.5px rgba(0, 0, 0, 0.4),
-        -4px -3px 2.5px rgba(0, 0, 0, 0.01);
+        1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        -1px -3px 2.5px rgba(0, 0, 0, 0.1);
 }
 
 .scholarship > h6, .scholarship > h5, .scholarship > h4, .scholarship > p
