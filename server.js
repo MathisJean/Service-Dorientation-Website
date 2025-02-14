@@ -32,12 +32,12 @@ for (const interfaceName in networkInterfaces)
 }
 
 //Set static middleware
-app.use(express.json())
+app.use(express.json({ limit: "10mb" })); // Increase limit to 10MB
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.static('public'));
 
 //Set view engine
 app.set("view engine", "ejs");
-
 
 //----Using Routers----
 

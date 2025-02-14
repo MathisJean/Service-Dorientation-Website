@@ -1,4 +1,11 @@
 
+html
+{
+    --background--pos--x: right;
+    --background--pos--y: top;
+    --background--angle: 200deg;
+}
+
 .page_head > input
 {
     margin-top: 6rem;
@@ -154,6 +161,9 @@
     align-items: center;
 
     background-color: rgb(245, 245, 245);
+
+    background-position: center;
+    background-size: cover;
 
     border-radius: 500px;
 

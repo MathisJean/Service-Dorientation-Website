@@ -102,7 +102,7 @@ router.get("/data", (req, res) =>
   {
     //Define incoming data
     const orienter_data = req.body; //Data must be in object form
-  
+
     readFile(data_path, (err, data) =>
     {
       if(err)
@@ -128,11 +128,18 @@ router.get("/data", (req, res) =>
 
               Object.values(orienter_data.orienters[0]).forEach((key_value, index) =>
               {
-                if(String(Object.values(parsed_data.orienters[i])[index]) !== String(key_value))
+                if(String(key_value) == "/clear/" && index == Object.keys(parsed_data.orienters[i]).length - 1)
                 {
                   key = Object.keys(parsed_data.orienters[i])[index];
-                  
-                  parsed_data.orienters[i][key] = key_value   ;           
+
+                  parsed_data.orienters[i][key] = "";    
+                }
+
+                else if(String(Object.values(parsed_data.orienters[i])[index]) !== String(key_value) && String(key_value) !== "")
+                {
+                  key = Object.keys(parsed_data.orienters[i])[index];
+
+                  parsed_data.orienters[i][key] = key_value;           
                 };
               });
   

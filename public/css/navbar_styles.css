@@ -154,11 +154,23 @@
 
 .nav_sidebar > ul > li
 {
-    margin-bottom: 2em;
-
     text-align: center;
 
-    transition: transform 0.1s ease;
+    margin-bottom: 1em;
+    padding: 0.5em 0;
+
+    transition: padding 0.1s ease;
+}
+
+.nav_sidebar > ul > li:hover
+{
+    padding-top: 0.3em;
+    padding-bottom: 0.7em;
+}
+
+.nav_sidebar > ul > li:active
+{
+    transform: translateY(-1px);
 }
 
 .nav_sidebar > ul > li > a
@@ -168,21 +180,10 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1.5em;
     font-weight: 600;
-
+    
     text-decoration: none;
 
     transition: text-shadow 0.1s ease;
-}
-
-
-.nav_sidebar > ul > li:hover
-{
-    transform: translateY(-5px);
-}
-
-.nav_sidebar > ul > li:active
-{
-    transform: translateY(-1px);
 }
 
 .nav_sidebar > ul > li > a:hover

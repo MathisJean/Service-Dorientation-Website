@@ -13,16 +13,65 @@ update_orienters();
 
 function upload_img(event, input_file, profil)
 {
-    let url = URL.createObjectURL(input_file.files[0]);
+    let img = input_file.files[0]
+    let url = URL.createObjectURL(img);
+    
+    let profil_id = profil.querySelector(".id").textContent
+    
+    let reader = new FileReader();
 
-    console.log(input_file.files[0])
+    reader.onload = function ()
+    {
+        let base64img = reader.result;
 
+        //Create object with the new img
+        let obj = JSON.stringify({orienters:
+            [{
+                id: profil_id,
+                name: "",
+                position: "",
+                email: "",
+                image: base64img,
+            }]
+        });
+
+        PUT("/data", obj)
+        .then(data => 
+        {
+            let drop_area = profil.querySelector(".drop_area");
+    
+            drop_area.style.backgroundImage = "url(" + url + ")"
+        })
+        .catch(err => 
+        {
+            popup(".error_popup", String(err))
+        });
+    }
+
+    reader.readAsDataURL(img); //Convert img to Base 64
+}
+
+function clear_img(id)
+{
+    //If create object with the empty values
+    obj = JSON.stringify({orienters:
+        [{
+            id: id,
+            name: "",
+            position: "",
+            email: "",
+            image: "/clear/",
+        }]
+    });
+
+    //Request to delete orienter from json database based on specified id
     PUT("/data", obj)
     .then(data => 
     {
-        let drop_area = profil.querySelector(".drop_area");
+        //When HTTP request is succesful, clear background
+        let profil = document.getElementById("profil_" + String(id));
 
-        drop_area.style.backgroundImage = "url(" + url + ")"
+        profil.querySelector(".drop_area").style.backgroundImage = ""
     })
     .catch(err => 
     {
@@ -51,12 +100,30 @@ function update_orienters()
                 vie_carriere_container.appendChild(profil);
             };
 
-            input_file = profil.querySelector(".input_file")
+            let input_file = profil.querySelector(".input_file")
+            let drop_area = profil.querySelector(".drop_area")
 
-            input_file.addEventListener("change", (event) => 
+            input_file.addEventListener("change", event => 
             {
                 upload_img(event, event.target, profil)
-            });            
+            });        
+            
+            //Drag and drop functionality
+            drop_area.addEventListener("dragover", event => 
+            {
+                event.preventDefault();
+
+                event.dataTransfer.dropEffect = "copy"; //Change effect to "copy"
+            });
+
+            drop_area.addEventListener("drop", event => 
+            {
+                event.preventDefault();
+
+                event.target.files = event.dataTransfer.files;
+
+                upload_img(event, event.target, profil)
+            });
         });
 
         admin(orientation_container);
@@ -168,7 +235,7 @@ function edit_orienter(checkbox, parent)
                 name: edited_values[1],
                 position: edited_values[2],
                 email: edited_values[3],
-                image: edited_values[4] ? edited_values[4] : "",
+                image: "",
             }]
         });
     
@@ -219,13 +286,14 @@ function services(radio)
 function initialize_orienter(orienter)
 {
     let new_profil = document.createElement("div");
+    let img_link = orienter.image == "" || orienter.image == " " ? "" : URL.createObjectURL(base64ToImg(orienter.image));
 
     new_profil.id = "profil_" + String(orienter.id);
 
     new_profil.innerHTML =
     `
-        <label for="input_file_${orienter.id}" class="drop_area" style="background-image: ${orienter.image};">
-            <input type="file" id="input_file_${orienter.id}" class="input_file" accept="image/*" hidden>
+        <label for="input_file_${orienter.id}" class="drop_area" style="background-image: url(${img_link});">
+            <input type="file" id="input_file_${orienter.id}" class="input_file admin_input" accept="image/*" hidden>
 
             <div id="img_view" class="admin">
                 <img src="/icons/add_img.svg" class="no_select" draggable="false"></img>
@@ -257,9 +325,34 @@ function initialize_orienter(orienter)
 
             <label for="delete_button_${orienter.id}" class="admin icon">
                 <img src="/icons/delete.svg" class="no_select" draggable="false"></img>
-            <label>
+            </label>
+
+            <input type="button" id="clear_button_${orienter.id}" onclick="clear_img(${orienter.id})" style="display: none;">
+
+            <label for="clear_button_${orienter.id}" class="add_button admin icon">
+                <img src="/icons/remove_img.svg" class="no_select" draggable="false"></img>
+            </label>
         </div>
     `;
 
-    return new_profil
+    return new_profil;
+}
+
+//No clue how this works... but it does
+function base64ToImg(base64String)
+{
+    let arr = base64String.split(",");
+    let mime = arr[0].match(/:(.*?);/)[1];
+    let bstr = atob(arr[1]); //Decode the Base64 string into binary
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+
+    //Convert Base64 string to byte array
+    while (n--) 
+    {
+        u8arr[n] = bstr.charCodeAt(n);
+    };
+    
+    //Create a Blob object from the byte array and MIME type
+    return new Blob([u8arr], {type: mime});
 }

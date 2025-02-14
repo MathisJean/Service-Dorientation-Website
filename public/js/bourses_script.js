@@ -57,12 +57,6 @@ function update_table()
       `
         <div>
           <h2>${month}</h2>
-
-          <input type="button" id="add_button_${month.replaceSpecialChar()}" onclick="add_scholarship('${month.replaceSpecialChar()}')" style="display: none;">
-
-          <label for="add_button_${month.replaceSpecialChar()}" class="add_button admin icon">
-            <img src="/icons/add.svg" class="no_select" draggable="false"></img>
-          </label>
         </div>
       `;
 
@@ -118,14 +112,14 @@ function update_table()
 };
 
 //Admin feature to add scholarship
-function add_scholarship(month)
+function add_scholarship(id)
 {  
   //Define values upon scholarship initialisation
   obj = JSON.stringify({scholarships:
     [{
       id: -1,
       name: "Nom",
-      date: "0 " + String(month),
+      date: "Date",
       criteria: "Critères",
       value: "Valeur",
       link: "#",
@@ -137,16 +131,16 @@ function add_scholarship(month)
   POST("/bourses/data", obj)
   .then(data => 
   {      
-    let scholarship_container = document.getElementById("month_container_" + String(month.replaceSpecialChar()));
+    let scholarship = document.getElementById("scholarship_" + String(id));
 
     let pos = data.scholarships.length - 1
     let new_scholarship = initiate_scholarship(data.scholarships[pos]);
 
     //Adds new scholarship to container
-    scholarship_container.appendChild(new_scholarship);
+    scholarship.after(new_scholarship);
 
     //Sets the scholarship in edit mode
-    checkbox = document.getElementById("edit_checkbox_" + String(data.scholarships[pos].id));
+    checkbox = new_scholarship.querySelector(".edit_checkbox");
     checkbox.checked = true;
 
     edit_scholarship(checkbox, new_scholarship);
@@ -158,7 +152,7 @@ function add_scholarship(month)
 }
 
 //Admin feature to edit scholarship data
-function edit_scholarship(checkbox, parent)
+function edit_scholarship(checkbox, parent, event)
 {
   //Edit mode
   if(checkbox.checked)
@@ -269,7 +263,7 @@ function edit_scholarship(checkbox, parent)
       let date = String(edited_scholarship_values[3].replaceSpecialChar());
 
       //Changes location of scholarship to appropriate month container
-      if (String(scholarship_values[3].replaceSpecialChar()) !== date)
+      if(String(scholarship_values[3].replaceSpecialChar()) !== date)
       {    
         let container_id;
         let container;
@@ -296,30 +290,40 @@ function edit_scholarship(checkbox, parent)
         //Get scholarships from the container
         let scholarships = Array.from(container.children);
 
-        //Loops through every scholarship
-        for (let i = 0; i < scholarships.length; i++)
+        if(scholarships.length == 0)
         {
-          let scholarship_date = scholarships[i].querySelector(".scholarship_date").textContent; //Get date from scholarship date field
-          let dayA = scholarship_date.match(/\d+/g) == null ? [0] : scholarship_date.match(/\d+/g); //Get day from scholarship thats already there
-          let dayB = date.match(/\d+/g) == null ? [0] : date.match(/\d+/g); //Get day of inserting scholarship
+          container.appendChild(parent)
+        }
 
-          //If the scholarship being inserted has a smaller date then the one after
-          if (dayB[0] <= dayA[0])
+        else if(scholarships.length > 0)
+        {
+          //Loops through every scholarship
+          for (let i = 0; i < scholarships.length; i++)
           {
-            scholarships[i].before(parent);
-            break;
-          }
+            let scholarship_date = scholarships[i].querySelector(".scholarship_date").textContent; //Get date from scholarship date field
+            let dayA = scholarship_date.match(/\d+/g) == null ? [0] : scholarship_date.match(/\d+/g); //Get day from scholarship thats already there
+            let dayB = date.match(/\d+/g) == null ? [0] : date.match(/\d+/g); //Get day of inserting scholarship
 
-          //If scholarship has largest date, add at end
-          else if (i == scholarships.length - 1)
-          {
-            scholarships[i].after(parent);
-            break;
+            //If the scholarship being inserted has a smaller date then the one after
+            if (dayB[0] <= dayA[0])
+            {
+              scholarships[i].before(parent);
+              break;
+            }
+
+            //If scholarship has largest date, add at end
+            else if (i == scholarships.length - 1)
+            {
+              scholarships[i].after(parent);
+              break;
+            };
           };
-        };
+        }
 
         //If scholarship is moved to month with no scholarships, show container and header
         hide_month_headers();
+
+        scroll_to("#" + String(parent.id), event);
       };
     })
     .catch(err => {popup(".error_popup", String(err))});
@@ -365,6 +369,12 @@ function initiate_scholarship(scholarship)
     <p class="scholarship_criteria admin_edit">${scholarship.criteria}</p>
 
     <div class="scholarship_buttons">
+      <input type="button" id="add_button_${scholarship.id}" onclick="add_scholarship(${scholarship.id})" style="display: none;">
+
+      <label for="add_button_${scholarship.id}" class="add_button admin icon">
+        <img src="/icons/add.svg" class="no_select" draggable="false"></img>
+      </label>
+
       <input type="checkbox" id="subscribe_checkbox_${scholarship.id}" style="display: none;">
 
       <label for="subscribe_checkbox_${scholarship.id}" class="user icon">
@@ -372,7 +382,7 @@ function initiate_scholarship(scholarship)
         <img src="/icons/unsubscribe.svg" class="active_checkbox no_select" draggable="false"></img>
       </label>
 
-      <input type="checkbox" id="edit_checkbox_${scholarship.id}" onchange="edit_scholarship(this, this.parentNode.parentNode)" style="display: none;">
+      <input type="checkbox" id="edit_checkbox_${scholarship.id}" class="edit_checkbox" onchange="edit_scholarship(this, this.parentNode.parentNode, event)" style="display: none;">
 
       <label for="edit_checkbox_${scholarship.id}" class="admin icon">
         <img src="/icons/edit.svg" class="unactive_checkbox no_select" draggable="false"></img>
@@ -383,7 +393,7 @@ function initiate_scholarship(scholarship)
 
       <label for="delete_button_${scholarship.id}" class="admin icon">
         <img src="/icons/delete.svg" class="no_select" draggable="false"></img>
-      <label>
+      </label>
     </div>
   `;
 
