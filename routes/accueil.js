@@ -10,13 +10,13 @@ const router = express.Router()
 //Setup Router
 router.get('/', (req, res) => 
 {
-  res.render("bourses")
+  res.render("accueil")
   res.end()
 })
 
 //Handle HTTP requests
 
-let data_path = "database/bourses_data.json" //Path to data file
+let data_path = "database/orienteurs_data.json" //Path to data file
 
 //Get bursary data from GET request
 router.get("/data", (req, res) =>
@@ -33,23 +33,9 @@ router.get("/data", (req, res) =>
         res.status(404).send("Reading JSON file");
       }
       else if(parsed_data)
-      {  
-        const response = 
-        { 
-          scholarships: parsed_data.scholarships.map(scholarship =>
-          ({
-            id: scholarship.id,
-            name: scholarship.name,
-            date: scholarship.date,
-            criteria: scholarship.criteria,
-            value: scholarship.value,
-            link: scholarship.link,
-            subscribedUsers: scholarship.subscribedUsers.length //Remove user email from res         
-          })) 
-        };
-  
+      {   
         //Send if GET is complete
-        res.send(response);
+        res.send(parsed_data);
       };
     });
   });
@@ -58,7 +44,7 @@ router.get("/data", (req, res) =>
   router.post("/data", (req, res) =>
   {
     //Define incoming data
-    const scholarship_data = req.body; //Data must be in object form
+    const orienter_data = req.body; //Data must be in object form
   
     readFile(data_path, (err, data) =>
     {
@@ -74,10 +60,10 @@ router.get("/data", (req, res) =>
         let parsed_data = JSON.parse(data); //Convert json data to object
   
         //Increment id from last obj id
-        last_obj = parsed_data.scholarships.slice(-1)
-        scholarship_data.scholarships[0].id = Number(last_obj[0].id) + 1
+        last_obj = parsed_data.orienters.slice(-1)
+        orienter_data.orienters[0].id = Number(last_obj[0].id) + 1
   
-        parsed_data.scholarships.push(scholarship_data.scholarships[0]); //Add obj to data
+        parsed_data.orienters.push(orienter_data.orienters[0]); //Add obj to data
   
         lockfile.lock(data_path, {retries: {retries: 5}})
         .then((release) =>
@@ -93,23 +79,9 @@ router.get("/data", (req, res) =>
               return res.status(404).send("Writing JSON file");
             }    
             else
-            {
-              const response = 
-              { 
-                scholarships: parsed_data.scholarships.map(scholarship =>
-                ({
-                  id: scholarship.id,
-                  name: scholarship.name,
-                  date: scholarship.date,
-                  criteria: scholarship.criteria,
-                  value: scholarship.value,
-                  link: scholarship.link,
-                  subscribedUsers: scholarship.subscribedUsers.length //Remove user email from res         
-                })) 
-              };
-  
+            { 
               //Send if POST is complete
-              res.send(response);
+              res.send(parsed_data);
             };   
           });
   
@@ -129,8 +101,8 @@ router.get("/data", (req, res) =>
   router.put("/data", (req, res) =>
   {
     //Define incoming data
-    const scholarship_data = req.body; //Data must be in object form
-  
+    const orienter_data = req.body; //Data must be in object form
+
     readFile(data_path, (err, data) =>
     {
       if(err)
@@ -145,16 +117,31 @@ router.get("/data", (req, res) =>
         let parsed_data = JSON.parse(data); //Convert json data to object
         let data_found = false;
   
-        if(parsed_data.scholarships)
+        if(parsed_data.orienters)
         {            
-          for(i = 0; i <= parsed_data.scholarships.length - 1; i++)
+          for(i = 0; i <= parsed_data.orienters.length - 1; i++)
           {
             //Check for a record that matches the incoming data
-            if(Number(parsed_data.scholarships[i].id) === Number(scholarship_data.scholarships[0].id))
+            if(Number(parsed_data.orienters[i].id) === Number(orienter_data.orienters[0].id))
             {
               data_found = true;  
-  
-              parsed_data.scholarships[i] = scholarship_data.scholarships[0];
+
+              Object.values(orienter_data.orienters[0]).forEach((key_value, index) =>
+              {
+                if(String(key_value) == "/clear/" && index == Object.keys(parsed_data.orienters[i]).length - 1)
+                {
+                  key = Object.keys(parsed_data.orienters[i])[index];
+
+                  parsed_data.orienters[i][key] = "";    
+                }
+
+                else if(String(Object.values(parsed_data.orienters[i])[index]) !== String(key_value) && String(key_value) !== "")
+                {
+                  key = Object.keys(parsed_data.orienters[i])[index];
+
+                  parsed_data.orienters[i][key] = key_value;           
+                };
+              });
   
               lockfile.lock(data_path, {retries: {retries: 5}})
               .then((release) =>
@@ -169,23 +156,9 @@ router.get("/data", (req, res) =>
                     return res.status(404).send("Writing JSON file");
                   }    
                   else
-                  {
-                    const response = 
-                    { 
-                      scholarships: parsed_data.scholarships.map(scholarship =>
-                      ({
-                        id: scholarship.id,
-                        name: scholarship.name,
-                        date: scholarship.date,
-                        criteria: scholarship.criteria,
-                        value: scholarship.value,
-                        link: scholarship.link,
-                        subscribedUsers: scholarship.subscribedUsers.length //Remove user email from res         
-                      })) 
-                    };
-        
+                  {       
                     //Send if PUT is complete
-                    res.send(response);
+                    res.send(parsed_data);
                   };   
                 });
                   
@@ -216,7 +189,7 @@ router.get("/data", (req, res) =>
   router.delete("/data", (req, res) =>
   {
     //Define incoming delete data
-    const scholarship_id = req.body.id; //Data must be in object form
+    const orienter_id = req.body.id; //Data must be in object form
   
     readFile(data_path, (err, data) =>
     {
@@ -232,16 +205,16 @@ router.get("/data", (req, res) =>
         let parsed_data = JSON.parse(data); //Convert json data to object
         let data_found = false;
   
-        if(parsed_data.scholarships)
+        if(parsed_data.orienters)
         {        
-          for(i = 0; i <= parsed_data.scholarships.length - 1; i++)
+          for(i = 0; i <= parsed_data.orienters.length - 1; i++)
           {
             //Check for a record that matches the incoming data
-            if(Number(parsed_data.scholarships[i].id) === Number(scholarship_id))
+            if(Number(parsed_data.orienters[i].id) === Number(orienter_id))
             {
               data_found = true;  
   
-              parsed_data.scholarships.splice(i, 1);
+              parsed_data.orienters.splice(i, 1);
   
               lockfile.lock(data_path, {retries: {retries: 5}})
               .then((release) =>
@@ -256,23 +229,9 @@ router.get("/data", (req, res) =>
                     return res.status(404).send("Writing JSON file");
                   }    
                   else
-                  {
-                    const response = 
-                    { 
-                      scholarships: parsed_data.scholarships.map(scholarship =>
-                      ({
-                        id: scholarship.id,
-                        name: scholarship.name,
-                        date: scholarship.date,
-                        criteria: scholarship.criteria,
-                        value: scholarship.value,
-                        link: scholarship.link,
-                        subscribedUsers: scholarship.subscribedUsers.length //Remove user email from res         
-                      })) 
-                    };
-        
+                  {       
                     //Send if DELETE is complete
-                    res.send(response);
+                    res.send(parsed_data);
                   };   
                 });
                   

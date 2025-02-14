@@ -1,0 +1,328 @@
+
+html
+{
+    --background--pos--x: right;
+    --background--pos--y: top;
+    --background--angle: 200deg;
+}
+
+.page_head > input
+{
+    margin-top: 6rem;
+
+    transition: 
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+.page_head > input:hover
+{
+    transform: translateY(-5px);
+
+    box-shadow: 
+        1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        -1px -3px 2.5px rgba(0, 0, 0, 0.01);
+}
+
+.page_head > input:active
+{
+    transform: translateY(-1px);
+}
+
+.select_container
+{
+    display: flex;
+
+    width: 100%;
+}
+
+.select
+{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    color: black;
+
+    font-size: 1.5em;
+    font-weight: 700;
+
+    border: none;
+    border-radius: 50px;
+
+    box-shadow: 
+        1px 3px 2.5px rgba(0, 0, 0, 0.1);
+
+    padding: 0.5em;
+    margin-top: -1em;
+
+    width: 50%;
+
+    z-index: 3;
+
+    transition:
+        box-shadow 0.1s ease-in,
+        background-color 0.1s ease,
+        color 0.1s ease;
+}
+
+.select:hover
+{
+    box-shadow: 
+        1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        -1px -3px 2.5px rgba(0, 0, 0, 0.01);
+}
+
+#orientation:checked + .orientation
+{
+    background-color: var(--secondary--bg--color);
+    color: var(--bg--text--color);
+}
+
+#vie_carriere:checked + .vie_carriere
+{
+    background-color: var(--secondary--bg--color);
+    color: var(--bg--text--color);
+}
+
+.info
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.orienters
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.orienters > div
+{
+    position: relative;
+}
+
+.admin_btn
+{
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    padding: 4em;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.orienters > div
+{
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+
+    padding: 1em;
+    padding-top: 3em;
+}
+
+.orienters > div div
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: baseline;
+}
+
+.orienters input
+{
+    border: none;
+
+    outline: none;
+}
+
+.drop_area
+{
+    display: flex;
+
+    justify-self: center;
+    align-self: center;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(245, 245, 245);
+
+    background-position: center;
+    background-size: cover;
+
+    border-radius: 500px;
+
+    min-width: 16em;
+    min-height: 16em;
+
+    aspect-ratio: 1/1;
+}
+
+#img_view
+{
+    background-color: rgba(245, 245, 245, 0.15);
+
+    backdrop-filter: blur(2px);
+
+    border-radius: 50px;
+
+    padding: 0.5em;
+}
+
+.orienters
+{
+    width: 60%;
+}
+
+.orienter_name
+{
+    font-weight: 600;
+
+    outline: none;
+}
+
+.orienter_role
+{
+    font-style: italic;
+
+    outline: none;
+}
+
+.orienters a
+{
+    color: var(--link--color);
+
+    font-style: italic;
+
+    outline: none;
+}
+
+.services
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.services > div
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 3em 0;
+}
+
+.services > div > h3
+{
+    font-weight: 600;
+}
+
+.services > div > h6
+{
+    font-weight: 500;
+    font-style: italic;
+
+    padding: 0.5em
+}
+
+.orienters label
+{
+    width: 24px;
+    height: 28px;
+}
+
+input[type="checkbox"]:checked + label > .unactive_checkbox
+{
+    display: none;
+}
+
+input[type="checkbox"]:checked + label > .active_checkbox
+{
+    display: block;
+}
+
+.active_checkbox
+{
+    display: none;
+}
+
+.contacts
+{
+    display: flex;
+}
+
+.contacts > ul
+{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+    align-items: center;
+
+    margin: 3em 0;
+
+    width: 100%;
+}
+
+.contacts > ul > li
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50px;
+
+    box-shadow: 
+        inset 1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        inset -1px -3px 2.5px rgba(0, 0, 0, 0.1),
+        1px 3px 2.5px rgba(0, 0, 0, 0.0),
+        -1px -3px 2.5px rgba(0, 0, 0, 0.0);
+
+    padding: 1em;
+
+    width: 15%;
+
+    aspect-ratio: 1;
+
+    transition: 
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+.contacts > ul > li:hover
+{
+    transform: translateY(-5px);
+
+    box-shadow: 
+        1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        -1px -3px 2.5px rgba(0, 0, 0, 0.1);
+}
+
+.contacts > ul > li > h5
+{
+    font-weight: 700;
+
+    margin-top: 0.5em;
+}

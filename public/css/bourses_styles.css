@@ -1,69 +1,9 @@
 
-#background_gradient
+html
 {
-    position: relative;
-    left: 0;
-
-    background: 
-    conic-gradient(from 50deg at left,
-        rgb(255, 255, 255),
-        rgb(100, 100, 100)  200deg,
-        rgb(255, 255, 255)
-    );
-   
-    overflow: hidden;
-    margin: 0;
-}
-
-#background_img
-{
-    position: relative;
-    left: 0;
-
-    background: 
-    repeating-radial-gradient(circle farthest-side at left,
-        rgba(255, 255, 255, 0.5) 10%,
-        rgba(250, 250, 250, 0.5) 15%,
-        rgba(240, 240, 240, 0.5) 20%
-    );
-
-    overflow: hidden;
-    margin: 0;
-}
-
-.page_head
-{
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    position: relative;
-    left: 0;
-
-    margin: 6rem 0;
-
-    overflow: hidden;
-}
-
-.page_head h1
-{   
-    margin: 0;
-
-    z-index: 3;
-}
-
-.page_head h3
-{
-    text-align: center;
-
-    font-style: italic;
-
-    margin: 0;
-
-    z-index: 3;
+    --background--pos--x: left;
+    --background--pos--y: 60%;
+    --background--angle: 50deg;
 }
 
 .scholarship_nav
@@ -86,7 +26,7 @@
     list-style-type: none;
 
     margin: 0%;
-    padding: 1em;
+    padding: 0%;
 
     width: 100%;
 }
@@ -104,37 +44,52 @@
     padding: 1em;
 
     transition: 
-        transform 0.1s ease,
         box-shadow 0.1s ease;
 }
 
-.scholarship_nav input:hover
+.scholarship_nav li
 {
-    transform: translateY(-5px);
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 
+    transition: 
+        padding 0.1s ease;
+}
+
+.scholarship_nav li:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.scholarship_nav li:hover > input
+{
     box-shadow: 
         1px 3px 2.5px rgba(0, 0, 0, 0.4),
         -1px -3px 2.5px rgba(0, 0, 0, 0.01);
 }
 
-.scholarship_nav input:active
+.scholarship_nav li:active
 {
-    transform: translateY(-1px);
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
 
+.scholarship_nav li:active > input
+{
     box-shadow: 
-        0.5px 1px 2.5px rgba(0, 0, 0, 0.4),
-        -0.5px -1px 2.5px rgba(0, 0, 0, 0.01);
+        1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        -1px -3px 2.5px rgba(0, 0, 0, 0.01);
 }
 
 .spacer
 {
-    height: 2em;
+    height: 0.5em;
 }
 
 #table 
 {
     display: flex;
-
     flex-direction: column;
 
     background: 
@@ -196,8 +151,8 @@
     border-radius: 50px;
 
     box-shadow: 
-        inset 4px 3px 2.5px rgba(0, 0, 0, 0.4),
-        inset -4px -3px 2.5px rgba(0, 0, 0, 0.2),
+        inset 1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        inset -1px -3px 2.5px rgba(0, 0, 0, 0.1),
         4px 3px 2.5px rgba(0, 0, 0, 0.0),
         -4px -3px 2.5px rgba(0, 0, 0, 0.0);
 
@@ -218,8 +173,8 @@
     box-shadow: 
         inset 4px 3px 2.5px rgba(0, 0, 0, 0.0),
         inset -4px -3px 2.5px rgba(0, 0, 0, 0.0),
-        4px 3px 2.5px rgba(0, 0, 0, 0.4),
-        -4px -3px 2.5px rgba(0, 0, 0, 0.01);
+        1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        -1px -3px 2.5px rgba(0, 0, 0, 0.1);
 }
 
 .scholarship > h6, .scholarship > h5, .scholarship > h4, .scholarship > p

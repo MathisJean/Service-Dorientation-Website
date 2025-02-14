@@ -2,7 +2,7 @@
 //----HTTP requests----//
 
 //Example GET
-//GET("/scholarship_data")
+//GET("/bourses/data")
 //  .then(data => {console.log("GET resolved:", data)})
 //  .catch(err => {console.error(err)})
 
@@ -127,12 +127,19 @@ const DELETE = async (resource, json_data) => //Data must be in object form
     return data;
 }
 
-//----Global-Constants----//
+//----Global Constants----//
 
 //Admin is set based on account on log-in
-const is_admin = false;
+const is_admin = true;
+
+const style = window.getComputedStyle(document.body)
 
 const background = document.querySelector("#background_gradient");
+const background_pos_x = style.getPropertyValue("--background--pos--x");
+const background_pos_y = style.getPropertyValue("--background--pos--y");
+const background_angle = parseInt(style.getPropertyValue("--background--angle"), 10);
+
+document.removeEventListener("scroll", update_gradient); // Ensure it starts clean
 
 const observer = new IntersectionObserver((entries) => 
 {
@@ -149,18 +156,66 @@ const observer = new IntersectionObserver((entries) =>
     });
 });
 
-//Verifies if background in viewport
-observer.observe(background);
+//----Global Script----//
 
-//----Global-Functions----//
+//Waits for website to be loaded
+window.addEventListener("load", () => 
+{
+    window.scrollTo(0, 0);
 
+    //Verifies if background is in viewport
+    observer.observe(background);
+
+    update_gradient() //Sets the background to the right starting amount
+});
+
+//----Global Functions----//
+
+//Hides or shows elements based on .admin and .user class
+function admin(parent)
+{
+  Array.from(parent.querySelectorAll(".admin")).forEach(element =>
+  {
+    element.style.display = is_admin ? "inline_block" : "none";
+  });
+  Array.from(parent.querySelectorAll(".user")).forEach(element =>
+  {
+    element.style.display = !is_admin ? "inline-block" : "none";
+  });
+  Array.from(parent.querySelectorAll(".admin_input")).forEach(element =>
+  {
+    element.disabled = !is_admin
+  });
+};
+
+function change_cell_focus(event)
+{
+  if(document.activeElement !== document.body && event.key === "Enter")
+  {
+    event.preventDefault()
+
+    // Example: Move focus to the next element (optional)
+    let next = document.activeElement.nextElementSibling ? document.activeElement.nextElementSibling : document.activeElement.parentElement.nextElementSibling
+
+    if(Array.from(next.classList).includes("scholarship_link")) 
+    {
+      next.querySelector("input").focus();
+    }
+    else if(!Array.from(next.classList).includes("scholarship_buttons"))
+    {      
+      next.focus();
+    };
+  };
+}
+
+//Update the background
 function update_gradient()
 {
-    const y = window.scrollY / window.innerHeight * 120 + 50;
+    const y = window.scrollY / window.innerHeight * 120 + background_angle;
     
     background.style.background = 
     `
-        conic-gradient(from ${y}deg at left,
+        conic-gradient(from ${y}deg at ${background_pos_x} ${background_pos_y},
         rgb(255, 255, 255),
         rgb(100, 100, 100)  200deg,
         rgb(255, 255, 255)
@@ -237,7 +292,7 @@ function signup()
     console.log("Signed Up")
 }
 
-//----Global-Methods----//
+//----Global Methods----//
 
 //Custom Method to Replace Characters from a list to regular versions
 String.prototype.replaceSpecialChar = function()
