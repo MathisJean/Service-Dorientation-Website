@@ -21,7 +21,7 @@ const GET = async (resource) =>
             err = "Cannot get data"
         }
 
-        throw String(response.status + " - " + err);
+        throw String(err);
     };
 
     const data = await response.json();
@@ -54,7 +54,7 @@ const POST = async (resource, json_data) => //Data must be in object form
             err = "Cannot post data"
         }
 
-        throw String(response.status + " - " + err);
+        throw String(err);
     };
 
     const data = await response.json();
@@ -87,7 +87,7 @@ const PUT = async (resource, json_data) => //Data must be in object form
             err = "Cannot put data"
         }
 
-        throw String(response.status + " - " + err);
+        throw String(err);
     };
 
     const data = await response.json();
@@ -120,17 +120,21 @@ const DELETE = async (resource, json_data) => //Data must be in object form
             err = "Cannot delete data"
         }
 
-        throw String(response.status + " - " + err);
+        throw String(err);
     };
 
     const data = await response.json();
     return data;
 }
 
-//----Global Constants----//
+//----Global Variables----//
 
-//Admin is set based on account on log-in
-const is_admin = true;
+// Initialize admin from localStorage or default to false
+let logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
+let is_admin = JSON.parse(localStorage.getItem("is_admin")) || false;
+
+let user_name = localStorage.getItem("user_name") || undefined;
+let user_email = localStorage.getItem("user_email") || undefined;
 
 const style = window.getComputedStyle(document.body)
 
@@ -138,8 +142,6 @@ const background = document.querySelector("#background_gradient");
 const background_pos_x = style.getPropertyValue("--background--pos--x");
 const background_pos_y = style.getPropertyValue("--background--pos--y");
 const background_angle = parseInt(style.getPropertyValue("--background--angle"), 10);
-
-document.removeEventListener("scroll", update_gradient); // Ensure it starts clean
 
 const observer = new IntersectionObserver((entries) => 
 {
@@ -158,35 +160,26 @@ const observer = new IntersectionObserver((entries) =>
 
 //----Global Script----//
 
+document.removeEventListener("scroll", update_gradient); // Ensure it starts without event listener
+
+window.onload = function () 
+{
+    setTimeout(function() {document.body.style.display = "";}, 200);
+}
+
 //Waits for website to be loaded
 window.addEventListener("load", () => 
 {
-    window.scrollTo(0, 0);
-
     //Verifies if background is in viewport
     observer.observe(background);
 
     update_gradient() //Sets the background to the right starting amount
+
+    admin(document)
+    account_icon() //Change account icon displayed
 });
 
 //----Global Functions----//
-
-//Hides or shows elements based on .admin and .user class
-function admin(parent)
-{
-  Array.from(parent.querySelectorAll(".admin")).forEach(element =>
-  {
-    element.style.display = is_admin ? "inline_block" : "none";
-  });
-  Array.from(parent.querySelectorAll(".user")).forEach(element =>
-  {
-    element.style.display = !is_admin ? "inline-block" : "none";
-  });
-  Array.from(parent.querySelectorAll(".admin_input")).forEach(element =>
-  {
-    element.disabled = !is_admin
-  });
-};
 
 function change_cell_focus(event)
 {
@@ -221,7 +214,7 @@ function update_gradient()
         rgb(255, 255, 255)
         )
     `;
-}
+};
 
 //Scrolls to specified element
 function scroll_to(query_selector, event)
@@ -274,6 +267,11 @@ function close_popup()
     popups.forEach(popup =>
     {
         popup.style.top = "-50%"
+
+        popup.querySelectorAll("input[type='email'], input[type='password']").forEach(input =>
+        {
+            input.value = null
+        });
     });
 
     //Unfreeze scroll
@@ -282,14 +280,140 @@ function close_popup()
     document.body.classList.remove("no_input")
 };
 
-function login()
+//Hides or shows elements based on .admin and .user class
+function admin(parent)
 {
-    console.log("Logged In")
+    is_admin = JSON.parse(localStorage.getItem("is_admin")) || false;
+    
+    Array.from(parent.querySelectorAll(".admin")).forEach(element => //Shows Elements if Admin
+    {
+        element.style.display = is_admin ? "inline_block" : "none";
+    });
+    Array.from(parent.querySelectorAll(".user")).forEach(element => //Shows Elements if User
+    {
+        element.style.display = !is_admin ? "inline-block" : "none";
+    });
+    Array.from(parent.querySelectorAll(".logged_in")).forEach(element => //Shows Elements if Logged In
+    {
+        element.style.display = logged_in && !is_admin ? "inline-block" : "none";
+    });
+    Array.from(parent.querySelectorAll(".admin_input")).forEach(element => //Enables Admin Inputs if Admin
+    {
+        element.disabled = !is_admin
+    });
+};
+
+function account_icon()
+{
+    logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
+
+    if(logged_in)
+    {
+        document.querySelector(".nav_login").style.display = "none";
+        document.querySelector(".nav_logout").style.display = "flex";
+    }
+    else if(!logged_in)
+    {
+        document.querySelector(".nav_login").style.display = "flex";
+        document.querySelector(".nav_logout").style.display = "none";
+    };
+};
+
+function login(event, popup)
+{
+    event.preventDefault() //Prevent reload
+
+    user_email = popup.querySelector("input[type='email']").value;
+    let password = popup.querySelector("input[type='password']").value;
+
+    //Create object with the new values
+    let obj = JSON.stringify({accounts:
+        [{
+            id: 0,
+            admin: "",
+            name: "",
+            password: password,
+            email: user_email
+        }]
+    });
+
+    PUT("/account_data", obj)
+    .then(data => 
+    {
+        close_popup() //Close login popup
+
+        //Store in localStorage
+        localStorage.setItem("logged_in", JSON.stringify(true));
+        localStorage.setItem("is_admin", JSON.stringify(data.admin));
+        localStorage.setItem("user_name", JSON.stringify(data.name));
+        localStorage.setItem("user_email", JSON.stringify(user_email));
+
+        user_name = data.name;
+
+        location.reload();
+    })
+    .catch(err => 
+    {
+        let popup_alert = popup.querySelector(".alert_msg");
+
+        popup_alert.textContent = err;
+        popup_alert.style.visibility = "visible";
+    });
 }
 
-function signup()
+function signup(event, popup)
 {
-    console.log("Signed Up")
+    event.preventDefault() //Prevent reload
+
+    let first_name = popup.querySelector("#first_name_input").value.replace(/\s+/g, '');
+    let last_name = popup.querySelector("#last_name_input").value.replace(/\s+/g, '');
+
+    user_name = String(first_name + " " + last_name);
+    user_email = popup.querySelector("input[type='email']").value;
+    let password = popup.querySelector("input[type='password']").value;
+
+    //Create object with the new values
+    let obj = JSON.stringify({accounts:
+        [{
+            id: -1,
+            admin: false,
+            name: user_name,
+            password: password,
+            email: user_email
+        }]
+    });
+
+    POST("/account_data", obj)
+    .then(data => 
+    {
+        close_popup() //Close login popup
+
+        //Store in localStorage
+        localStorage.setItem("logged_in", JSON.stringify(true));
+        localStorage.setItem("is_admin", JSON.stringify(data.admin));
+        localStorage.setItem("user_name", JSON.stringify(data.name));
+        localStorage.setItem("user_email", JSON.stringify(user_email));
+
+        location.reload();
+    })
+    .catch(err => 
+    {
+        let popup_alert = popup.querySelector(".alert_msg");
+
+        popup_alert.textContent = err;
+        popup_alert.style.visibility = "visible";
+    });
+};
+
+function logout()
+{
+    //Store in localStorage
+    localStorage.setItem("logged_in", JSON.stringify(false));
+    localStorage.setItem("is_admin", JSON.stringify(false));
+    localStorage.setItem("user_name", JSON.stringify(undefined));
+    localStorage.setItem("user_email", JSON.stringify(undefined));
+
+    location.reload();
 }
 
 //----Global Methods----//
@@ -298,10 +422,10 @@ function signup()
 String.prototype.replaceSpecialChar = function()
 {
     //Charcters that will be replaced
-    character_array   = ["é", "è", "û"];
-    replacement_array = ["e", "e", "u"];
+    const character_array   = ["é", "è", "û"];
+    const replacement_array = ["e", "e", "u"];
 
-    string = this;
+    let string = this;
 
     character_array.forEach((character, index) =>
     {

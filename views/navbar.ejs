@@ -25,23 +25,23 @@
             </div>
 
             <ul>
-              <li>
-                <a href="../">Accueil</a>
+              <li onclick="location.href='../'">
+                <p>Accueil</p>
               </li>
-              <li>
-                <a href="../experiences">Expériences</a>
+              <li onclick="location.href='../experiences'">
+                <p>Expériences</p>
               </li>
-              <li>
-                <a href="../cours">Cours</a>
+              <li onclick="location.href='../cours'">
+                <p>Cours</p>
               </li>
-              <li>
-                <a href="../bourses">Bourses</a>
+              <li onclick="location.href='../bourses'">
+                <p>Bourses</p>
               </li>
-              <li>
-                <a href="../resources">Resources</a>
+              <li onclick="location.href='../resources'">
+                <p>Resources</p>
               </li>
-              <li>
-                <a href="../blogues">Blogues</a>
+              <li onclick="location.href='../blogues'">
+                <p>Blogues</p>
               </li>
             </ul>
           </aside>
@@ -53,8 +53,14 @@
       </div>
 
       <div class="nav_right">
-        <div class="nav_icon_background nav_logout" style="display: none;">
+        <div class="nav_icon_background nav_logout" onclick="logout()">
           <img src="/icons/account.svg" class="nav_icon no_select" draggable="false"></img>
+        </div>
+
+        <div class="popup">
+          <h3>Name</3>
+
+          <h5>Logout</h5>
         </div>
 
         <div class="nav_icon_background nav_login" onclick="popup('.login_popup', '')">
@@ -86,9 +92,11 @@
 
       <h4>Connexion</h4>
 
-      <form onsubmit="login()">
-        <input type="email" placeholder="Couriel" required>
-        <input type="password" placeholder="Mot de Passe" required>
+      <form onsubmit="return login(event, this.parentNode)">
+        <div class="alert_msg"></div>
+
+        <input type="email" placeholder="E-mail" required autocomplete="off" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'E-mail Invalide'; popup_alert.style.visibility = 'visible';">
+        <input type="password" placeholder="Mot de Passe" required autocomplete="off" minlength="4" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'Mot de Passe Trop Court'; popup_alert.style.visibility = 'visible';">
 
         <input type="submit" value="Se Connecter" class="btn">
       </form>
@@ -103,11 +111,13 @@
 
       <h4>Inscription</h4>
 
-      <form onsubmit="signup()">
-        <input type="text" placeholder="Prénom" required>
-        <input type="text" placeholder="Nom" required>
-        <input type="email" placeholder="Couriel" required>
-        <input type="password" placeholder="Mot de Passe" required>
+      <form onsubmit="return signup(event, this.parentNode)">
+        <div class="alert_msg"></div>
+
+        <input type="text" id="first_name_input" placeholder="Prénom" required autocomplete="off">
+        <input type="text" id="last_name_input" placeholder="Nom" required autocomplete="off">
+        <input type="email" placeholder="E-mail" required autocomplete="off" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'E-mail Invalide'; popup_alert.style.visibility = 'visible';">
+        <input type="password" placeholder="Mot de Passe" required autocomplete="off" minlength="4" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'Mot de Passe Trop Court'; popup_alert.style.visibility = 'visible';">
 
         <input type="submit" value="Créer un Compte" class="btn">
       </form>

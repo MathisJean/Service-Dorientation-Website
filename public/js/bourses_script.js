@@ -346,6 +346,32 @@ function delete_scholarship(scholarship_id)
   .catch(err => {popup(".error_popup", String(err))});
 };
 
+function subscribe_scholarship(scholarship_id, checkbox)
+{
+  checkbox.disabled = true
+
+  if(checkbox.checked)
+  {
+    //Request to add scholarship subscription to specified id
+    POST("/bourses/subscribe", JSON.stringify({id: scholarship_id, email: localStorage.getItem("user_email") || undefined}))
+    .then(data => 
+    {
+      checkbox.disabled = false
+    })
+    .catch(err => {popup(".error_popup", String(err))});
+  }
+  else
+  {
+    //Request to remove scholarship subscription to specified id
+    DELETE("/bourses/subscribe", JSON.stringify({id: scholarship_id, email: localStorage.getItem("user_email") || undefined}))
+    .then(data => 
+    {
+      checkbox.disabled = false
+    })
+    .catch(err => {popup(".error_popup", String(err))});
+  }
+}
+
 //Function to initialize a scholarship
 function initiate_scholarship(scholarship)
 {
@@ -375,9 +401,9 @@ function initiate_scholarship(scholarship)
         <img src="/icons/add.svg" class="no_select" draggable="false"></img>
       </label>
 
-      <input type="checkbox" id="subscribe_checkbox_${scholarship.id}" style="display: none;">
+      <input type="checkbox" id="subscribe_checkbox_${scholarship.id}" onchange="subscribe_scholarship(${scholarship.id}, this)" style="display: none;">
 
-      <label for="subscribe_checkbox_${scholarship.id}" class="user icon">
+      <label for="subscribe_checkbox_${scholarship.id}" class="logged_in user icon">
         <img src="/icons/subscribe.svg" class="unactive_checkbox no_select" draggable="false"></img>
         <img src="/icons/unsubscribe.svg" class="active_checkbox no_select" draggable="false"></img>
       </label>

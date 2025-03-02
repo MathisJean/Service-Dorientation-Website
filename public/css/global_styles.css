@@ -126,6 +126,7 @@ h6, a
     align-items: center;
 
     background-color: white;
+    color: black;
 
     border-radius: 50px;
 
@@ -135,7 +136,6 @@ h6, a
     max-width: 100%;
 
     min-height: 30%;
-    max-height: 80%;
 
     top: -50%;
     left: 50%;
