@@ -35,7 +35,7 @@ function upload_img(event, input_file, profil)
             }]
         });
 
-        PUT("/data", obj)
+        PUT("/orienter", obj)
         .then(data => 
         {
             let drop_area = profil.querySelector(".drop_area");
@@ -44,7 +44,7 @@ function upload_img(event, input_file, profil)
         })
         .catch(err => 
         {
-            popup(".error_popup", String(err))
+            popup(".error_popup", "Impossible de changer l'enregistrement de l'orienteur")
         });
     }
 
@@ -65,7 +65,7 @@ function clear_img(id)
     });
 
     //Request to delete orienter from json database based on specified id
-    PUT("/data", obj)
+    PUT("/orienter", obj)
     .then(data => 
     {
         //When HTTP request is succesful, clear background
@@ -75,19 +75,32 @@ function clear_img(id)
     })
     .catch(err => 
     {
-        popup(".error_popup", String(err))
+        popup(".error_popup", "Impossible de changer l'enregistrement de l'orienteur")
     });
 }
 
 function update_orienters()
 {
-    GET("/data")
-    .then(data => 
+    GET("/orienter")
+    .then(orienters => 
     {
         const orientation_container = document.querySelector(".orienters_orientation");
         const vie_carriere_container = document.querySelector(".orienters_vie_carriere");
 
-        data.orienters.forEach(orienter =>
+        if(orienters.length == 0)
+        {
+            let orientation_sibling = document.createElement("div");
+            let vie_carriere_sibling = document.createElement("div");
+
+            orientation_container.append(orientation_sibling)
+            vie_carriere_container.append(vie_carriere_sibling)
+
+            add_orienter(orientation_sibling);
+            add_orienter(vie_carriere_sibling);
+
+        };
+
+        orienters.forEach(orienter =>
         {
             const profil = initialize_orienter(orienter)
 
@@ -95,7 +108,7 @@ function update_orienters()
             {                
                 orientation_container.appendChild(profil);
             }
-            else if(orienter.position.includes("vie-carrière"))
+            else
             {                
                 vie_carriere_container.appendChild(profil);
             };
@@ -135,7 +148,7 @@ function update_orienters()
     })
     .catch(err => 
     {
-        popup(".error_popup", String(err))
+        popup(".error_popup", "Impossible de récupérer les enregistrements des orienteurs")
     });
 }
 
@@ -154,18 +167,18 @@ function add_orienter(sibling)
         }]
     });
 
-    POST("/data", obj)
-    .then(data => 
+    POST("/orienter", obj)
+    .then(orienters => 
     {
-        let index = data.orienters.length - 1; 
+        let index = orienters.length - 1; 
 
-        let profil = initialize_orienter(data.orienters[index]);
+        let profil = initialize_orienter(orienters[index]);
 
         sibling.after(profil);
     })
     .catch(err => 
     {
-        popup(".error_popup", String(err))
+        popup(".error_popup", "Impossible d'ajouter un enregistrement d'orienteur")
     });
 }
 
@@ -240,11 +253,11 @@ function edit_orienter(checkbox, parent)
         });
     
         //Send a request to edit the data
-        PUT("/data", obj)
+        PUT("/orienter", obj)
         .then(data => {})
         .catch(err => 
         {
-            popup(".error_popup", String(err))
+            popup(".error_popup", "Impossible de changer l'enregistrement de l'orienteur")
         });
     };
 };
@@ -252,7 +265,7 @@ function edit_orienter(checkbox, parent)
 function delete_orienter(id)
 {
     //Request to delete orienter from json database based on specified id
-    DELETE("/data", JSON.stringify({id: id}))
+    DELETE(`/orienter/${id}`, null)
     .then(data => 
     {
         //When HTTP request is succesful, delete
@@ -260,7 +273,7 @@ function delete_orienter(id)
     })
     .catch(err => 
     {
-        popup(".error_popup", String(err))
+        popup(".error_popup", "Impossible de supprimer l'enregistrement de l'orienteur")
     });
 }
 
@@ -338,7 +351,7 @@ function initialize_orienter(orienter)
     return new_profil;
 }
 
-//No clue how this works... but it does
+//No clue how this works... but it does, thank you stack overflow
 function base64ToImg(base64String)
 {
     let arr = base64String.split(",");

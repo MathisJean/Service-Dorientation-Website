@@ -1,14 +1,15 @@
 
 //Set up libraries
-const http = require('http');
 const https = require('https');
-const lockfile = require('proper-lockfile');
 const os = require('os');
+
 const fs = require('fs');
-const {writeFile, readFile} = require('fs');
 const path = require('path');
+
 const express = require('express');
 const app = express();
+
+const rateLimit = require("express-rate-limit");
 
 let host;
 let port;
@@ -31,7 +32,16 @@ for (const interfaceName in networkInterfaces)
   }
 }
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `windowMs`
+  message: "Too many requests, please try again later.",
+  standardHeaders: true, // Return rate limit info in headers
+  legacyHeaders: false, // Disable `X-RateLimit-*` headers
+})
+
 //Set static middleware
+app.use(limiter)
 app.use(express.json({ limit: "10mb" })); // Increase limit to 10MB
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.static('public'));

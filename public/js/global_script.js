@@ -242,6 +242,7 @@ function scroll_to(query_selector, event)
   };
 };
 
+//Displays a popup
 function popup(popup_class, txt_msg)
 {
     let popup = document.querySelector(popup_class);
@@ -260,6 +261,7 @@ function popup(popup_class, txt_msg)
     popup.style.top = "50%";
 };
 
+//Closes every popup
 function close_popup()
 {
     let popups = Array.from(document.querySelectorAll(".popup"));
@@ -268,7 +270,7 @@ function close_popup()
     {
         popup.style.top = "-50%"
 
-        popup.querySelectorAll("input[type='email'], input[type='password']").forEach(input =>
+        popup.querySelectorAll("input[type='text'], input[type='email'], input[type='password']").forEach(input =>
         {
             input.value = null
         });
@@ -327,17 +329,16 @@ function login(event, popup)
     let password = popup.querySelector("input[type='password']").value;
 
     //Create object with the new values
-    let obj = JSON.stringify({accounts:
-        [{
-            id: 0,
-            admin: "",
-            name: "",
-            password: password,
-            email: user_email
-        }]
+    let obj = JSON.stringify(
+    {
+        id: "",
+        admin: "",
+        name: "",
+        password: password,
+        email: user_email    
     });
 
-    PUT("/account_data", obj)
+    POST("/account/login", obj)
     .then(data => 
     {
         close_popup() //Close login popup
@@ -373,17 +374,16 @@ function signup(event, popup)
     let password = popup.querySelector("input[type='password']").value;
 
     //Create object with the new values
-    let obj = JSON.stringify({accounts:
-        [{
-            id: -1,
-            admin: false,
-            name: user_name,
-            password: password,
-            email: user_email
-        }]
+    let obj = JSON.stringify(
+    {
+        id: -1,
+        admin: false,
+        name: user_name,
+        password: password,
+        email: user_email        
     });
 
-    POST("/account_data", obj)
+    POST("/account/signup", obj)
     .then(data => 
     {
         close_popup() //Close login popup
