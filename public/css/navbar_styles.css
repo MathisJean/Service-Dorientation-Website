@@ -231,16 +231,31 @@
     white-space: nowrap;
 }
 
-.login_popup form, .signup_popup form
+.login_popup form, .signup_popup form, .authentication_popup form
 {
     display: flex;
-
+    
     flex-direction: column;
 }
 
-.login_popup > h4, .signup_popup > h4
+.login_popup > h4, .signup_popup > h4, .authentication_popup > h4
 {
     margin-bottom: 1em;
+}
+
+.authentication_popup form div
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.authentication_popup p 
+{
+    font-style: italic;
+
+    align-self: center;
+
+    margin-top: 1em;
 }
 
 .popup form > input[type="email"],
@@ -255,6 +270,18 @@
     min-width: 15em;
 
     outline: none;
+}
+
+.popup form .authentication_input
+{
+    border: 2px solid var(--bg--grey--color);
+    border-radius: 5px;
+
+    width: 5ch;
+
+    outline: none;
+
+    text-align: center;
 }
 
 .btn
@@ -274,6 +301,11 @@
 
     padding: 0.5em;
     margin: 0%;
+}
+
+.switch_popup_btn:active
+{
+    color: blue; 
 }
 
 .alert_msg

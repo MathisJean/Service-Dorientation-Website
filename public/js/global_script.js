@@ -136,6 +136,8 @@ let is_admin = JSON.parse(localStorage.getItem("is_admin")) || false;
 let user_name = localStorage.getItem("user_name") || undefined;
 let user_email = localStorage.getItem("user_email") || undefined;
 
+let authentication_code;
+
 const style = window.getComputedStyle(document.body)
 
 const background = document.querySelector("#background_gradient");
@@ -177,6 +179,55 @@ window.addEventListener("load", () =>
 
     admin(document)
     account_icon() //Change account icon displayed
+});
+
+//Change focus on authentication inputs
+Array.from(document.querySelectorAll(".popup .user_input")).forEach((input, index, inputs) =>
+{
+    input.addEventListener("keydown", (event) => 
+    {
+        if(event.key === "Enter")
+        {
+            //Move to the next input if available
+            if(index < inputs.length - 1) 
+            {
+                event.preventDefault(); //Prevent form submission
+
+                inputs[index + 1].focus();
+                inputs[index + 1].select();
+            };
+        }
+    });
+});
+
+//Change focus on authentication inputs
+document.querySelectorAll(".popup .authentication_input").forEach((input, index, inputs) => 
+{
+    input.addEventListener("input", (event) => 
+    {
+        if(event.inputType === "insertText" && event.data.match(/^[0-9]$/)) 
+        {
+            //Move to the next input if available
+            if(index < inputs.length - 1) 
+            {
+                inputs[index + 1].focus();
+                inputs[index + 1].select();
+            };
+        }
+    });
+
+    input.addEventListener("keydown", (event) => 
+    {
+        if(event.key === "Backspace" && input.value === "") 
+        {
+            //Move to the prev input if available
+            if(index > 0) 
+            {
+                inputs[index - 1].focus();
+                inputs[index - 1].value = "";
+            };
+        };
+    });
 });
 
 //----Global Functions----//
@@ -243,10 +294,14 @@ function scroll_to(query_selector, event)
 };
 
 //Displays a popup
-function popup(popup_class, txt_msg)
+function show_popup(popup_class, txt_msg)
 {
+    close_popup();
+
     let popup = document.querySelector(popup_class);
     let popup_text = document.querySelector(popup_class + " > p");
+
+    popup.querySelector("input").focus();
 
     //Freeze scroll
     document.body.style.overflow = "hidden";
@@ -270,7 +325,7 @@ function close_popup()
     {
         popup.style.top = "-50%"
 
-        popup.querySelectorAll("input[type='text'], input[type='email'], input[type='password']").forEach(input =>
+        popup.querySelectorAll("input[type='text'], input[type='email'], input[type='password'], input[type='number']").forEach(input =>
         {
             input.value = null
         });
@@ -305,6 +360,7 @@ function admin(parent)
     });
 };
 
+//Changes account icon if logged in
 function account_icon()
 {
     logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
@@ -321,6 +377,7 @@ function account_icon()
     };
 };
 
+//On login
 function login(event, popup)
 {
     event.preventDefault() //Prevent reload
@@ -362,6 +419,9 @@ function login(event, popup)
     });
 }
 
+let obj;
+
+//On signup
 function signup(event, popup)
 {
     event.preventDefault() //Prevent reload
@@ -374,7 +434,7 @@ function signup(event, popup)
     let password = popup.querySelector("input[type='password']").value;
 
     //Create object with the new values
-    let obj = JSON.stringify(
+    obj = JSON.stringify(
     {
         id: -1,
         admin: false,
@@ -383,18 +443,23 @@ function signup(event, popup)
         email: user_email        
     });
 
-    POST("/account/signup", obj)
-    .then(data => 
+    send_email(popup);
+};
+
+//Resends an Email
+function send_email(popup)
+{
+    POST("/account/signup/authentication", obj)
+    .then(code => 
     {
-        close_popup() //Close login popup
+        authentication_code = code;
 
-        //Store in localStorage
-        localStorage.setItem("logged_in", JSON.stringify(true));
-        localStorage.setItem("is_admin", JSON.stringify(data.admin));
-        localStorage.setItem("user_name", JSON.stringify(data.name));
-        localStorage.setItem("user_email", JSON.stringify(user_email));
+        //Resets the authentication code after 3 minutes
+        setTimeout(() => {authentication_code = ""}, 180000)
 
-        location.reload();
+        close_popup()
+
+        show_popup(".authentication_popup", "");
     })
     .catch(err => 
     {
@@ -405,6 +470,7 @@ function signup(event, popup)
     });
 };
 
+//Logout
 function logout()
 {
     //Store in localStorage
@@ -414,7 +480,57 @@ function logout()
     localStorage.setItem("user_email", JSON.stringify(undefined));
 
     location.reload();
-}
+};
+
+//Email verification via authentication code
+function authenticate(event, popup)
+{
+    event.preventDefault() //Prevent reload
+
+    let input_code = "";
+
+    Array.from(popup.querySelectorAll("input[type='text']")).forEach(input =>
+    {
+        input_code += String(input.value);
+    });
+
+    console.log(Number(input_code) , Number(authentication_code))
+
+    if(Number(input_code) === Number(authentication_code))
+    {
+        console.log("completing")
+
+        POST("/account/signup/complete", null)
+        .then(data => 
+        {
+            console.log("complete")
+
+            close_popup()
+            
+            //Store in localStorage        
+            localStorage.setItem("logged_in", JSON.stringify(true));
+            localStorage.setItem("is_admin", JSON.stringify(data.admin));
+            localStorage.setItem("user_name", JSON.stringify(data.name));
+            localStorage.setItem("user_email", JSON.stringify(user_email));
+
+            location.reload()
+        })
+        .catch(err => 
+        {
+            let popup_alert = popup.querySelector(".alert_msg");
+
+            popup_alert.textContent = err;
+            popup_alert.style.visibility = "visible";
+        }); 
+    }
+    else
+    {
+        let popup_alert = popup.querySelector(".alert_msg");
+
+        popup_alert.textContent = "Code incorrect";
+        popup_alert.style.visibility = "visible";
+    };
+};
 
 //----Global Methods----//
 

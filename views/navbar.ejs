@@ -63,7 +63,7 @@
           <h5>Logout</h5>
         </div>
 
-        <div class="nav_icon_background nav_login" onclick="popup('.login_popup', '')">
+        <div class="nav_icon_background nav_login" onclick="show_popup('.login_popup', '')">
           <h6>Connexion</h6>
         </div>
 
@@ -95,13 +95,13 @@
       <form onsubmit="return login(event, this.parentNode)">
         <div class="alert_msg"></div>
 
-        <input type="email" placeholder="E-mail" required autocomplete="off" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'E-mail Invalide'; popup_alert.style.visibility = 'visible';">
-        <input type="password" placeholder="Mot de Passe" required autocomplete="off" minlength="4" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'Mot de Passe Trop Court'; popup_alert.style.visibility = 'visible';">
+        <input type="email" class="user_input" placeholder="E-mail" required autocomplete="email" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'E-mail Invalide'; popup_alert.style.visibility = 'visible';">
+        <input type="password" class="user_input" placeholder="Mot de Passe" required autocomplete="current-password" minlength="4" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'Mot de Passe Trop Court'; popup_alert.style.visibility = 'visible';">
 
         <input type="submit" value="Se Connecter" class="btn">
       </form>
 
-      <input type="button" value="Créer un Compte" class="switch_popup_btn" onclick="close_popup(); popup('.signup_popup', '')">
+      <input type="button" value="Créer un Compte" class="switch_popup_btn" onclick="close_popup(); show_popup('.signup_popup', '')">
     </div>
 
     <div class="signup_popup popup">
@@ -114,15 +114,42 @@
       <form onsubmit="return signup(event, this.parentNode)">
         <div class="alert_msg"></div>
 
-        <input type="text" id="first_name_input" placeholder="Prénom" required autocomplete="off">
-        <input type="text" id="last_name_input" placeholder="Nom" required autocomplete="off">
-        <input type="email" placeholder="E-mail" required autocomplete="off" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'E-mail Invalide'; popup_alert.style.visibility = 'visible';">
-        <input type="password" placeholder="Mot de Passe" required autocomplete="off" minlength="4" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'Mot de Passe Trop Court'; popup_alert.style.visibility = 'visible';">
+        <input type="text" class="user_input" id="first_name_input" placeholder="Prénom" required autocomplete="name">
+        <input type="text" class="user_input" id="last_name_input" placeholder="Nom" required autocomplete="name">
+        <input type="email" class="user_input" placeholder="E-mail" required autocomplete="email" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'E-mail Invalide'; popup_alert.style.visibility = 'visible';">
+        <input type="password" class="user_input" placeholder="Mot de Passe" required autocomplete="new-password" minlength="4" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'Mot de Passe Trop Court'; popup_alert.style.visibility = 'visible';">
 
         <input type="submit" value="Créer un Compte" class="btn">
       </form>
 
-      <input type="button" value="Se Connecter" class="switch_popup_btn" onclick="close_popup(); popup('.login_popup', '')">
+      <input type="button" value="Se Connecter" class="switch_popup_btn" onclick="close_popup(); show_popup('.login_popup', '')">
+    </div>
+
+    <div class="authentication_popup popup">
+      <label for="close_btn" class="close_btn no_select icon">
+        <img src="/icons/close.svg">
+      </label>
+
+      <h4>Vérification</h4>
+
+      <form onsubmit="return authenticate(event, this.parentNode)">
+        <div class="alert_msg"></div>
+
+        <div>
+          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
+          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
+          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>                         
+          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
+          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
+          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>              
+        </div>
+
+        <p>Le code expire dans 3 minutes</p>
+
+        <input type="submit" value="Valider" class="btn">
+      </form>
+
+      <input type="button" value="Renvoyer le E-mail" class="switch_popup_btn" onclick="send_email(this.parentNode)">
     </div>
   </body>
   

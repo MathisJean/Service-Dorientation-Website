@@ -10,6 +10,7 @@ const express = require('express')
 const router = express.Router()
 
 const handle_api_error = require("../lib/error_handler.js");
+//const email_authentication = require("../lib/email_authentication.js");
 
 //Setup Router
 router.get('/', (req, res) => 
@@ -17,6 +18,46 @@ router.get('/', (req, res) =>
   res.render("accueil")
   res.end()
 })
+
+//Set up libraries
+const nodemailer = require("nodemailer");
+
+async function email_authentication(recipient, sender, authentication_code)
+{
+    //Email body
+    const html = 
+    `
+        <p>Bonjour ${recipient.name}!</p>
+        <p>Ton code de vérification est: ${authentication_code}</p>
+    `;
+
+    const transporter = nodemailer.createTransport(
+    {
+        service: 'gmail',
+        auth: 
+        {
+            user: sender.email,
+            pass: 'wmcw jeso nuhc xmlx ', //Encrypt in future
+        },
+    });
+
+    try 
+    {
+        const info = await transporter.sendMail(
+        {
+            from: `"Orientation ESN" <${sender.email}>`,
+            to: recipient.email,
+            subject: 'Vérification du E-mail',
+            html: html,
+        });
+
+        console.log('Message Sent: ' + info.messageId);
+    } 
+    catch(error) 
+    {
+        console.error('Error sending email:', error);
+    }
+};
 
 //----Handle HTTP requests----//
 
@@ -259,6 +300,9 @@ router.delete("/orienter/:id", async (req, res) =>
 
 //---Account---//
 
+let account_request;
+let authentication_code = "";
+
 //Account login Post HTTP request
 router.post("/account/login", async (req, res) => 
 {
@@ -299,69 +343,98 @@ router.post("/account/login", async (req, res) =>
   }
 });
 
-//Account signup Post HTTP request
-router.post("/account/signup", async (req, res) => 
+//Account signup authentication Post HTTP request
+router.post("/account/signup/authentication", async (req, res) => 
+{
+  //Define incoming data
+  account_request = req.body;
+  const user_email = account_request?.email;
+
+  try
   {
-    //Define incoming data
-    const account_request = req.body;
-    const user_name = account_request?.name;
-    const user_email = account_request?.email;
-    const user_password = account_request?.password;
-  
+    //Read files
+    const account_data = await fs.promises.readFile(account_path, "utf-8"); 
+
+    let accounts = JSON.parse(account_data)?.accounts;
+
+    //Compare incoming acount data to records
+    const found_account = accounts.find((account) => account.email === user_email);
+
+    if(!found_account)
+    {
+      authentication_code = "";
+
+      for(let i = 0; i <= 5; i++)
+      {
+        authentication_code += String(Math.round(Math.random() * 9))
+      };
+
+      //Send authentication email
+      email_authentication(account_request, accounts[0], authentication_code)
+
+      //Return response
+      return res.send(authentication_code);
+    }
+    else
+    {
+      //Throw error if file found
+      let err = new Error("Account found");
+
+      //Custom error code for account found
+      err.code = "ACCF";
+      throw err; 
+    };
+  }
+  catch(err)
+  {
+    //Handles error based on code
+    return handle_api_error(err, res);
+  }
+});
+
+//Account signup completion Post HTTP request
+router.post("/account/signup/complete", async (req, res) =>
+{
+  try
+  {
+    //Read files
+    const account_data = await fs.promises.readFile(account_path, "utf-8"); 
+
+    let accounts = JSON.parse(account_data)?.accounts;
+
+    account_request.id = Number(accounts[accounts.length - 1].id) + 1;
+
+    accounts.push(account_request)
+
+    //Lock files  
+    await lockfile.lock(account_path, { retries: { retries: 5 } });
+
     try
     {
-      //Read files
-      const account_data = await fs.promises.readFile(account_path, "utf-8"); 
-  
-      let accounts = JSON.parse(account_data)?.accounts;
-  
-      //Compare incoming acount data to records
-      const found_account = accounts.find((account) => account.email === user_email);
-  
-      if(!found_account)
-      {
-        account_request.id = Number(accounts[accounts.length - 1].id) + 1;
-
-        accounts.push(account_request)
-
-        //Lock files  
-        await lockfile.lock(account_path, { retries: { retries: 5 } });
-
-        try
-        {
-          //Write file
-          await fs.promises.writeFile(account_path, JSON.stringify({accounts}, null, 2))
-        }
-        finally
-        {
-          try 
-          {
-            await lockfile.unlock(account_path);
-          }
-          catch(err)
-          {
-            console.error("Unlock failed");
-          }
-        };
-        //Return response
-        return res.send(account_request);
-      }
-      else
-      {
-        //Throw error if file found
-        let err = new Error("Account found");
-  
-        //Custom error code for account found
-        err.code = "ACCF";
-        throw err; 
-      };
+      //Write file
+      await fs.promises.writeFile(account_path, JSON.stringify({accounts}, null, 2))
     }
-    catch(err)
+    finally
     {
-      //Handles error based on code
-      return handle_api_error(err, res);
-    }
-  });
+      try 
+      {
+        await lockfile.unlock(account_path);
+      }
+      catch(err)
+      {
+        console.error("Unlock failed:", err);
+      }
+    };
+
+    //Return response
+    return res.send(account_request);
+  }
+  catch(err)
+  {
+    //Handles error based on code
+    return handle_api_error(err, res);
+  }
+});
 
 //Export router to server file
 module.exports = router

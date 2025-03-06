@@ -44,7 +44,7 @@ function upload_img(event, input_file, profil)
         })
         .catch(err => 
         {
-            popup(".error_popup", "Impossible de changer l'enregistrement de l'orienteur")
+            show_popup(".error_popup", "Impossible de changer l'enregistrement de l'orienteur")
         });
     }
 
@@ -75,7 +75,7 @@ function clear_img(id)
     })
     .catch(err => 
     {
-        popup(".error_popup", "Impossible de changer l'enregistrement de l'orienteur")
+        show_popup(".error_popup", "Impossible de changer l'enregistrement de l'orienteur")
     });
 }
 
@@ -148,7 +148,7 @@ function update_orienters()
     })
     .catch(err => 
     {
-        popup(".error_popup", "Impossible de récupérer les enregistrements des orienteurs")
+        show_popup(".error_popup", "Impossible de récupérer les enregistrements des orienteurs")
     });
 }
 
@@ -178,7 +178,7 @@ function add_orienter(sibling)
     })
     .catch(err => 
     {
-        popup(".error_popup", "Impossible d'ajouter un enregistrement d'orienteur")
+        show_popup(".error_popup", "Impossible d'ajouter un enregistrement d'orienteur")
     });
 }
 
@@ -257,7 +257,7 @@ function edit_orienter(checkbox, parent)
         .then(data => {})
         .catch(err => 
         {
-            popup(".error_popup", "Impossible de changer l'enregistrement de l'orienteur")
+            show_popup(".error_popup", "Impossible de changer l'enregistrement de l'orienteur")
         });
     };
 };
@@ -273,7 +273,7 @@ function delete_orienter(id)
     })
     .catch(err => 
     {
-        popup(".error_popup", "Impossible de supprimer l'enregistrement de l'orienteur")
+        show_popup(".error_popup", "Impossible de supprimer l'enregistrement de l'orienteur")
     });
 }
 

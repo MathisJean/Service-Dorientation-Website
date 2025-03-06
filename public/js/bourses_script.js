@@ -128,7 +128,7 @@ function update_table()
     //Hides month header and containers without any children
     hide_month_headers();
   })
-  .catch(err => {popup(".error_popup", "Impossible de récupérer les enregistrements de bourses")});
+  .catch(err => {show_popup(".error_popup", "Impossible de récupérer les enregistrements de bourses")});
 };
 
 //Admin feature to add scholarship
@@ -167,7 +167,7 @@ function add_scholarship(id)
     //Hides user elements
     admin(new_scholarship);
   })
-  .catch(err => {popup(".error_popup", "Impossible d'ajouter l'enregistrement de la bourse")});
+  .catch(err => {show_popup(".error_popup", "Impossible d'ajouter l'enregistrement de la bourse")});
 }
 
 //Admin feature to edit scholarship data
@@ -346,7 +346,7 @@ function edit_scholarship(checkbox, parent, event)
         scroll_to("#" + String(parent.id), event);
       };
     })
-    .catch(err => {popup(".error_popup", "Impossible de changer l'enregistrement de la bourse")});
+    .catch(err => {show_popup(".error_popup", "Impossible de changer l'enregistrement de la bourse")});
   };
 };
 
@@ -363,7 +363,7 @@ function delete_scholarship(scholarship_id)
     //Hide header and container if no more content inside it
     hide_month_headers();
   })
-  .catch(err => {popup(".error_popup", "Impossible de supprimer l'enregistrement de la bourse")});
+  .catch(err => {show_popup(".error_popup", "Impossible de supprimer l'enregistrement de la bourse")});
 };
 
 function subscribe_scholarship(scholarship_id, checkbox)
@@ -378,7 +378,7 @@ function subscribe_scholarship(scholarship_id, checkbox)
     {
       checkbox.disabled = false
     })
-    .catch(err => {popup(".error_popup", "Impossible de s'abonner à l'enregistrement de la bourse")});
+    .catch(err => {show_popup(".error_popup", "Impossible de s'abonner à l'enregistrement de la bourse")});
   }
   else
   {
@@ -388,7 +388,7 @@ function subscribe_scholarship(scholarship_id, checkbox)
     {
       checkbox.disabled = false
     })
-    .catch(err => {popup(".error_popup", "Impossible de se désabonner de l'enregistrement de la bourse")});
+    .catch(err => {show_popup(".error_popup", "Impossible de se désabonner de l'enregistrement de la bourse")});
   }
 }
 
@@ -408,7 +408,7 @@ function initiate_scholarship(scholarship)
     <h6 class="scholarship_date admin_edit">${scholarship.date}</h6>
 
     <div class="scholarship_link">
-      <a href=${scholarship.link} target="_blank">Plus d'information</a>
+      <a href=${scholarship.link} target="_blank" onclick="this.blur()">Plus d'information</a>
       <input type="text" value="${scholarship.link}" style="display: none;">
     </div>
 
