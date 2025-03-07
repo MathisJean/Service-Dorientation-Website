@@ -4,13 +4,12 @@ const fs = require('fs');
 const path = require('path');
 
 const lockfile = require('proper-lockfile');
-const {writeFile, readFile} = require('fs');
 
 const express = require('express')
 const router = express.Router()
 
 const handle_api_error = require("../lib/error_handler.js");
-//const email_authentication = require("../lib/email_authentication.js");
+const email_authentication = require("../lib/email_authentication.js");
 
 //Setup Router
 router.get('/', (req, res) => 
@@ -18,46 +17,6 @@ router.get('/', (req, res) =>
   res.render("accueil")
   res.end()
 })
-
-//Set up libraries
-const nodemailer = require("nodemailer");
-
-async function email_authentication(recipient, sender, authentication_code)
-{
-    //Email body
-    const html = 
-    `
-        <p>Bonjour ${recipient.name}!</p>
-        <p>Ton code de vérification est: ${authentication_code}</p>
-    `;
-
-    const transporter = nodemailer.createTransport(
-    {
-        service: 'gmail',
-        auth: 
-        {
-            user: sender.email,
-            pass: 'wmcw jeso nuhc xmlx ', //Encrypt in future
-        },
-    });
-
-    try 
-    {
-        const info = await transporter.sendMail(
-        {
-            from: `"Orientation ESN" <${sender.email}>`,
-            to: recipient.email,
-            subject: 'Vérification du E-mail',
-            html: html,
-        });
-
-        console.log('Message Sent: ' + info.messageId);
-    } 
-    catch(error) 
-    {
-        console.error('Error sending email:', error);
-    }
-};
 
 //----Handle HTTP requests----//
 

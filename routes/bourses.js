@@ -22,7 +22,6 @@ router.get('/', (req, res) =>
 
 //href to JSON files
 let scholarship_path = "database/bourses_data.json" //Path to data file
-let account_path = "database/compte_data.json" //Path to account data file
 
 //---Scholarship---//
 

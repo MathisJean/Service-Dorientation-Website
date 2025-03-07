@@ -170,6 +170,7 @@ function add_scholarship(id)
   .catch(err => {show_popup(".error_popup", "Impossible d'ajouter l'enregistrement de la bourse")});
 }
 
+//TODO: Capitalise Titles, Dates and start of Paragraphs
 //Admin feature to edit scholarship data
 function edit_scholarship(checkbox, parent, event)
 {
