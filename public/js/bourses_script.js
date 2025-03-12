@@ -406,7 +406,10 @@ function initiate_scholarship(scholarship)
     <div class="id" style="display: none;">${scholarship.id}</div>
     <h4 class="scholarship_name admin_edit">${scholarship.name}</h4>
     <h5 class="scholarship_value admin_edit">${scholarship.value}</h5>
-    <h6 class="scholarship_date admin_edit">${scholarship.date}</h6>
+
+    <div class="scholarship_date">
+      <h6 class="admin_edit">${scholarship.date}</h6>
+    </div>
 
     <div class="scholarship_link">
       <a href=${scholarship.link} target="_blank" onclick="this.blur()">Plus d'information</a>

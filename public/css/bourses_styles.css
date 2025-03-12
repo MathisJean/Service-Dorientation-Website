@@ -204,7 +204,12 @@ html
 
 .scholarship_date
 {
+    display: flex;
+    flex-direction: row;
+
     grid-area: 3 / 1 / 4 / 3;
+
+    align-items: center;
     
     padding-left: 0.5em;
 }

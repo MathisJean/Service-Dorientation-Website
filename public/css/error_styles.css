@@ -1,0 +1,28 @@
+
+html
+{
+    --background--pos--x: right;
+    --background--pos--y: top;
+    --background--angle: 200deg;
+}
+
+.date
+{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 4em;
+}
+
+.date input
+{
+    display: flex;
+
+    background-color: transparent;
+    color: black;
+
+    border: none;
+}
+

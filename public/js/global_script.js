@@ -408,7 +408,7 @@ function login(event, popup)
 
         user_name = data.name;
 
-        location.reload();
+        location.reload()
     })
     .catch(err => 
     {
