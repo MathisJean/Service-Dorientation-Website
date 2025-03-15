@@ -5,28 +5,13 @@
 const table = document.getElementById("table");
 
 //"Autres" gets removed from array after initialisation
-const months = 
-[
-  "Septembre",
-  "Octobre",
-  "Novembre",
-  "Décembre",
-  "Janvier",
-  "Février",
-  "Mars",
-  "Avril",
-  "Mai",
-  "Juin",
-  "Juillet",
-  "Août",
-  "Autres"
-]; 
+const months =  ["Autres", "Septembre", "Octobre", "Novembre", "Décembre", "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août"]; 
 
 //----Variables----//
 
 //Values of input fields when editing
-let scholarship_values = [];
-let edited_scholarship_values = [];
+let scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
+let edited_scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
 
 //----Script----//
 
@@ -66,28 +51,29 @@ function update_table()
     })
 
     //Remove autres from array
-    months.pop();
+    months.shift();
 
     //Sort scholarships by first numbers in date element
     scholarships.sort((a, b) =>
     {
-      let dayA = a.date.match(/\d+/g) == null ? [0] : a.date.match(/\d+/g);
-      let dayB = b.date.match(/\d+/g) == null ? [0] : b.date.match(/\d+/g);
+      dayA = Number(a.date.day)
+      dayB = Number(b.date.day)
 
-      return Number(dayA[0]) - Number(dayB[0]);
+      return dayA - dayB;
     });
 
     //Sort scholarships by month
     scholarships.forEach(scholarship => 
     {
-      let date = scholarship.date.replaceSpecialChar(); //Replaces characters from a list with others, method declared in global script
+      let month = scholarship.date.month.replaceSpecialChar(); //Replaces characters from a list with others, method declared in global script
+
       let container_id;
 
       for(m = 0; m < 12; m++)
       {
-        if(date.includes(months[m].replaceSpecialChar()))
+        if(month.replaceSpecialChar() == months[m].replaceSpecialChar())
         {
-          container_id = "month_container_" + String(months[m].replaceSpecialChar());
+          container_id = "month_container_" + month;
           break;
         }
 
@@ -128,7 +114,7 @@ function update_table()
     //Hides month header and containers without any children
     hide_month_headers();
   })
-  .catch(err => {show_popup(".error_popup", "Impossible de récupérer les enregistrements de bourses")});
+  .catch(err => {show_popup(".error_popup", "Impossible de récupérer les enregistrements de bourses") ; console.error(err)});
 };
 
 //Admin feature to add scholarship
@@ -139,7 +125,11 @@ function add_scholarship(id)
     [{
       id: -1,
       name: "Nom",
-      date: "Date",
+      date: {
+        day: 1,
+        month: "0",
+        time: "00:00"
+      },
       criteria: "Critères",
       value: "Valeur",
       link: "#",
@@ -164,20 +154,25 @@ function add_scholarship(id)
 
     edit_scholarship(checkbox, new_scholarship);
 
+    //Set date appropriatly for the month and previous day
+    new_scholarship.querySelector(".scholarship_date div > select").value = scholarship.querySelector(".scholarship_date div > select").value
+    new_scholarship.querySelector(".scholarship_date div > input[type='text']").value = scholarship.querySelector(".scholarship_date div > input[type='text']").value
+
     //Hides user elements
     admin(new_scholarship);
   })
   .catch(err => {show_popup(".error_popup", "Impossible d'ajouter l'enregistrement de la bourse")});
 }
 
-//TODO: Capitalise Titles, Dates and start of Paragraphs
+//TODO: Capitalise Titles and start of Paragraphs
 //Admin feature to edit scholarship data
 function edit_scholarship(checkbox, parent, event)
 {
   //Edit mode
   if(checkbox.checked)
   {
-    scholarship_values = []; //Reset values
+    //Reset value
+    scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
 
     parent.style.backgroundColor = "rgb(245, 245, 245)";
 
@@ -186,7 +181,8 @@ function edit_scholarship(checkbox, parent, event)
   //Save mode
   else
   {
-    edited_scholarship_values = []; //Reset values
+    //Reset value
+    edited_scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
 
     parent.style.backgroundColor = "white";
 
@@ -194,22 +190,42 @@ function edit_scholarship(checkbox, parent, event)
   }
 
   //Get every element with information in scholarship
-  Array.from(parent.querySelectorAll("input, a, .admin_edit, .id")).forEach(element =>
+  Array.from(parent.querySelectorAll("input, a, h6, .date, .admin_edit, .id")).forEach(element =>
   {
     //Edit mode
     if(checkbox.checked)
-    {      
-      //Hide link
+    {           
+      //Hide link or date
       if(element.tagName === "A")
       {
-        element.style.display = "none";;
+        element.style.display = "none";
       }
 
       //Show input type="text"
       else if(element.tagName === "INPUT" && element.type === "text")
       {
         element.style.display = "flex";
-        scholarship_values.push(element.value);
+        scholarship_values.link = element.value;
+      }
+
+      //Hide date header
+      else if(element.tagName === "H6")
+      {
+        element.style.display = "none";
+      }
+
+      //Make date editable
+      else if(Array.from(element.classList).includes("date"))
+      {
+        element.style.display = "flex";
+
+        let date = {day: "", month: "", time: ""}
+
+        date.day = element.querySelector("input[type='text']") ? element.querySelector("input[type='text']").value : ""
+        date.month = element.querySelector("select") ? element.querySelector("select").value : ""
+        date.time = element.querySelector("input[type='time']") ? element.querySelector("input[type='time']").value : ""
+
+        scholarship_values.date = date;
       }
 
       //Make elements other then link and criteria editable
@@ -218,13 +234,22 @@ function edit_scholarship(checkbox, parent, event)
         element.contentEditable = true;
         element.style.zIndex = "1";
 
-        scholarship_values.push(element.textContent);
+        const key_map = 
+        {
+          "H4": "name",
+          "H5": "value",
+          "P": "criteria"
+        };
+        
+        const key = key_map[element.tagName] || null; // Default to null if not found    
+
+        key ? scholarship_values[key] = element.textContent : null; 
       }
 
       //Add id to values list
       else if(Array.from(element.classList).includes("id"))
       {
-        scholarship_values.push(element.textContent);
+        scholarship_values["id"] = Number(element.textContent);
       };
     }
 
@@ -242,112 +267,132 @@ function edit_scholarship(checkbox, parent, event)
       else if(element.tagName === "INPUT" && element.type === "text")
       {
         element.style.display = "none";
-        edited_scholarship_values.push(element.value);
+        edited_scholarship_values.link = element.value;
       }
 
-      //Makes elements other then criteria and link none editable
+      //Hide date
+      else if(element.tagName === "H6")
+      {
+        element.style.display = "flex";
+      }        
+
+      //Make date editable
+      else if(Array.from(element.classList).includes("date"))
+      {
+        element.style.display = "none";
+
+        let date = {day: "", month: "", time: ""}
+
+        date.day = element.querySelector("input[type='text']") ? element.querySelector("input[type='text']").value : ""
+        date.month = element.querySelector("select") ? element.querySelector("select").value : ""
+        date.time = element.querySelector("input[type='time']") ? element.querySelector("input[type='time']").value : ""
+
+        edited_scholarship_values.date = date;
+
+        parent.querySelector("h6").textContent = `${date.day} ${date.month} ${date.time}`
+      }
+
+      //Makes elements none editable
       else if(Array.from(element.classList).includes("admin_edit"))
       {
         element.contentEditable = false;
-        edited_scholarship_values.push(element.textContent);
+
+        const key_map = 
+        {
+          "H4": "name",
+          "H5": "value",
+          "P": "criteria"
+        };
+        
+        const key = key_map[element.tagName] || null; // Default to null if not found    
+
+        key ? edited_scholarship_values[key] = element.textContent : null;
       }
 
       //Add id to edited values list
       else if(Array.from(element.classList).includes("id"))
       {
-        edited_scholarship_values.push(element.textContent);
+        edited_scholarship_values["id"] = Number(element.textContent);
       };
     };
   });
 
   //Compare values before and after edit
-  if(String(scholarship_values) !== String(edited_scholarship_values) && !checkbox.checked)
+  if(JSON.stringify(scholarship_values) !== JSON.stringify(edited_scholarship_values) && !checkbox.checked)
   {
     //If edited, create object with the new values
-    obj = JSON.stringify({scholarships:
-      [{
-        id: edited_scholarship_values[0],
-        name: edited_scholarship_values[1],
-        date: edited_scholarship_values[3],
-        criteria: edited_scholarship_values[5],
-        value: edited_scholarship_values[2],
-        link: edited_scholarship_values[4],
-        subscribedUsers: []
-      }]
-    });
+    obj = JSON.stringify({scholarships:[edited_scholarship_values]});
 
     //Send a request to edit the data
     PUT("/bourses/scholarship", obj)
     .then(data => 
     {
-      let date = String(edited_scholarship_values[3].replaceSpecialChar());
+      let date = edited_scholarship_values["date"];
 
-      //Changes location of scholarship to appropriate month container
-      if(String(scholarship_values[3].replaceSpecialChar()) !== date)
-      {    
-        let container_id;
-        let container;
+      let day = Number(date.day);
+      let month = String(date.month.replaceSpecialChar());
 
-        //Check through months
-        for(m = 0; m < 12; m++)
+      //Changes location of scholarship to appropriate month container   
+      let container_id;
+      let container;
+
+      //Check through months
+      for(m = 0; m < 12; m++)
+      {
+        if(months[m].replaceSpecialChar() === month)
         {
-          if(date.includes(months[m].replaceSpecialChar()))
+          container_id = "month_container_" + month;
+          break;
+        }
+        //If no month is in date
+        else if(m == 11)
+        {
+          container_id = "month_container_autres";
+        };
+      };
+
+      //Get the container for the scholarship
+      container = document.getElementById(container_id);
+
+      //Get scholarships from the container
+      let scholarships = Array.from(container.children);
+      scholarships = scholarships.filter(scholarship => 
+      {
+        return Number(scholarship.id.replace(/scholarship_/g, "")) !== Number(edited_scholarship_values["id"])
+      });
+
+      if(scholarships.length == 0)
+      {
+        container.appendChild(parent)
+      }
+      else if(scholarships.length > 0) 
+      {
+        //Loops through every scholarship
+        for (let i = 0; i < scholarships.length; i++)
+        {
+          let comparison_day = scholarships[i].querySelector(".scholarship_date div > input[type='text']").value; //Get day from scholarship date field
+
+          //If the scholarship being inserted has a smaller date then the one after
+          if (day < comparison_day)
           {
-            container_id = "month_container_" + String(months[m].replaceSpecialChar());
+            scholarships[i].before(parent);
             break;
           }
-          //If no month is in date
-          else if(m == 11)
+          //If scholarship has largest date, add at end
+          else if (i == scholarships.length - 1)
           {
-            container_id = "month_container_autres";
+            scholarships[i].after(parent);
+            break;
           };
         };
+      }
 
-        //Get the container for the scholarship
-        container = document.getElementById(container_id);
+      //If scholarship is moved to month with no scholarships, show container and header
+      hide_month_headers();
 
-        //Get scholarships from the container
-        let scholarships = Array.from(container.children);
-        scholarships = scholarships.filter(scholarship => 
-        {
-          return Number(scholarship.id.replace(/scholarship_/g, "")) !== Number(edited_scholarship_values[0])
-        });
-
-        if(scholarships.length == 0)
-        {
-          container.appendChild(parent)
-        }
-        else if(scholarships.length > 0) 
-        {
-          //Loops through every scholarship
-          for (let i = 0; i < scholarships.length; i++)
-          {
-            let scholarship_date = scholarships[i].querySelector(".scholarship_date").textContent; //Get date from scholarship date field
-            let dayA = scholarship_date.match(/\d+/g) == null ? [0] : scholarship_date.match(/\d+/g); //Get day from scholarship thats already there
-            let dayB = date.match(/\d+/g) == null ? [0] : date.match(/\d+/g); //Get day of inserting scholarship
-
-            //If the scholarship being inserted has a smaller date then the one after
-            if (dayB[0] <= dayA[0])
-            {
-              scholarships[i].before(parent);
-              break;
-            }
-            //If scholarship has largest date, add at end
-            else if (i == scholarships.length - 1)
-            {
-              scholarships[i].after(parent);
-              break;
-            };
-          };
-        }
-
-        //If scholarship is moved to month with no scholarships, show container and header
-        hide_month_headers();
-
-        scroll_to("#" + String(parent.id), event);
-      };
+      scroll_to("#" + String(parent.id), event);
     })
-    .catch(err => {show_popup(".error_popup", "Impossible de changer l'enregistrement de la bourse")});
+    .catch(err => {show_popup(".error_popup", "Impossible de changer l'enregistrement de la bourse") ; console.error(err)});
   };
 };
 
@@ -401,6 +446,8 @@ function initiate_scholarship(scholarship)
   new_scholarship.classList.add("scholarship");
   new_scholarship.id = "scholarship_" + String(scholarship.id);
 
+  let date = `${scholarship.date.day} ${scholarship.date.month} ${scholarship.date.time}` 
+
   new_scholarship.innerHTML = 
   ` 
     <div class="id" style="display: none;">${scholarship.id}</div>
@@ -408,11 +455,32 @@ function initiate_scholarship(scholarship)
     <h5 class="scholarship_value admin_edit">${scholarship.value}</h5>
 
     <div class="scholarship_date">
-      <h6 class="admin_edit">${scholarship.date}</h6>
+      <h6>${date}</h6>
+
+      <div class="date">
+        <input type="text" maxLength="2" placeholder="DD" value="${scholarship.date.day}">
+
+        <select id="month_select">
+          <option>Septembre</option>
+          <option>Octobre</option>
+          <option>Novembre</option>
+          <option>Décembre</option>
+          <option>Janvier</option>
+          <option>Février</option>
+          <option>Mars</option>
+          <option>Avril</option>
+          <option>Mai</option>
+          <option>Juin</option>
+          <option>Juillet</option>
+          <option>Août</option>
+        </select>
+
+        <input type="time" value="${scholarship.date.time}">
+      </div>
     </div>
 
     <div class="scholarship_link">
-      <a href=${scholarship.link} target="_blank" onclick="this.blur()">Plus d'information</a>
+      <a href="${scholarship.link}" target="_blank" onclick="this.blur()">Plus d'information</a>
       <input type="text" value="${scholarship.link}" style="display: none;">
     </div>
 
@@ -446,6 +514,8 @@ function initiate_scholarship(scholarship)
       </label>
     </div>
   `;
+
+  new_scholarship.querySelector("#month_select").value = scholarship.date.month;
 
   return new_scholarship;
 }

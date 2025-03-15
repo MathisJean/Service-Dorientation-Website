@@ -209,14 +209,48 @@ html
 
     grid-area: 3 / 1 / 4 / 3;
 
+    justify-content: baseline;
     align-items: center;
+
+    height: 100%;
+}
+
+.scholarship_date .date
+{
+    display: none;
+
+    background-color: transparent;
+
+    border: none;
+
+    outline: none;
+}
+
+.scholarship_date input
+{
+    background-color: transparent;
+
+    text-align: center;
     
-    padding-left: 0.5em;
+    border: none;
+    outline: none;
+}
+
+.scholarship_date input[type="text"]
+{
+    width: 3ch;
+}
+
+.scholarship_date select
+{
+    background-color: transparent;
+
+    border: none;
 }
 
 .scholarship_criteria
 {
-    justify-content: baseline;
+    justify-content: center;
     align-self: baseline;
 
     text-align: center;
@@ -258,7 +292,10 @@ input[type="checkbox"]:checked + label > .active_checkbox
 
 .scholarship_link
 {
-    text-align: end;
+    display: flex;
+
+    justify-content: end;
+    align-items: center;
 
     grid-area: 3 / 3 / 4 / -1;
 }
@@ -268,15 +305,12 @@ input[type="checkbox"]:checked + label > .active_checkbox
     display: flex;
 
     justify-content: end;
-    align-items: center;
+    align-items: baseline;
 
     color: var(--link--color);
     background-color: transparent;
 
     text-decoration: none;
-
-    width: 100%;
-    height: 100%;
 }
 
 .scholarship_link > input
@@ -284,6 +318,8 @@ input[type="checkbox"]:checked + label > .active_checkbox
     border: none;
 
     font-style: italic;
+
+    width: 100%;
 
     outline: none;
 }

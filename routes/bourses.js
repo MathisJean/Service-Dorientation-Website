@@ -104,6 +104,8 @@ router.put("/scholarship", async (req, res) =>
   //Define incoming data
   const request_data = req.body.scholarships[0];
 
+  request_data.date.day = Number(request_data.date.day);
+
   try
   {
     //Read file
@@ -130,7 +132,7 @@ router.put("/scholarship", async (req, res) =>
             {
               key = Object.keys(scholarships[i])[index];
 
-              scholarships[i][key] = Number(request_key)? Number(request_key) : String(request_key); 
+              scholarships[i][key] = Number(request_key)? Number(request_key) : String(request_key) !== "[object Object]" ? String(request_key) : request_key; 
             };
           })
 

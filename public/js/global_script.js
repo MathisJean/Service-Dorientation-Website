@@ -301,7 +301,7 @@ function show_popup(popup_class, txt_msg)
     let popup = document.querySelector(popup_class);
     let popup_text = document.querySelector(popup_class + " > p");
 
-    popup.querySelector("input").focus();
+    popup.querySelector("input")?.focus();
 
     //Freeze scroll
     document.body.style.overflow = "hidden";

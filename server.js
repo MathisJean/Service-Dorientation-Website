@@ -32,6 +32,7 @@ for (const interfaceName in networkInterfaces)
   }
 }
 
+//TODO: Fix Rate limiter
 //Rate limiter
 const limiter = rateLimit(
 {
@@ -100,4 +101,7 @@ const sslServer = https.createServer(
 sslServer.listen(port, host, () =>  
 {
   console.log(`Server running at https://${host}:${port} close it with CTRL + C`);
+  
+  //Start scholarship reminder schedule
+  require("./email_task_scheduler");
 });
