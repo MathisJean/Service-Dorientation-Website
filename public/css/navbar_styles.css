@@ -61,7 +61,7 @@
 
     background-color: var(--secondary--bg--color);
 
-    border-radius: 50px;
+    border-radius: var(--border--radius);
 
     justify-content: center;
     align-items: center;
@@ -325,4 +325,13 @@
     margin-bottom: 0.5em;
 
     visibility: hidden;
+}
+
+/* For very small screens, like mobile phones */
+@media only screen and (max-width: 480px) 
+{
+    .nav_text
+    {
+        font-size: 1.25em;
+    }
 }

@@ -270,27 +270,27 @@ function update_gradient()
 //Scrolls to specified element
 function scroll_to(query_selector, event)
 {
-  let elements = document.querySelectorAll(query_selector);
+    let elements = document.querySelectorAll(query_selector);
 
-  //Confirm element is visible
-  elements = Array.from(elements).filter(element =>
-  {
-    return element.style.display !== "none";
-  });
+    //Confirm element is visible
+    elements = Array.from(elements).filter(element =>
+    {
+        return element.style.display !== "none";
+    });
 
-  if(elements.length > 0)
-  {
-    event.preventDefault();
-    event.target.blur();
-  
-    element_position = elements[0].getBoundingClientRect().top + window.scrollY - 100;
-  
+    if(elements.length > 0)
+    {
+        event.preventDefault();
+        event.target.blur();
+
+        element_position = elements[0].getBoundingClientRect().top + window.scrollY - 100;
+
     window.scrollTo(
     {
-      top: element_position,
-      behavior: "smooth"
+        top: element_position,
+        behavior: "smooth"
     });
-  };
+    };
 };
 
 //Displays a popup

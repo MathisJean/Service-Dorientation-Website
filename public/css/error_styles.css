@@ -4,25 +4,16 @@ html
     --background--pos--x: right;
     --background--pos--y: top;
     --background--angle: 200deg;
+
+    --background--radial--start: 10%;
+    --background--radial--leap: 5%;
 }
 
-.date
+@media only screen and (max-width: 480px) 
 {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    margin-bottom: 4em;
-}
-
-.date input
-{
-    display: flex;
-
-    background-color: transparent;
-    color: black;
-
-    border: none;
+    html
+    {
+        --background--radial--leap: 10%;
+    }
 }
 

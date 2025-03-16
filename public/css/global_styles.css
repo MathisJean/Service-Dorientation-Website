@@ -7,6 +7,8 @@ html
     --bg--grey--color: rgb(245, 245, 245);
     --link--color: rgb(83, 83, 227);
 
+    --border--radius: 50px;
+
     overscroll-behavior: none;
 }
 
@@ -40,7 +42,7 @@ h1, h2, h3, h4, h5, h6, a, p
 
 h1
 {
-    font-size: 6rem;
+    font-size: 6em;
     font-weight: 700;
 }
 
@@ -110,7 +112,7 @@ h6, a
     font-weight: 600;
 
     border: none;
-    border-radius: 50px;
+    border-radius: var(--border--radius);
 
     padding: 1em;
     margin: 0.25em 0;
@@ -128,7 +130,7 @@ h6, a
     background-color: white;
     color: black;
 
-    border-radius: 50px;
+    border-radius: var(--border--radius);
 
     padding: 1.5em 3em;
 
@@ -186,9 +188,9 @@ h6, a
 
     background: 
     repeating-radial-gradient(circle farthest-side at var(--background--pos--x) var(--background--pos--y),
-        rgba(255, 255, 255, 0.5) 10%,
-        rgba(250, 250, 250, 0.5) 15%,
-        rgba(240, 240, 240, 0.5) 20%
+        rgba(255, 255, 255, 0.5) var(--background--radial--start),
+        rgba(250, 250, 250, 0.5) calc(var(--background--radial--start) + var(--background--radial--leap)),
+        rgba(240, 240, 240, 0.5) calc(var(--background--radial--start) + var(--background--radial--leap) * 2)
     );
 
     min-height: 100vh;
@@ -230,4 +232,36 @@ h6, a
     margin: 0;
 
     z-index: 3;
+}
+
+/* For very small screens, like mobile phones */
+@media only screen and (max-width: 480px) 
+{
+    html
+    {
+        --border--radius: 25px;
+
+        font-size: 10px;
+    }
+
+    h1
+    {
+        font-size: 4.5em;
+    }
+
+    h3
+    {
+        font-size: 1.5em;
+    }
+
+    #background_img
+    {
+        min-height: 50vh;
+    }
+
+    .svg
+    {
+        height: 16px;
+        width: 16px;
+    }
 }

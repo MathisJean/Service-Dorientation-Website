@@ -490,27 +490,27 @@ function initiate_scholarship(scholarship)
       <input type="button" id="add_button_${scholarship.id}" onclick="add_scholarship(${scholarship.id})" style="display: none;">
 
       <label for="add_button_${scholarship.id}" class="add_button admin icon">
-        <img src="/icons/add.svg" class="no_select" draggable="false"></img>
+        <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
       </label>
 
       <input type="checkbox" id="subscribe_checkbox_${scholarship.id}" onchange="subscribe_scholarship(${scholarship.id}, this)" style="display: none;">
 
       <label for="subscribe_checkbox_${scholarship.id}" class="logged_in user icon">
-        <img src="/icons/subscribe.svg" class="unactive_checkbox no_select" draggable="false"></img>
-        <img src="/icons/unsubscribe.svg" class="active_checkbox no_select" draggable="false"></img>
+        <img src="/icons/subscribe.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+        <img src="/icons/unsubscribe.svg" class="active_checkbox no_select svg" draggable="false"></img>
       </label>
 
       <input type="checkbox" id="edit_checkbox_${scholarship.id}" class="edit_checkbox" onchange="edit_scholarship(this, this.parentNode.parentNode, event)" style="display: none;">
 
       <label for="edit_checkbox_${scholarship.id}" class="admin icon">
-        <img src="/icons/edit.svg" class="unactive_checkbox no_select" draggable="false"></img>
-        <img src="/icons/save.svg" class="active_checkbox no_select" draggable="false"></img>
+        <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+        <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
       </label>
 
       <input type="button" id="delete_button_${scholarship.id}" onclick="delete_scholarship(${scholarship.id})" style="display: none;">
 
       <label for="delete_button_${scholarship.id}" class="admin icon">
-        <img src="/icons/delete.svg" class="no_select" draggable="false"></img>
+        <img src="/icons/delete.svg" class="no_select svg" draggable="false"></img>
       </label>
     </div>
   `;

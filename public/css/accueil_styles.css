@@ -4,6 +4,9 @@ html
     --background--pos--x: right;
     --background--pos--y: top;
     --background--angle: 200deg;
+
+    --background--radial--start: 10%;
+    --background--radial--leap: 5%;
 }
 
 .page_head > input
@@ -50,7 +53,7 @@ html
     font-weight: 700;
 
     border: none;
-    border-radius: 50px;
+    border-radius: var(--border--radius);
 
     box-shadow: 
         1px 3px 2.5px rgba(0, 0, 0, 0.1);
@@ -179,7 +182,7 @@ html
 
     backdrop-filter: blur(2px);
 
-    border-radius: 50px;
+    border-radius: var(--border--radius);
 
     padding: 0.5em;
 }
@@ -275,8 +278,10 @@ input[type="checkbox"]:checked + label > .active_checkbox
 {
     display: flex;
     flex-direction: row;
+    
+    flex-wrap: wrap;
 
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 
     margin: 3em 0;
@@ -293,7 +298,7 @@ input[type="checkbox"]:checked + label > .active_checkbox
     justify-content: center;
     align-items: center;
 
-    border-radius: 50px;
+    border-radius: var(--border--radius);
 
     box-shadow: 
         inset 1px 3px 2.5px rgba(0, 0, 0, 0.4),
@@ -301,9 +306,10 @@ input[type="checkbox"]:checked + label > .active_checkbox
         1px 3px 2.5px rgba(0, 0, 0, 0.0),
         -1px -3px 2.5px rgba(0, 0, 0, 0.0);
 
+    margin-bottom: 0.5em;
     padding: 1em;
 
-    width: 15%;
+    min-width: 15%;
 
     aspect-ratio: 1;
 
@@ -326,4 +332,43 @@ input[type="checkbox"]:checked + label > .active_checkbox
     font-weight: 700;
 
     margin-top: 0.5em;
+}
+
+@media only screen and (max-width: 480px) 
+{
+    html
+    {
+        --background--radial--leap: 10%;
+    }
+
+    .select
+    {
+        font-size: 1.10em;
+
+        padding: 1em 0.5em;
+    }
+
+    .info
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .drop_area
+    {
+        min-width: 12em;
+        min-height: 12em;
+
+        margin-right: 1em;
+    }
+
+    .services h3
+    {
+        font-weight: 900;
+    }
+
+    .contacts > ul > li
+    {
+        min-width: 10em;
+    }
 }

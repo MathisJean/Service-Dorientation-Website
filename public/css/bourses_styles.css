@@ -4,6 +4,9 @@ html
     --background--pos--x: left;
     --background--pos--y: 60%;
     --background--angle: 50deg;
+
+    --background--radial--start: 10%;
+    --background--radial--leap: 5%;
 }
 
 .scholarship_nav
@@ -37,7 +40,7 @@ html
     color: var(--bg--text--color);
 
     border: none;
-    border-radius: 50px;
+    border-radius: var(--border--radius);
 
     font-weight: 700;
 
@@ -108,11 +111,9 @@ html
 .month_container
 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, calc(50% - 0.25em)));
+    grid-template-columns: repeat(2, minmax(400px, 1fr));
 
     gap: 2em 0.5em;
-
-    background-color: rgb(255, 255, 255);
 
     padding: 2em 1em;
 }
@@ -143,12 +144,12 @@ html
     display: grid;
 
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(4, minmax(50px, auto));  
+    grid-template-rows: repeat(4, minmax(40px, auto));  
 
     background-color: white;
 
     border: none;
-    border-radius: 50px;
+    border-radius: var(--border--radius);
 
     box-shadow: 
         inset 1px 3px 2.5px rgba(0, 0, 0, 0.4),
@@ -324,3 +325,30 @@ input[type="checkbox"]:checked + label > .active_checkbox
     outline: none;
 }
 
+@media only screen and (max-width: 1024px) 
+{
+    .scholarship_nav > ul
+    {
+        flex-wrap: wrap;
+
+        padding: 0 4em;
+    }
+
+    .month_container
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .scholarship
+    {
+        padding: 1.5em 2em;
+    }
+}
+
+@media only screen and (max-width: 480px) 
+{
+    html
+    {
+        --background--radial--leap: 10%;
+    }
+}
