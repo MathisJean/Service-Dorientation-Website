@@ -145,7 +145,7 @@ const background_pos_x = style.getPropertyValue("--background--pos--x");
 const background_pos_y = style.getPropertyValue("--background--pos--y");
 const background_angle = parseInt(style.getPropertyValue("--background--angle"), 10);
 
-const observer = new IntersectionObserver((entries) => 
+const background_observer = new IntersectionObserver((entries) => 
 {
     entries.forEach(entry => 
     {
@@ -169,11 +169,18 @@ window.onload = function ()
     setTimeout(function() {document.body.style.display = "";}, 200);
 }
 
+window.addEventListener('scroll', function() 
+{
+    let scrollPosition = window.scrollY;
+    document.getElementById('background_gradiant').style.transform = `translateY(${scrollPosition * 0.5}px)`;
+});
+
+
 //Waits for website to be loaded
 window.addEventListener("load", () => 
 {
     //Verifies if background is in viewport
-    observer.observe(background);
+    background_observer.observe(background);
 
     update_gradient() //Sets the background to the right starting amount
 
@@ -253,7 +260,7 @@ function change_cell_focus(event)
 }
 
 //Update the background
-function update_gradient()
+function update_gradient(event)
 {
     const y = window.scrollY / window.innerHeight * 120 + background_angle;
     
@@ -531,6 +538,21 @@ function authenticate(event, popup)
         popup_alert.style.visibility = "visible";
     };
 };
+
+//Scroll animations
+const scroll_observer = new IntersectionObserver(elements =>
+{
+    elements.forEach(element =>
+    {
+        if(element.isIntersecting)
+        {
+            element.target.classList.add("scroll_show");
+        };
+    });
+});
+
+const hidden_elements = Array.from(document.querySelectorAll(".scroll_hide"));
+hidden_elements.forEach(element => {scroll_observer.observe(element)});
 
 //----Global Methods----//
 

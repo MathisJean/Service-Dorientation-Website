@@ -9,22 +9,11 @@ html
     --background--radial--leap: 5%;
 }
 
-.page_head > input
-{
-    margin-top: 6rem;
-
-    transition: 
-        transform 0.1s ease,
-        box-shadow 0.1s ease;
-}
-
 .page_head > input:hover
 {
     transform: translateY(-5px);
 
-    box-shadow: 
-        1px 3px 2.5px rgba(0, 0, 0, 0.4),
-        -1px -3px 2.5px rgba(0, 0, 0, 0.01);
+    box-shadow: var(--drop--shadow);
 }
 
 .page_head > input:active
@@ -55,10 +44,9 @@ html
     border: none;
     border-radius: var(--border--radius);
 
-    box-shadow: 
-        1px 3px 2.5px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 3px 2.5px rgba(0, 0, 0, 0.1);
 
-    padding: 0.5em;
+    padding: 0.75em 0.5em;
     margin-top: -1em;
 
     width: 50%;
@@ -73,9 +61,7 @@ html
 
 .select:hover
 {
-    box-shadow: 
-        1px 3px 2.5px rgba(0, 0, 0, 0.4),
-        -1px -3px 2.5px rgba(0, 0, 0, 0.01);
+    box-shadow: var(--drop--shadow);
 }
 
 #orientation:checked + .orientation
@@ -300,11 +286,7 @@ input[type="checkbox"]:checked + label > .active_checkbox
 
     border-radius: var(--border--radius);
 
-    box-shadow: 
-        inset 1px 3px 2.5px rgba(0, 0, 0, 0.4),
-        inset -1px -3px 2.5px rgba(0, 0, 0, 0.1),
-        1px 3px 2.5px rgba(0, 0, 0, 0.0),
-        -1px -3px 2.5px rgba(0, 0, 0, 0.0);
+    box-shadow: var(--inset--shadow);
 
     margin-bottom: 0.5em;
     padding: 1em;
@@ -322,9 +304,7 @@ input[type="checkbox"]:checked + label > .active_checkbox
 {
     transform: translateY(-5px);
 
-    box-shadow: 
-        1px 3px 2.5px rgba(0, 0, 0, 0.4),
-        -1px -3px 2.5px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--drop--shadow);
 }
 
 .contacts > ul > li > h5

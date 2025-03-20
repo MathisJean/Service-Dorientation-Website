@@ -1,12 +1,231 @@
 
 html
 {
-    --background--pos--x: right;
-    --background--pos--y: top;
-    --background--angle: 200deg;
+    --background--pos--x: 70%;
+    --background--pos--y: 100%;
+    --background--angle: 300deg;
 
     --background--radial--start: 10%;
-    --background--radial--leap: 5%;
+    --background--radial--leap: 8%;
+}
+
+.content
+{
+    position: relative;
+}
+
+.divider
+{
+    display: flex;
+    position: absolute;
+
+    bottom: 99.75%;
+
+    width: 100%;
+}
+
+.content h2
+{
+    padding: 0.5em;
+}
+
+.cours
+{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.conseils
+{
+    display: flex;
+    flex-direction: row;
+    
+    flex-wrap: wrap;
+
+    justify-content: space-evenly;
+    align-items: center;
+
+    margin: 3em 0;
+    padding: 0;
+
+    width: 100%;
+}
+
+.conseils > div
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    border-radius: var(--border--radius);
+
+    box-shadow: var(--inset--shadow);
+
+    margin-bottom: 0.5em;
+    padding: 1em;
+
+    min-width: 15%;
+
+    aspect-ratio: 1;
+
+    transition: 
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+.conseils > div:hover
+{
+    box-shadow: var(--drop--shadow);
+
+    transform: translateY(-5px);
+}
+
+.conseils > div:nth-child(2)
+{
+    animation-delay: 0.2s;
+}
+
+.conseils > div:nth-child(3)
+{
+    animation-delay: 0.4s;
+}
+
+.conseils > div:nth-child(4)
+{
+    animation-delay: 0.6s;
+}
+
+.conseils > div:nth-child(5)
+{
+    animation-delay: 0.8s;
+}
+
+.conseils p
+{
+    font-weight: 700;
+
+    margin-top: 0.5em;
+}
+
+.guide
+{
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    margin-top: 2em;
+
+    gap: 5%;
+
+    width: 100%;
+}
+
+.guide div
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    transition: 
+        padding 0.1s ease;
+}
+
+.guide div:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.guide div:active
+{
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
+
+.guide div .btn
+{
+    margin: 0% !important;
+}
+
+.guide div .btn:hover
+{
+    box-shadow: var(--drop--shadow);
+
+    transition:
+        box-shadow 0.1s;
+}
+
+.parcours
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 4em 0;
+}
+
+.slideshow
+{
+    display: flex;
+}
+
+.video video
+{
+    display: none;
+}
+
+.more
+{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 5%;
+
+    width: 100%;
+}
+
+.more div
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    transition: 
+        padding 0.1s ease;
+}
+
+.more div:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.more div:active
+{
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
+
+.more div .btn
+{
+    margin: 0% !important;
+}
+
+.more div .btn:hover
+{
+    box-shadow: var(--drop--shadow);
+
+    transition:
+        box-shadow 0.1s;
 }
 
 @media only screen and (max-width: 480px) 
@@ -15,4 +234,15 @@ html
     {
         --background--radial--leap: 10%;
     }
+
+    .conseils
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .conseils > div
+    {
+        min-width: 10em;
+    }
 }
+

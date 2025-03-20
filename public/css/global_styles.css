@@ -9,6 +9,18 @@ html
 
     --border--radius: 50px;
 
+    --drop--shadow: 
+        inset 4px 3px 2.5px rgba(0, 0, 0, 0.0),
+        inset -4px -3px 2.5px rgba(0, 0, 0, 0.0),
+        1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        -1px -3px 2.5px rgba(0, 0, 0, 0.1);
+
+    --inset--shadow:        
+        inset 1px 3px 2.5px rgba(0, 0, 0, 0.4),
+        inset -1px -3px 2.5px rgba(0, 0, 0, 0.1),
+        4px 3px 2.5px rgba(0, 0, 0, 0.0),
+        -4px -3px 2.5px rgba(0, 0, 0, 0.0);
+
     overscroll-behavior: none;
 }
 
@@ -144,9 +156,7 @@ h6, a
 
     transform: translate(-50%, -50%);
 
-    box-shadow: 
-        4px 3px 2.5px rgba(0, 0, 0, 0.4),
-        -4px -3px 2.5px rgba(0, 0, 0, 0.01);
+    box-shadow: var(--drop--shadow);
 
     z-index: 4;
 
@@ -170,6 +180,7 @@ h6, a
     position: relative;
     left: 0;
 
+    background-attachment: fixed;
     background: 
     conic-gradient(from var(--background--angle) at var(--background--pos--x) var(--background--pos--y),
         rgb(255, 255, 255),
@@ -186,6 +197,7 @@ h6, a
     position: relative;
     left: 0;
 
+    background-attachment: fixed;
     background: 
     repeating-radial-gradient(circle farthest-side at var(--background--pos--x) var(--background--pos--y),
         rgba(255, 255, 255, 0.5) var(--background--radial--start),
@@ -232,6 +244,60 @@ h6, a
     margin: 0;
 
     z-index: 3;
+}
+
+.page_head input[type="button"]
+{
+    margin-top: 6rem;
+
+    transition: 
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+.content
+{
+    background-color: white;
+}
+
+@keyframes scroll_show
+{
+    from
+    {
+        opacity: 0;
+        filter: blur(3px);
+        translate: -50%;
+    }
+    to
+    {
+        opacity: 1;
+        filter: blur(0px);
+        translate: 0%;
+    }
+}
+
+.scroll_hide
+{
+    opacity: 0;
+    filter: blur(3px);
+    translate: -50%;
+}
+
+.scroll_show
+{
+    animation-name: scroll_show;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@media(prefers-reduced-motion)
+{
+    .scroll_hide
+    {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateX(0%);
+    }
 }
 
 /* For very small screens, like mobile phones */

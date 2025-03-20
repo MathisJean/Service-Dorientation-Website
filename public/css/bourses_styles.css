@@ -45,6 +45,7 @@ html
     font-weight: 700;
 
     padding: 1em;
+    margin-top: 0 !important;
 
     transition: 
         box-shadow 0.1s ease;
@@ -67,9 +68,7 @@ html
 
 .scholarship_nav li:hover > input
 {
-    box-shadow: 
-        1px 3px 2.5px rgba(0, 0, 0, 0.4),
-        -1px -3px 2.5px rgba(0, 0, 0, 0.01);
+    box-shadow: var(--drop--shadow);
 }
 
 .scholarship_nav li:active
@@ -80,12 +79,10 @@ html
 
 .scholarship_nav li:active > input
 {
-    box-shadow: 
-        1px 3px 2.5px rgba(0, 0, 0, 0.4),
-        -1px -3px 2.5px rgba(0, 0, 0, 0.01);
+    box-shadow: var(--drop--shadow);
 }
 
-.spacer
+.divider
 {
     height: 0.5em;
 }
@@ -151,11 +148,7 @@ html
     border: none;
     border-radius: var(--border--radius);
 
-    box-shadow: 
-        inset 1px 3px 2.5px rgba(0, 0, 0, 0.4),
-        inset -1px -3px 2.5px rgba(0, 0, 0, 0.1),
-        4px 3px 2.5px rgba(0, 0, 0, 0.0),
-        -4px -3px 2.5px rgba(0, 0, 0, 0.0);
+    box-shadow: var(--inset--shadow);
 
     padding: 3em 2em;
 
@@ -171,11 +164,7 @@ html
 {
     transform: translateY(-5px);
 
-    box-shadow: 
-        inset 4px 3px 2.5px rgba(0, 0, 0, 0.0),
-        inset -4px -3px 2.5px rgba(0, 0, 0, 0.0),
-        1px 3px 2.5px rgba(0, 0, 0, 0.4),
-        -1px -3px 2.5px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--drop--shadow);
 }
 
 .scholarship > h6, .scholarship > h5, .scholarship > h4, .scholarship > p
