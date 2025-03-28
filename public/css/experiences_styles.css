@@ -9,10 +9,273 @@ html
     --background--radial--leap: 5%;
 }
 
+h2
+{
+    padding: 0.5em;
+}
+
+.experiences
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+/* Slideshow container */
+.slideshow
+{
+    display: flex;
+    position: relative;
+
+    align-items: center;
+
+    margin-top: 2em;
+
+    min-width: 65%;  
+}
+
+/* Hide the images by default */
+.slide
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: baseline;
+    align-items: baseline;
+
+    position: relative;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 100%;
+    height: 0%;
+
+    padding-top: 56.25%; /* 16:9 Aspect Ratio (Height / Width * 100) */
+
+    border-radius: 10px;
+
+    box-shadow: var(--inset--shadow);
+}
+
+.slide img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 5px;
+    border: none;
+}
+
+.slide div
+{
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+
+    height: 100%;
+    width: 100%;
+
+    border-radius: 5px;
+    border: none;
+
+    padding: 1em;
+}
+
+.slide p
+{
+    padding: 1em;
+
+    word-break: break-word;
+}
+
+/* Next & previous buttons */
+.prev, .next 
+{
+    position: absolute;
+
+    right: 100%;
+    
+    color: black;
+   
+    border-radius: 0 5px 5px 0;
+
+    font-weight: bold;
+    font-size: 1em;
+
+    padding: 2em;
+
+    width: auto;
+    
+    transition: 0.5s ease;
+    
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next 
+{
+    left: 100%;
+
+    border-radius: 5px 0 0 5px;
+}
+
+.prev:hover, .next:hover
+{
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* The dots */
+.dot 
+{
+    display: inline-block;
+
+    background-color: #bbb;
+    
+    border-radius: 50%;
+
+    margin: 1em 2px;
+
+    height: 0.5em;
+    width: 0.5em;
+    
+    cursor: pointer;
+  
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover 
+{
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade 
+{
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade 
+{
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+.more
+{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 5%;
+
+    width: 100%;
+}
+
+.more div
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    transition: 
+        padding 0.1s ease;
+}
+
+.more div:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.more div:active
+{
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
+
+.more div .btn
+{
+    margin: 0% !important;
+}
+
+.more div .btn:hover
+{
+    box-shadow: var(--drop--shadow);
+
+    transition:
+        box-shadow 0.1s;
+}
+
+.orient-action
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 2em 0;
+}
+
+.orient-action > div
+{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    
+    width: 100%;
+
+    padding: 0 6em;
+}
+
+.orient-action > div h2
+{
+    align-items: baseline;
+
+    height: 100%;
+    min-width: 10ch;
+
+    padding: 0%;
+    padding-right: 1em;
+}
+
+/* Mobile users */
 @media only screen and (max-width: 480px) 
 {
     html
     {
         --background--radial--leap: 10%;
+    }
+
+    .slideshow
+    {
+        min-width: 75%;  
+    }
+
+    .slide div h3
+    {
+        font-size: 1.25em;
+    }
+
+    .slide div p
+    {
+        font-size: 0.75em;
     }
 }

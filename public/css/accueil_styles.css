@@ -307,6 +307,26 @@ input[type="checkbox"]:checked + label > .active_checkbox
     box-shadow: var(--drop--shadow);
 }
 
+.contacts > ul > li:nth-child(2)
+{
+    animation-delay: 0.2s;
+}
+
+.contacts > ul > li:nth-child(3)
+{
+    animation-delay: 0.4s;
+}
+
+.contacts > ul > li:nth-child(4)
+{
+    animation-delay: 0.6s;
+}
+
+.contacts > ul > li:nth-child(5)
+{
+    animation-delay: 0.8s;
+}
+
 .contacts > ul > li > h5
 {
     font-weight: 700;
@@ -332,6 +352,16 @@ input[type="checkbox"]:checked + label > .active_checkbox
     {
         display: flex;
         flex-direction: column;
+    }
+        
+    .orienters
+    {
+        width: 100%;
+    }
+        
+    .orienters h3
+    {
+        font-size: 1.5em;
     }
 
     .drop_area

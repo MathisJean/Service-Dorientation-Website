@@ -13,6 +13,7 @@ const months =  ["Autres", "Septembre", "Octobre", "Novembre", "Décembre", "Jan
 let scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
 let edited_scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
 
+//TODO: Add event listener that sends you back to your scrolling position
 //----Script----//
 
 update_table();
@@ -113,6 +114,8 @@ function update_table()
 
     //Hides month header and containers without any children
     hide_month_headers();
+
+    load();
   })
   .catch(err => {show_popup(".error_popup", "Impossible de récupérer les enregistrements de bourses") ; console.error(err)});
 };
@@ -444,6 +447,7 @@ function initiate_scholarship(scholarship)
   let new_scholarship = document.createElement("div");
 
   new_scholarship.classList.add("scholarship");
+  new_scholarship.classList.add("scroll_hide");
   new_scholarship.id = "scholarship_" + String(scholarship.id);
 
   let date = `${scholarship.date.day} ${scholarship.date.month} ${scholarship.date.time}` 

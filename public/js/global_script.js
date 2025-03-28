@@ -129,7 +129,10 @@ const DELETE = async (resource, json_data) => //Data must be in object form
 
 //----Global Variables----//
 
-// Initialize admin from localStorage or default to false
+//Media Queries
+const reduced_motion_query = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+//Initialize admin from localStorage or default to false
 let logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
 let is_admin = JSON.parse(localStorage.getItem("is_admin")) || false;
 
@@ -160,6 +163,22 @@ const background_observer = new IntersectionObserver((entries) =>
     });
 });
 
+//Scroll animations
+const scroll_observer = new IntersectionObserver(elements =>
+{
+    elements.forEach(element =>
+    {
+        if(element.isIntersecting)
+        {
+            element.target.classList.add("scroll_show");
+        };
+    });
+});
+
+const hidden_elements = Array.from(document.querySelectorAll(".scroll_hide"));
+hidden_elements.forEach(element => {scroll_observer.observe(element)});
+
+
 //----Global Script----//
 
 document.removeEventListener("scroll", update_gradient); // Ensure it starts without event listener
@@ -169,24 +188,32 @@ window.onload = function ()
     setTimeout(function() {document.body.style.display = "";}, 200);
 }
 
-window.addEventListener('scroll', function() 
+if(!reduced_motion_query.matches)
 {
-    let scrollPosition = window.scrollY;
-    document.getElementById('background_gradiant').style.transform = `translateY(${scrollPosition * 0.5}px)`;
-});
-
+    window.addEventListener("scroll", function() 
+    {
+        let scrollPosition = window.scrollY;
+        document.getElementById("background_gradient").style.transform = `translateY(${scrollPosition * 0.5}px)`;
+    });
+};
 
 //Waits for website to be loaded
-window.addEventListener("load", () => 
+window.addEventListener("load", load)
+
+function load()
 {
     //Verifies if background is in viewport
     background_observer.observe(background);
 
     update_gradient() //Sets the background to the right starting amount
 
+    //Show onscroll animations
+    const hidden_elements = Array.from(document.querySelectorAll(".scroll_hide"));
+    hidden_elements.forEach(element => {scroll_observer.observe(element)});
+
     admin(document)
     account_icon() //Change account icon displayed
-});
+};
 
 //Change focus on authentication inputs
 Array.from(document.querySelectorAll(".popup .user_input")).forEach((input, index, inputs) =>
@@ -539,20 +566,54 @@ function authenticate(event, popup)
     };
 };
 
-//Scroll animations
-const scroll_observer = new IntersectionObserver(elements =>
-{
-    elements.forEach(element =>
-    {
-        if(element.isIntersecting)
-        {
-            element.target.classList.add("scroll_show");
-        };
-    });
-});
+let slideIndex = 1;
 
-const hidden_elements = Array.from(document.querySelectorAll(".scroll_hide"));
-hidden_elements.forEach(element => {scroll_observer.observe(element)});
+if(document.getElementsByClassName("slide").length > 0)
+{
+    showSlides(slideIndex)
+}
+
+//Next/previous controls
+function plusSlides(n)
+{
+  showSlides(slideIndex += n);
+}
+
+//Thumbnail image controls
+function currentSlide(n)
+{
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n)
+{
+    let i;
+    let slides = document.getElementsByClassName("slide");
+    let dots = document.getElementsByClassName("dot");
+
+    if(n > slides.length) 
+    {
+        slideIndex = 1
+    }
+
+    if(n < 1) 
+    {
+        slideIndex = slides.length
+    }
+
+    for(i = 0; i < slides.length; i++) 
+    {
+        slides[i].style.display = "none";
+    }
+
+    for(i = 0; i < dots.length; i++) 
+    {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+} 
 
 //----Global Methods----//
 

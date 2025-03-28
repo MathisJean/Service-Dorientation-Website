@@ -11,13 +11,15 @@
     <body>
         <%- include("navbar.ejs") %>
 
-        <div id="background_gradient">
-            <div id="background_img">
-                <div class="page_head">
-                    <h1>Notre Mission</h1> 
-                    <h3>T'aider à bâtir un projet de vie et de carrière personnalisé</h3> 
-                    
-                    <input type="button" value="Nos Services" class="btn" onclick="scroll_to('.info' , event)">
+        <div>
+            <div id="background_gradient">
+                <div id="background_img">
+                    <div class="page_head">
+                        <h1>Notre Mission</h1> 
+                        <h3>T'aider à bâtir un projet de vie et de carrière personnalisé</h3> 
+                        
+                        <input type="button" value="Explorer" class="btn" onclick="scroll_to('.info' , event)">
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,23 +85,23 @@
 
             <div class="contacts">
                 <ul>
-                    <li>
+                    <li class="scroll_hide">
                         <img src="/icons/teams.svg" class="svg">
                         <h5>Teams</h5>
                     </li>
-                    <li>
+                    <li class="scroll_hide">
                         <img src="/icons/location.svg" class="svg">
                         <h5>Local F175</h5>
                     </li>
-                    <li>
+                    <li class="scroll_hide">
                         <img src="/icons/instagram.svg" class="svg">
                         <h5>orientation_esn</h5>
                     </li>
-                    <li>
+                    <li class="scroll_hide">
                         <img src="/icons/email.svg" class="svg">
                         <h5>Couriel</h5>
                     </li>                
-                    <li>
+                    <li class="scroll_hide">
                         <img src="/icons/phone.svg" class="svg">
                         <h5>(506) 547-2785</h5>
                     </li>

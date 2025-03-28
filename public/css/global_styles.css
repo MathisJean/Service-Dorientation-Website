@@ -126,7 +126,7 @@ h6, a
     border: none;
     border-radius: var(--border--radius);
 
-    padding: 1em;
+    padding: 1.25em 1.5em;
     margin: 0.25em 0;
 }
 
@@ -249,6 +249,7 @@ h6, a
 .page_head input[type="button"]
 {
     margin-top: 6rem;
+    padding: 1.5em 2.5em;
 
     transition: 
         transform 0.1s ease,
@@ -257,7 +258,19 @@ h6, a
 
 .content
 {
+    position: relative;
+
     background-color: white;
+}
+
+.divider
+{
+    display: flex;
+    position: absolute;
+
+    bottom: 99.9%;
+
+    width: 100%;
 }
 
 @keyframes scroll_show
@@ -290,7 +303,7 @@ h6, a
     animation-fill-mode: forwards;
 }
 
-@media(prefers-reduced-motion)
+@media (prefers-reduced-motion: reduce)
 {
     .scroll_hide
     {
@@ -315,9 +328,11 @@ h6, a
         font-size: 4.5em;
     }
 
-    h3
+    .page_head > h3
     {
-        font-size: 1.5em;
+        font-size: 1.25em;
+
+        padding: 1em;
     }
 
     #background_img
