@@ -15,12 +15,176 @@
       <div id="background_img">
           <div class="page_head">
               <h1>Resources</h1> 
-              <h3>T'aider à bâtir un projet de vie et de carrière personnalisé</h3> 
+              <h3>Aider à ta réussite ainsi qu'à ton parcours</h3> 
               
-              <input type="button" value="Nos Services" class="btn" onclick="scroll_to('.info' , event)">
+              <div>
+                <input type="button" value="Explorer" class="btn" onclick="scroll_to('.content' , event)">
+              </div>
           </div>
       </div>
     </div> 
+    
+    <div class="content">
+      <div class="select_container">
+        <input type="radio" name="services" id="academique" style="display: none;" onchange="services()" checked>
+
+        <label for="academique" class="no_select select academique">
+            <div>Postsecondaire</div>
+        </label>
+
+        <input type="radio" name="services" id="vie_carriere" style="display: none;" onchange="services()">
+
+        <label for="vie_carriere" class="no_select select vie_carriere">
+            <div>Vie-Carrière</div>
+        </label>
+      </div>
+
+      <div class="academique_container">
+        <div class="postsecondaire">
+          <h2>Ton futur</h2>
+          <div class="options">
+            <div class="option scroll_hide">
+              <img src="/icons/futur.svg" class="no_select svg" draggable="false"></img>
+              <p>Congé sabatique</p>
+            </div>
+        
+            <div class="option scroll_hide">
+              <img src="/icons/manual_work.svg" class="no_select svg" draggable="false"></img>
+              <p>Apprentissage</p>
+            </div>
+            <div class="option scroll_hide">
+              <img src="/icons/military.svg" class="no_select svg" draggable="false"></img>
+              <p>Domaine militaire</p>
+            </div>
+            <div class="option scroll_hide">
+              <img src="/icons/formation.svg" class="no_select svg" draggable="false"></img>
+              <p>Formation privée</p>
+            </div>
+            <div class="option scroll_hide">
+              <img src="/icons/college.svg" class="no_select svg" draggable="false"></img>
+              <p>Collège</p>
+            </div>
+            <div class="option scroll_hide">
+              <img src="/icons/school.svg" class="no_select svg" draggable="false"></img>
+              <p>Université</p>
+            </div>
+            <div class="option scroll_hide">
+              <img src="/icons/buisness.svg" class="no_select svg" draggable="false"></img>
+              <p>Entrepreneuriat</p>
+            </div>
+            <div class="option scroll_hide">
+              <img src="/icons/work.svg" class="no_select svg" draggable="false"></img>
+              <p>Marché du travail</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="guides">
+          <h2>Guides</h2>
+
+          <div>
+            <input type="button" class="btn" value="&nbsp;Métier&nbsp;" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_cf3f61b86d7c4c878ef35114933430aa.pdf', '_blank')">
+            <input type="button" class="btn" value="&nbsp;Foresterie&nbsp;" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_0e0afa4e767c40deae2019d4da885c4e.pdf', '_blank')">
+            <input type="button" class="btn" value="Santé" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b240319043774ce8b203c1faa539f081.pdf', '_blank')">
+            <input type="button" class="btn" value="Petite enfance" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b03f666a7e514c909f88d37f418a6639.pdf', '_blank')">
+            <input type="button" class="btn" value="Tourisme" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_9c8701cfe6c1417990eb5af56c49528b.pdf', '_blank')">
+          </div>
+        </div>
+      </div>
+
+      <div class="vie_carriere_container">
+        <div class="capsules">
+          <div class="slideshow scroll_hide">
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/eqkNKSDpCqU"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/JySfJUWPgKI"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/GsCihe-R_Bo"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/aY1et6mlSGo"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/I2d1g7tYU5o"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/1_rljwUvu1o"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/3lCze2h3a9k"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/1eQVsRjhf4I"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>                
+
+            <!--Next and previous buttons-->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          </div>
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
+            <span class="dot" onclick="currentSlide(8)"></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 
   <script defer src="../js/global_script.js"></script>

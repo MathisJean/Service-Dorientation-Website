@@ -131,6 +131,7 @@ const DELETE = async (resource, json_data) => //Data must be in object form
 
 //Media Queries
 const reduced_motion_query = window.matchMedia("(prefers-reduced-motion: reduce)");
+//const screen_width_query = window.matchMedia("(max-width: 480px)");
 
 //Initialize admin from localStorage or default to false
 let logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
@@ -190,10 +191,22 @@ window.onload = function ()
 
 if(!reduced_motion_query.matches)
 {
+    let ticking = false;
+
     window.addEventListener("scroll", function() 
     {
-        let scrollPosition = window.scrollY;
-        document.getElementById("background_gradient").style.transform = `translateY(${scrollPosition * 0.5}px)`;
+        if(!ticking)
+        {
+            requestAnimationFrame(() =>
+            {
+                let scrollPosition = window.scrollY;
+                document.getElementById("background_gradient").style.transform = `translateY(${scrollPosition * 0.5}px)`;
+
+                ticking = false;
+            })
+
+            ticking = true;
+        }
     });
 };
 
@@ -401,13 +414,11 @@ function account_icon()
 
     if(logged_in)
     {
-        document.querySelector(".nav_login").style.display = "none";
-        document.querySelector(".nav_logout").style.display = "flex";
+        document.querySelector(".nav_login").style.zIndex = "0";
     }
     else if(!logged_in)
     {
-        document.querySelector(".nav_login").style.display = "flex";
-        document.querySelector(".nav_logout").style.display = "none";
+        document.querySelector(".nav_login").style.zIndex = "2";
     };
 };
 

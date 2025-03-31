@@ -7,6 +7,8 @@ html
 
     --background--radial--start: 10%;
     --background--radial--leap: 5%;
+
+    --divider--offset: 5%;
 }
 
 .scholarship_nav
@@ -43,8 +45,7 @@ html
     border-radius: var(--border--radius);
 
     font-weight: 700;
-
-    padding: 1.25em 1.5em;
+    
     margin-top: 0 !important;
 
     transition: 
@@ -121,7 +122,7 @@ html
     padding: 2em 1em;
 }
 
-.scholarship:nth-child(2)
+.scholarship:nth-child(even)
 {
     animation-delay: 0.2s;
 }
@@ -321,6 +322,11 @@ input[type="checkbox"]:checked + label > .active_checkbox
     .scholarship
     {
         padding: 1.5em 2em;
+    }
+    
+    .scholarship
+    {
+        animation-delay: 0.0s !important;
     }
 }
 

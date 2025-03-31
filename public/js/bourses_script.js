@@ -151,6 +151,8 @@ function add_scholarship(id)
 
     scholarship.after(new_scholarship);
 
+    new_scholarship.classList.add("scroll_show");
+
     //Sets the scholarship in edit mode
     checkbox = new_scholarship.querySelector(".edit_checkbox");
     checkbox.checked = true;

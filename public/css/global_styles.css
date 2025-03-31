@@ -249,7 +249,7 @@ h6, a
 .page_head input[type="button"]
 {
     margin-top: 6rem;
-    padding: 1.5em 2.5em;
+    padding: 1.25em 1.5em;
 
     transition: 
         transform 0.1s ease,
@@ -261,6 +261,8 @@ h6, a
     position: relative;
 
     background-color: white;
+    
+    margin-bottom: 3em;
 }
 
 .divider
@@ -268,9 +270,10 @@ h6, a
     display: flex;
     position: absolute;
 
+    left: calc(-1 * (var(--divider--offset) + 10%));
     bottom: 99.9%;
 
-    width: 100%;
+    width: 120%;
 }
 
 @keyframes scroll_show
@@ -313,6 +316,205 @@ h6, a
     }
 }
 
+/* Slideshow container */
+.slideshow
+{
+    display: flex;
+    position: relative;
+
+    align-items: center;
+
+    margin-top: 2em;
+
+    min-width: 65%;  
+}
+
+/* Hide the images by default */
+.slide
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: baseline;
+    align-items: baseline;
+
+    position: relative;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 100%;
+    height: 0%;
+
+    padding-top: 56.25%; /* 16:9 Aspect Ratio (Height / Width * 100) */
+
+    border-radius: 10px;
+
+    box-shadow: var(--inset--shadow);
+}
+
+.slide iframe, .slide img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 10px;
+    border: none;
+}
+
+.slide div
+{
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+
+    height: 100%;
+    width: 100%;
+
+    border-radius: 5px;
+    border: none;
+
+    padding: 1em;
+}
+
+.slide p
+{
+    padding: 1em;
+
+    word-break: break-word;
+}
+
+/* Next & previous buttons */
+.prev, .next 
+{
+    position: absolute;
+
+    right: 100%;
+    
+    color: black;
+   
+    border-radius: 0 5px 5px 0;
+
+    font-weight: bold;
+    font-size: 1em;
+
+    padding: 2em;
+
+    width: auto;
+    
+    transition: 0.5s ease;
+    
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next 
+{
+    left: 100%;
+
+    border-radius: 5px 0 0 5px;
+}
+
+.prev:hover, .next:hover
+{
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* The dots/bullets/indicators */
+.dot 
+{
+    display: inline-block;
+
+    background-color: #bbb;
+    
+    border-radius: 50%;
+
+    margin: 1em 2px;
+
+    height: 0.5em;
+    width: 0.5em;
+    
+    cursor: pointer;
+  
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover 
+{
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade 
+{
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade 
+{
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+.more
+{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 5%;
+
+    width: 100%;
+}
+
+.more div
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    transition: 
+        padding 0.1s ease;
+}
+
+.more div:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.more div:active
+{
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
+
+.more div .btn
+{
+    margin: 0% !important;
+}
+
+.more div .btn:hover
+{
+    box-shadow: var(--drop--shadow);
+
+    transition:
+        box-shadow 0.1s;
+}
+
 /* For very small screens, like mobile phones */
 @media only screen and (max-width: 480px) 
 {
@@ -344,5 +546,24 @@ h6, a
     {
         height: 16px;
         width: 16px;
+    }
+
+    @keyframes scroll_show
+    {
+        from
+        {
+            opacity: 0;
+        }
+        to
+        {
+            opacity: 1;
+        }
+    }
+
+    .scroll_hide
+    {
+        opacity: 0;
+        filter: blur(0px);
+        translate: 0%;
     }
 }

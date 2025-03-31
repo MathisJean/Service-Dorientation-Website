@@ -9,16 +9,37 @@ html
     --background--radial--leap: 5%;
 }
 
-.page_head > input:hover
+.page_head > div
 {
-    transform: translateY(-5px);
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 
+    margin-top: 6rem;
+
+    transition: 
+        padding 0.1s ease;
+}
+
+.page_head > div:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.page_head > div:hover > input
+{
     box-shadow: var(--drop--shadow);
 }
 
-.page_head > input:active
+.page_head > div:active
 {
-    transform: translateY(-1px);
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
+
+.page_head input
+{
+    margin: 0% !important;
 }
 
 .select_container
@@ -270,7 +291,7 @@ input[type="checkbox"]:checked + label > .active_checkbox
     justify-content: space-evenly;
     align-items: center;
 
-    margin: 3em 0;
+    margin-top: 3em;
     padding: 0;
 
     width: 100%;

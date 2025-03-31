@@ -40,9 +40,11 @@
               <li onclick="location.href='../resources'">
                 <p>Resources</p>
               </li>
-              <li onclick="location.href='../blogues'">
-                <p>Blogues</p>
-              </li>
+              <!--
+                <li onclick="location.href='../blogues'">
+                  <p>Blogues</p>
+                </li>                   
+              -->
             </ul>
           </aside>
         </div>
@@ -53,18 +55,13 @@
       </div>
 
       <div class="nav_right">
-        <div class="nav_icon_background nav_logout" onclick="logout()">
-          <img src="/icons/account.svg" class="nav_icon no_select svg" draggable="false"></img>
-        </div>
-
-        <div class="popup">
-          <h3>Name</3>
-
-          <h5>Logout</h5>
-        </div>
-
-        <div class="nav_icon_background nav_login" onclick="show_popup('.login_popup', '')">
-          <img src="/icons/login.svg" class="nav_icon no_select svg" draggable="false"></img>
+        <div>
+          <div class="nav_icon_background nav_logout" onclick="logout()">
+            <img src="/icons/account.svg" class="nav_icon no_select svg" draggable="false"></img>
+          </div>
+          <div class="nav_icon_background nav_login" onclick="show_popup('.login_popup', '')">
+            <img src="/icons/login.svg" class="nav_icon no_select svg" draggable="false"></img>
+          </div>
         </div>
 
         <div class="nav_icon_background">
@@ -72,6 +69,14 @@
         </div>
       </div>
     </nav>  
+
+    <!--Beta Testing-->
+
+    <div class="dev_nav">
+      <img src="/icons/warning.svg" class="nav_icon no_select svg" draggable="false"></img>
+      Site web en dévelopment
+      <img src="/icons/warning.svg" class="nav_icon no_select svg" draggable="false"></img>
+    </div>
 
     <input type="button" id="close_btn" style="display: none;" onclick="close_popup()">
   

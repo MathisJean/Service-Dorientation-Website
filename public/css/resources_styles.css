@@ -9,10 +9,260 @@ html
     --background--radial--leap: 5%;
 }
 
+.page_head > div
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    margin-top: 6rem;
+
+    transition: 
+        padding 0.1s ease;
+}
+
+.page_head > div:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.page_head > div:hover > input
+{
+    box-shadow: var(--drop--shadow);
+}
+
+.page_head > div:active
+{
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
+
+.page_head input
+{
+    margin: 0% !important;
+}
+
+.select_container
+{
+    display: flex;
+
+    width: 100%;
+}
+
+.select
+{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    color: black;
+
+    font-size: 1.5em;
+    font-weight: 700;
+
+    border: none;
+    border-radius: var(--border--radius);
+
+    box-shadow: 1px 3px 2.5px rgba(0, 0, 0, 0.1);
+
+    padding: 0.75em 0.5em;
+    margin-top: -1em;
+
+    width: 50%;
+
+    z-index: 3;
+
+    transition:
+        box-shadow 0.1s ease-in,
+        background-color 0.1s ease,
+        color 0.1s ease;
+}
+
+.select:hover
+{
+    box-shadow: var(--drop--shadow);
+}
+
+#academique:checked + .academique
+{
+    background-color: var(--secondary--bg--color);
+    color: var(--bg--text--color);
+}
+
+#vie_carriere:checked + .vie_carriere
+{
+    background-color: var(--secondary--bg--color);
+    color: var(--bg--text--color);
+}
+
+.academique_container, .vie_carriere_container
+{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+h2
+{
+    padding: 0.5em;
+}
+
+.capsules
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+.postsecondaire
+{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    width: 100%;
+}
+
+.options
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    justify-items: center;
+    align-content: center;
+
+    margin: 2em 0;
+    padding: 0;
+
+    width: 100%;
+}
+
+.options > div
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    border-radius: var(--border--radius);
+
+    box-shadow: var(--inset--shadow);
+
+    margin-bottom: 0.5em;
+
+    width: 200px;
+
+    aspect-ratio: 1;
+
+    transition: 
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+.option:hover
+{
+    box-shadow: var(--drop--shadow);
+
+    transform: translateY(-5px);
+}
+
+.option:nth-child(2)
+{
+    animation-delay: 0.2s;
+}
+
+.option:nth-child(3)
+{
+    animation-delay: 0.4s;
+}
+
+.option:nth-child(4)
+{
+    animation-delay: 0.6s;
+}
+
+.option:nth-child(5)
+{
+    animation-delay: 0.8s;
+}
+
+.option:nth-child(6)
+{
+    animation-delay: 1.0s;
+}
+
+.option:nth-child(7)
+{
+    animation-delay: 1.2s;
+}
+
+.option:nth-child(8)
+{
+    animation-delay: 1.4s;
+}
+
+.option p
+{
+    font-weight: 700;
+
+    margin-top: 0.5em;
+}
+
+.guides
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.guides div
+{
+    display: flex;
+
+    justify-content: center;
+
+    column-gap: 5%;
+
+    width: 100%;
+}
+
+.guides div input
+{
+    margin: 0%;
+}
+
 @media only screen and (max-width: 480px) 
 {
     html
     {
         --background--radial--leap: 10%;
+    }
+
+    .options
+    {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .options > div
+    {
+        width: 75%;
+    }
+
+    .option
+    {
+        animation-delay: 0s !important;
     }
 }

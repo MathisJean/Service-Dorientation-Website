@@ -11,26 +11,22 @@ const app = express();
 
 const rateLimit = require("express-rate-limit");
 
-let host;
-let port;
+let host = "localhost";
+let port = process.env.PORT || 3000;
 
 //Get dymamic IP address
 const networkInterfaces = os.networkInterfaces();
 
-for (const interfaceName in networkInterfaces) 
+for (const iface of Object.values(networkInterfaces))
 {
-  for (const interfaceInfo of networkInterfaces[interfaceName]) 
+  for (const ifaceInfo of iface) 
   {
-    //Check if the network interface is IPv4 and not internal
-    if (interfaceInfo.family === 'IPv4' && !interfaceInfo.internal) 
+    if (ifaceInfo.family === "IPv4" && !ifaceInfo.internal) 
     {
-      host = interfaceInfo.address;
-      port = process.env.PORT || 3000;
-
-      break
-    }
-  }
-}
+      host = ifaceInfo.address;
+    };
+  };
+};
 
 //TODO: Fix Rate limiter
 //Rate limiter
@@ -45,6 +41,19 @@ const limiter = rateLimit(
 
 //Set static middleware
 //app.use(limiter)
+
+app.use((req, res, next) => 
+  {
+  res.setHeader("Content-Security-Policy", 
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline'; " +
+    "style-src 'self' 'unsafe-inline'; " +
+    "img-src 'self' blob: data:; " +
+    "frame-src 'self' https://www.youtube.com;"
+  );
+  next();
+});
+
 app.use(express.json({ limit: "10mb" })); // Increase limit to 10MB
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.static('public'));

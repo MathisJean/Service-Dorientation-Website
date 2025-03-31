@@ -18,7 +18,9 @@
                 <h1>Cours</h1> 
                 <h3>Explore les options de cours pour un parcours personel</h3> 
                 
-                <input type="button" value="Explorer" class="btn" onclick="scroll_to('.content' , event)">
+                <div>
+                  <input type="button" value="Explorer" class="btn" onclick="scroll_to('.content' , event)">
+                </div>
             </div>
         </div>
       </div> 
@@ -84,35 +86,35 @@
         <h2>Choisir ton parcours</h2>
 
         <div class="slideshow scroll_hide">  
-          <div class="slide fade">        
+          <div class="slide fade">
             <iframe
-              src="https://www.youtube.com/embed/3o9TXKW6utQ" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              src="https://www.youtube.com/embed/3o9TXKW6utQ"
+              title="YouTube video player"
+              frameborder="0"
+              sandbox="allow-scripts allow-same-origin"
               allowfullscreen>
-            </iframe>        
+            </iframe>
           </div>
-
-          <div class="slide fade">        
+          
+          <div class="slide fade">
             <iframe
-              src="https://www.youtube.com/embed/bRdQ1T7oSuc" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              src="https://www.youtube.com/embed/bRdQ1T7oSuc"
+              title="YouTube video player"
+              frameborder="0"
+              sandbox="allow-scripts allow-same-origin"
               allowfullscreen>
-            </iframe>    
-          </div>        
-
-          <div class="slide fade">        
+            </iframe>
+          </div>
+          
+          <div class="slide fade">
             <iframe
-              src="https://www.youtube.com/embed/XwiZWlk06zI" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              src="https://www.youtube.com/embed/XwiZWlk06zI"
+              title="YouTube video player"
+              frameborder="0"
+              sandbox="allow-scripts allow-same-origin"
               allowfullscreen>
-            </iframe>    
-          </div>         
+            </iframe>
+          </div>                 
 
           <!--Next and previous buttons-->
           <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -137,7 +139,5 @@
     </div>
   </body>
 
-  <script defer src="../js/global_script.js"></script>
-  <script defer src="../js/cours_script.js"></script>
-  
+  <script defer src="../js/global_script.js"></script> 
 </html>

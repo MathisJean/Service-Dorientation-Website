@@ -1,12 +1,47 @@
 
 html
 {
-    --background--pos--x: right;
-    --background--pos--y: top;
-    --background--angle: 200deg;
+    --background--pos--x: 30%;
+    --background--pos--y: -5%;
+    --background--angle: 30deg;
 
-    --background--radial--start: 10%;
-    --background--radial--leap: 5%;
+    --background--radial--start: 15%;
+    --background--radial--leap: 10%;
+
+    --divider--offset: 8%;
+}
+
+.page_head > div
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    margin-top: 6rem;
+
+    transition: 
+        padding 0.1s ease;
+}
+
+.page_head > div:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.page_head > div:hover > input
+{
+    box-shadow: var(--drop--shadow);
+}
+
+.page_head > div:active
+{
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
+
+.page_head input
+{
+    margin: 0% !important;
 }
 
 h2
@@ -23,209 +58,10 @@ h2
     align-items: center;
 }
 
-/* Slideshow container */
-.slideshow
+.exposition
 {
     display: flex;
-    position: relative;
-
-    align-items: center;
-
-    margin-top: 2em;
-
-    min-width: 65%;  
-}
-
-/* Hide the images by default */
-.slide
-{
-    display: flex;
-    flex-direction: column;
-
-    justify-content: baseline;
-    align-items: baseline;
-
-    position: relative;
-
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    width: 100%;
-    height: 0%;
-
-    padding-top: 56.25%; /* 16:9 Aspect Ratio (Height / Width * 100) */
-
-    border-radius: 10px;
-
-    box-shadow: var(--inset--shadow);
-}
-
-.slide img
-{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    border-radius: 5px;
-    border: none;
-}
-
-.slide div
-{
-    display: flex;
-    flex-direction: column;
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-
-    height: 100%;
-    width: 100%;
-
-    border-radius: 5px;
-    border: none;
-
-    padding: 1em;
-}
-
-.slide p
-{
-    padding: 1em;
-
-    word-break: break-word;
-}
-
-/* Next & previous buttons */
-.prev, .next 
-{
-    position: absolute;
-
-    right: 100%;
-    
-    color: black;
-   
-    border-radius: 0 5px 5px 0;
-
-    font-weight: bold;
-    font-size: 1em;
-
-    padding: 2em;
-
-    width: auto;
-    
-    transition: 0.5s ease;
-    
-    cursor: pointer;
-    user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next 
-{
-    left: 100%;
-
-    border-radius: 5px 0 0 5px;
-}
-
-.prev:hover, .next:hover
-{
-    color: rgba(0, 0, 0, 0.5);
-}
-
-/* The dots */
-.dot 
-{
-    display: inline-block;
-
-    background-color: #bbb;
-    
-    border-radius: 50%;
-
-    margin: 1em 2px;
-
-    height: 0.5em;
-    width: 0.5em;
-    
-    cursor: pointer;
-  
-    transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover 
-{
-    background-color: #717171;
-}
-
-/* Fading animation */
-.fade 
-{
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@keyframes fade 
-{
-    from {opacity: .4}
-    to {opacity: 1}
-}
-
-.more
-{
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 5%;
-
-    width: 100%;
-}
-
-.more div
-{
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-
-    transition: 
-        padding 0.1s ease;
-}
-
-.more div:hover
-{
-    padding-top: 0.2em;
-    padding-bottom: 0.8em;
-}
-
-.more div:active
-{
-    padding-top: 0.4em;
-    padding-bottom: 0.6em;
-}
-
-.more div .btn
-{
-    margin: 0% !important;
-}
-
-.more div .btn:hover
-{
-    box-shadow: var(--drop--shadow);
-
-    transition:
-        box-shadow 0.1s;
-}
-
-.orient-action
-{
-    display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 
     justify-content: center;
     align-items: center;
@@ -233,27 +69,100 @@ h2
     padding: 2em 0;
 }
 
-.orient-action > div
+.description
 {
     display: flex;
     flex-direction: row;
 
     align-items: center;
     
-    width: 100%;
-
-    padding: 0 6em;
+    width: 90%;
 }
 
-.orient-action > div h2
+.exposition > div h2
 {
     align-items: baseline;
 
     height: 100%;
-    min-width: 10ch;
+    min-width: 8ch;
 
     padding: 0%;
-    padding-right: 1em;
+    margin: 0%;
+    margin-right: 1em;
+}
+
+#salon_emploi_expand + label, #orient_action_expand + label
+{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    margin: 1em;
+
+    cursor: pointer;
+} 
+
+#salon_emploi_expand + label > img, #orient_action_expand + label > img
+{
+    margin: 0%;
+
+    transition: 
+        rotate 0.1s ease;
+} 
+
+#salon_emploi_expand:checked ~ label > img, #orient_action_expand:checked ~ label > img
+{
+    rotate: 180deg;
+} 
+
+#salon_emploi_expand:checked ~ .list
+{
+    height: 300px;
+
+    padding: 2em;
+
+    opacity: 1;
+}
+
+#orient_action_expand:checked ~ .list
+{
+    height: 500px;
+
+    padding: 2em;
+
+    opacity: 1;
+}
+
+.list
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    justify-items: center;
+    align-content: center;
+
+    gap: 5%;
+
+    height: 0px;
+    width: 100%;
+
+    padding: 0 2em;
+
+    opacity: 0;
+
+    transition: 
+        height 0.5s ease-in-out,
+        opacity 0.5s ease-in-out,
+        padding 0.5s ease-in-out;
+
+    overflow: hidden;
+}
+
+.list a
+{
+    color: var(--link--color);
 }
 
 /* Mobile users */
@@ -275,6 +184,38 @@ h2
     }
 
     .slide div p
+    {
+        font-size: 0.75em;
+    }
+    
+    .description > h2
+    {
+        display: none;
+    }
+
+    .description > p
+    {
+        text-align: center;
+    }
+
+    .list
+    {
+        grid-template-columns: 1fr 1fr;
+
+        row-gap: 5%;
+    }
+
+    #salon_emploi_expand:checked ~ .list
+    {
+        height: 250px;
+    }    
+    
+    #orient_action_expand:checked ~ .list
+    {
+        height: 400px;
+    }    
+
+    .list a
     {
         font-size: 0.75em;
     }

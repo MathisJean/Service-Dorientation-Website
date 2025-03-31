@@ -299,13 +299,13 @@ function services(radio)
 function initialize_orienter(orienter)
 {
     let new_profil = document.createElement("div");
-    let img_link = orienter.image == "" || orienter.image == " " ? "" : URL.createObjectURL(base64ToImg(orienter.image));
+    let img_link = orienter.image.trim() === "" ? "" : URL.createObjectURL(base64ToImg(orienter.image));
 
     new_profil.id = "profil_" + String(orienter.id);
 
     new_profil.innerHTML =
     `
-        <label for="input_file_${orienter.id}" class="drop_area" style="background-image: url(${img_link});">
+        <label for="input_file_${orienter.id}" class="drop_area" style="background-image: url('${img_link}');">
             <input type="file" id="input_file_${orienter.id}" class="input_file admin_input" accept="image/*" hidden>
 
             <div id="img_view" class="admin">
