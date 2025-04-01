@@ -120,6 +120,12 @@ body
     z-index: 2;
 }
 
+/*Temp Icon*/
+.nav_right > .nav_icon_background > .nav_icon
+{
+    transform: rotate(180deg);
+}
+
 .nav_icon
 {
     display: flex;
@@ -186,7 +192,7 @@ body
     width: 100%;
     height: 4rem;
 
-    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--drop--shadow);
 
     margin: 0%;
 }
@@ -350,6 +356,15 @@ body
     margin-bottom: 0.5em;
 
     visibility: hidden;
+}
+
+/* For very small screens, like mobile phones */
+@media only screen and (max-width: 1024px) 
+{
+    .nav_sidebar > ul > li
+    {
+        margin: 2em 0;
+    }
 }
 
 /* For very small screens, like mobile phones */

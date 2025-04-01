@@ -120,6 +120,8 @@ html
     gap: 2em 0.5em;
 
     padding: 2em 1em;
+
+    width: 100%;
 }
 
 .scholarship:nth-child(even)
@@ -132,7 +134,7 @@ html
     display: grid;
 
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(4, minmax(40px, auto));  
+    grid-template-rows: repeat(4, minmax(40px, auto)); 
 
     background-color: white;
 
@@ -144,6 +146,7 @@ html
     padding: 3em 2em;
 
     height: auto;
+    width: 100%;
 
     transition: 
         box-shadow 0.2s ease,
@@ -231,6 +234,9 @@ html
 
 .scholarship_criteria
 {
+    display: flex;
+    flex-direction: column;
+
     justify-content: center;
     align-self: baseline;
 
@@ -240,6 +246,7 @@ html
 
     word-break: break-word;
 
+    height: auto;
     width: 100%;
 }
 
@@ -305,7 +312,7 @@ input[type="checkbox"]:checked + label > .active_checkbox
     outline: none;
 }
 
-@media only screen and (max-width: 1024px) 
+@media only screen and (max-width: 768px) 
 {
     .scholarship_nav > ul
     {
@@ -321,6 +328,8 @@ input[type="checkbox"]:checked + label > .active_checkbox
 
     .scholarship
     {
+        width: 100%;
+
         padding: 1.5em 2em;
     }
     

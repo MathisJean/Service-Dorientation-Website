@@ -131,7 +131,7 @@ const DELETE = async (resource, json_data) => //Data must be in object form
 
 //Media Queries
 const reduced_motion_query = window.matchMedia("(prefers-reduced-motion: reduce)");
-//const screen_width_query = window.matchMedia("(max-width: 480px)");
+const medium_screen_width_query = window.matchMedia("(max-width: 1024px)");
 
 //Initialize admin from localStorage or default to false
 let logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
@@ -189,7 +189,7 @@ window.onload = function ()
     setTimeout(function() {document.body.style.display = "";}, 200);
 }
 
-if(!reduced_motion_query.matches)
+if(!reduced_motion_query.matches && !medium_screen_width_query.matches)
 {
     let ticking = false;
 

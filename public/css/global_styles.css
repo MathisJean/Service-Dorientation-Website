@@ -32,6 +32,13 @@ body
     overflow-x: hidden;
 }
 
+/* Dark Theme */
+body.dark-theme 
+{
+    background-color: #813939;
+    color: #fff;
+}
+
 *,
 *::after,
 *::before
@@ -194,6 +201,11 @@ h6, a
 
 #background_img
 {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
     position: relative;
     left: 0;
 
@@ -217,13 +229,13 @@ h6, a
 
     flex-direction: column;
 
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
     position: relative;
     left: 0;
 
-    margin: 6rem 0;
+    width: 100%;
 
     overflow: hidden;
 }
@@ -515,6 +527,46 @@ h6, a
         box-shadow 0.1s;
 }
 
+@media only screen and (max-width: 1024px) 
+{
+    html
+    {
+        --border--radius: 25px;
+
+        font-size: 10px;
+    }
+
+    #background_img
+    {
+        min-height: 75vh;
+    }
+    
+    .svg
+    {
+        height: 20px;
+        width: 20px;
+    }
+
+    @keyframes scroll_show
+    {
+        from
+        {
+            opacity: 0;
+        }
+        to
+        {
+            opacity: 1;
+        }
+    }
+
+    .scroll_hide
+    {
+        opacity: 0;
+        filter: blur(0px);
+        translate: 0%;
+    }
+}
+
 /* For very small screens, like mobile phones */
 @media only screen and (max-width: 480px) 
 {
@@ -546,24 +598,5 @@ h6, a
     {
         height: 16px;
         width: 16px;
-    }
-
-    @keyframes scroll_show
-    {
-        from
-        {
-            opacity: 0;
-        }
-        to
-        {
-            opacity: 1;
-        }
-    }
-
-    .scroll_hide
-    {
-        opacity: 0;
-        filter: blur(0px);
-        translate: 0%;
     }
 }

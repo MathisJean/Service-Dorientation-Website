@@ -161,7 +161,7 @@ h2
 
     margin-bottom: 0.5em;
 
-    width: 200px;
+    min-width: 75%;
 
     aspect-ratio: 1;
 
