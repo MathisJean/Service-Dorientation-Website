@@ -311,6 +311,12 @@ router.post("/account/signup/authentication", async (req, res) =>
 
   try
   {
+    //Check if the file exists, if not, create it with default content
+    if(!fs.existsSync(account_path)) 
+    {
+      await fs.promises.writeFile(account_path, JSON.stringify({accounts: []}, null, 2));
+    };
+
     //Read files
     const account_data = await fs.promises.readFile(account_path, "utf-8"); 
 

@@ -98,7 +98,7 @@ app.use((req, res) =>
 {
   res.status(404).render("error");
 });
-
+/*
 //Create https server
 const sslServer = https.createServer(
   {
@@ -114,3 +114,12 @@ sslServer.listen(port, host, () =>
   //Start scholarship reminder schedule
   require("./email_task_scheduler");
 });
+*/
+
+app.listen(port, host, () =>  
+  {
+    console.log(`Server running at https://${host}:${port} close it with CTRL + C`);
+    
+    //Start scholarship reminder schedule
+    require("./email_task_scheduler");
+  });
