@@ -11,9 +11,10 @@ const app = express();
 
 const rateLimit = require("express-rate-limit");
 
-let host = "localhost";
+let host = "0.0.0.0";
 let port = process.env.PORT || 3000;
 
+/*
 //Get dymamic IP address
 const networkInterfaces = os.networkInterfaces();
 
@@ -27,6 +28,7 @@ for (const iface of Object.values(networkInterfaces))
     };
   };
 };
+*/
 
 //TODO: Fix Rate limiter
 //Rate limiter
@@ -118,8 +120,6 @@ sslServer.listen(port, host, () =>
 
 app.listen(port, host, () =>  
   {
-    console.log(`Server running at https://${host}:${port} close it with CTRL + C`);
-    
     //Start scholarship reminder schedule
     require("./email_task_scheduler");
   });
