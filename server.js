@@ -11,10 +11,10 @@ const app = express();
 
 const rateLimit = require("express-rate-limit");
 
-let host = "0.0.0.0";
+let host = "Localhost";
 let port = process.env.PORT || 3000;
 
-/*
+
 //Get dymamic IP address
 const networkInterfaces = os.networkInterfaces();
 
@@ -28,7 +28,6 @@ for (const iface of Object.values(networkInterfaces))
     };
   };
 };
-*/
 
 //TODO: Fix Rate limiter
 //Rate limiter
@@ -100,7 +99,7 @@ app.use((req, res) =>
 {
   res.status(404).render("error");
 });
-/*
+
 //Create https server
 const sslServer = https.createServer(
   {
@@ -116,10 +115,3 @@ sslServer.listen(port, host, () =>
   //Start scholarship reminder schedule
   require("./email_task_scheduler");
 });
-*/
-
-app.listen(port, host, () =>  
-  {
-    //Start scholarship reminder schedule
-    require("./email_task_scheduler");
-  });

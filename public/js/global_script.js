@@ -539,17 +539,11 @@ function authenticate(event, popup)
         input_code += String(input.value);
     });
 
-    console.log(Number(input_code) , Number(authentication_code))
-
     if(Number(input_code) === Number(authentication_code))
     {
-        console.log("completing")
-
         POST("/account/signup/complete", null)
         .then(data => 
         {
-            console.log("complete")
-
             close_popup()
             
             //Store in localStorage        
