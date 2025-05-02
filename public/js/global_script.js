@@ -153,13 +153,13 @@ const background_observer = new IntersectionObserver((entries) =>
 {
     entries.forEach(entry => 
     {
-        if (entry.isIntersecting) 
+        if(entry.isIntersecting) 
         {
-            document.addEventListener("scroll", update_gradient);
-        } 
+            window.addEventListener("scroll", update_gradient)
+        }
         else 
         {
-            document.removeEventListener("scroll", update_gradient);
+            window.removeEventListener("scroll", update_gradient)
         };
     });
 });
@@ -189,26 +189,23 @@ window.onload = function ()
     setTimeout(function() {document.body.style.display = "";}, 200);
 }
 
-if(!reduced_motion_query.matches && !medium_screen_width_query.matches)
+let ticking = false;
+
+window.addEventListener("scroll", function()
 {
-    let ticking = false;
-
-    window.addEventListener("scroll", function() 
+    if(!ticking)
     {
-        if(!ticking)
+        requestAnimationFrame(() =>
         {
-            requestAnimationFrame(() =>
-            {
-                let scrollPosition = window.scrollY;
-                document.getElementById("background_gradient").style.transform = `translateY(${scrollPosition * 0.5}px)`;
+            let scrollPosition = window.scrollY;
+            document.getElementById("background_gradient").style.transform = `translateY(${scrollPosition * 0.5}px)`;
 
-                ticking = false;
-            })
+            ticking = false;
+        })
 
-            ticking = true;
-        }
-    });
-};
+        ticking = true;
+    }
+});
 
 //Waits for website to be loaded
 window.addEventListener("load", load)
@@ -330,13 +327,9 @@ function scroll_to(query_selector, event)
         event.preventDefault();
         event.target.blur();
 
-        element_position = elements[0].getBoundingClientRect().top + window.scrollY - 100;
+        element_position = elements[0]?.getBoundingClientRect().top + window.scrollY - 100;
 
-    window.scrollTo(
-    {
-        top: element_position,
-        behavior: "smooth"
-    });
+        elements[0]?.scrollIntoView({ behavior: "smooth" });      
     };
 };
 
@@ -361,6 +354,7 @@ function show_popup(popup_class, txt_msg)
     };
 
     popup.style.top = "50%";
+    popup.style.opacity = "1";
 };
 
 //Closes every popup
@@ -371,6 +365,7 @@ function close_popup()
     popups.forEach(popup =>
     {
         popup.style.top = "-50%"
+        popup.style.opacity = "0";
 
         popup.querySelectorAll("input[type='text'], input[type='email'], input[type='password'], input[type='number']").forEach(input =>
         {

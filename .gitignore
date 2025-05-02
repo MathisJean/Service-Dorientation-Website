@@ -1,3 +1,14 @@
+#Node dependencies
 node_modules/
+
+#Local environment variables
+.env
+
+#Encrypted or sensitive local data
 database/
 cert/
+
+#None code files
+TODO.txt
+directions.docx
+color_palette.png

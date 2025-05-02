@@ -1,3 +1,6 @@
+//Admin Account
+//password: debug109
+//email: orientation.esn.testing@gmail.com
 
 //Set up libraries
 const https = require('https');
@@ -9,11 +12,14 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
-const rateLimit = require("express-rate-limit");
+//Security libraries
+const crypto = require('crypto');
+const helmet = require('helmet');
+const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 
 let host = "Localhost";
 let port = process.env.PORT || 3000;
-
 
 //Get dymamic IP address
 const networkInterfaces = os.networkInterfaces();
@@ -29,20 +35,7 @@ for (const iface of Object.values(networkInterfaces))
   };
 };
 
-//TODO: Fix Rate limiter
-//Rate limiter
-const limiter = rateLimit(
-{
-  windowMs: 15 * 60 * 1000, //15 minutes
-  max: 100, //Limit each IP to 100 requests per `windowMs`
-  message: "Too many requests, please try again later.",
-  standardHeaders: true, //Return rate limit info in headers
-  legacyHeaders: false, //Disable `X-RateLimit-*` headers
-});
-
 //Set static middleware
-//app.use(limiter)
-
 app.use((req, res, next) => 
   {
   res.setHeader("Content-Security-Policy", 
@@ -58,6 +51,12 @@ app.use((req, res, next) =>
 app.use(express.json({ limit: "10mb" })); // Increase limit to 10MB
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.static('public'));
+
+//Security features
+//app.use(helmet());
+//app.use(cors({ origin: 'https://yourfrontend.com', credentials: true })); //TODO: change URL
+app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+app.use(express.json());
 
 //Set view engine
 app.set("view engine", "ejs");

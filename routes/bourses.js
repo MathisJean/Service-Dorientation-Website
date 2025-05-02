@@ -10,6 +10,7 @@ const express = require('express')
 const router = express.Router()
 
 const handle_api_error = require("../lib/error_handler.js");
+const {encrypt, decrypt} = require("../lib/encryption.js");
 
 //Setup Router
 router.get('/', (req, res) => 
@@ -31,11 +32,12 @@ router.get("/scholarship", async (req, res) =>
   try
   {
     //Read file
-    const scholarship_data = await fs.promises.readFile(scholarship_path);
+    let scholarship_data = await fs.promises.readFile(scholarship_path, "utf-8");
 
+    scholarship_data = decrypt(scholarship_data); //Decrypt data
 
     //Define data
-    let scholarships = JSON.parse(scholarship_data)?.scholarships;
+    let scholarships = scholarship_data?.scholarships;
 
     //Return response
     return res.send(scholarships) 
@@ -56,10 +58,12 @@ router.post("/scholarship", async (req, res) =>
   try
   {
     //Read file
-    const scholarship_data = await fs.promises.readFile(scholarship_path);
+    let scholarship_data = await fs.promises.readFile(scholarship_path, "utf-8");
+
+    scholarship_data = decrypt(scholarship_data); //Decrypt data
 
     //Define data
-    let scholarships = JSON.parse(scholarship_data)?.scholarships;
+    let scholarships = scholarship_data?.scholarships;
 
     //Increment id from last record
     let last_scholarship = scholarships.slice(-1)[0];
@@ -74,7 +78,7 @@ router.post("/scholarship", async (req, res) =>
     try
     {
       //Write file
-      await fs.promises.writeFile(scholarship_path, JSON.stringify({scholarships}, null, 2))
+      await fs.promises.writeFile(scholarship_path, encrypt({scholarships})) //Encrypt data
     }
     finally
     {
@@ -109,10 +113,12 @@ router.put("/scholarship", async (req, res) =>
   try
   {
     //Read file
-    const scholarship_data = await fs.promises.readFile(scholarship_path);
+    let scholarship_data = await fs.promises.readFile(scholarship_path, "utf-8");
+
+    scholarship_data = decrypt(scholarship_data); //Decrypt data
 
     //Define data
-    let scholarships = JSON.parse(scholarship_data)?.scholarships;
+    let scholarships = scholarship_data?.scholarships;
     let scholarship_found = false;
 
     if(scholarships)
@@ -142,7 +148,7 @@ router.put("/scholarship", async (req, res) =>
           try
           {
             //Write file
-            await fs.promises.writeFile(scholarship_path, JSON.stringify({scholarships}, null, 2))
+            await fs.promises.writeFile(scholarship_path, encrypt({scholarships})) //Encrypt data
           }
           finally
           {
@@ -185,10 +191,12 @@ router.delete("/scholarship/:id", async (req, res) =>
   try
   {
     //Read file
-    const scholarship_data = await fs.promises.readFile(scholarship_path);
+    let scholarship_data = await fs.promises.readFile(scholarship_path, "utf-8");
+
+    scholarship_data = decrypt(scholarship_data); //Decrypt data
 
     //Define data
-    let scholarships = JSON.parse(scholarship_data)?.scholarships;
+    let scholarships = scholarship_data?.scholarships;
     let scholarship_found = false;
 
     if(scholarships)
@@ -208,7 +216,7 @@ router.delete("/scholarship/:id", async (req, res) =>
           try
           {
             //Write file
-            await fs.promises.writeFile(scholarship_path, JSON.stringify({scholarships}, null, 2))
+            await fs.promises.writeFile(scholarship_path, encrypt({scholarships})) //Encrypt data
           }
           finally
           {
@@ -254,7 +262,9 @@ router.post("/subscribe/:id", async (req, res) =>
   try
   {
     //Read file
-    const scholarship_data = await fs.promises.readFile(scholarship_path, "utf-8") 
+    let scholarship_data = await fs.promises.readFile(scholarship_path, "utf-8");
+
+    scholarship_data = decrypt(JSON.parse(scholarship_data)); //Decrypt data
 
     let scholarships = JSON.parse(scholarship_data)?.scholarships;
     let scholarship_found = false;

@@ -10,6 +10,7 @@ const router = express.Router()
 
 const handle_api_error = require("../lib/error_handler.js");
 const email_authentication = require("../lib/email_authentication.js");
+const {encrypt, decrypt} = require("../lib/encryption.js");
 
 //Setup Router
 router.get('/', (req, res) => 
@@ -31,11 +32,12 @@ router.get("/orienter", async (req, res) =>
   try
   {
     //Read file
-    const orienter_data = await fs.promises.readFile(orienter_path);
+    let orienter_data = await fs.promises.readFile(orienter_path);
 
+    orienter_data = decrypt(orienter_data); //Decrypt data
 
     //Define data
-    let orienters = JSON.parse(orienter_data)?.orienters;
+    let orienters = orienter_data?.orienters;
 
     //Return response
     return res.send(orienters) 
@@ -56,10 +58,12 @@ router.post("/orienter", async (req, res) =>
   try
   {
     //Read file
-    const orienter_data = await fs.promises.readFile(orienter_path);
+    let orienter_data = await fs.promises.readFile(orienter_path);
+
+    orienter_data = decrypt(orienter_data); //Decrypt data
 
     //Define data
-    let orienters = JSON.parse(orienter_data)?.orienters;
+    let orienters = orienter_data?.orienters;
 
     let last_orienter
 
@@ -84,7 +88,7 @@ router.post("/orienter", async (req, res) =>
     try
     {
       //Write file
-      await fs.promises.writeFile(orienter_path, JSON.stringify({orienters}, null, 2))
+      await fs.promises.writeFile(orienter_path, encrypt({orienters}), null, 2) //Encrypt data
     }
     finally
     {
@@ -117,10 +121,12 @@ router.put("/orienter", async (req, res) =>
   try
   {
     //Read file
-    const orienter_data = await fs.promises.readFile(orienter_path);
+    let orienter_data = await fs.promises.readFile(orienter_path);
+
+    orienter_data = decrypt(orienter_data); //Decrypt data
 
     //Define data
-    let orienters = JSON.parse(orienter_data)?.orienters;
+    let orienters = orienter_data?.orienters;
     let orienter_found = false;
 
     if(orienters)
@@ -157,7 +163,7 @@ router.put("/orienter", async (req, res) =>
           try
           {
             //Write file
-            await fs.promises.writeFile(orienter_path, JSON.stringify({orienters}, null, 2))
+            await fs.promises.writeFile(orienter_path, encrypt({orienters}, null, 2))
           }
           finally
           {
@@ -200,10 +206,12 @@ router.delete("/orienter/:id", async (req, res) =>
   try
   {
     //Read file
-    const orienter_data = await fs.promises.readFile(orienter_path);
+    let orienter_data = await fs.promises.readFile(orienter_path);
+
+    orienter_data = decrypt(orienter_data); //Decrypt data
 
     //Define data
-    let orienters = JSON.parse(orienter_data)?.orienters;
+    let orienters = orienter_data?.orienters;
     let orienter_found = false;
 
     if(orienters)
@@ -223,7 +231,7 @@ router.delete("/orienter/:id", async (req, res) =>
           try
           {
             //Write file
-            await fs.promises.writeFile(orienter_path, JSON.stringify({orienters}, null, 2))
+            await fs.promises.writeFile(orienter_path, encrypt({orienters}, null, 2))
           }
           finally
           {
@@ -273,9 +281,11 @@ router.post("/account/login", async (req, res) =>
   try
   {
     //Read files
-    const account_data = await fs.promises.readFile(account_path, "utf-8"); 
+    let account_data = await fs.promises.readFile(account_path, "utf-8"); 
 
-    let accounts = JSON.parse(account_data)?.accounts;
+    account_data = decrypt(account_data); //Decrypt data
+
+    let accounts = account_data?.accounts;
 
     //Compare incoming acount data to records
     const found_account = accounts.find((account) => account.email === user_email && account.password === user_password);
@@ -314,13 +324,15 @@ router.post("/account/signup/authentication", async (req, res) =>
     //Check if the file exists, if not, create it with default content
     if(!fs.existsSync(account_path)) 
     {
-      await fs.promises.writeFile(account_path, JSON.stringify({accounts: []}, null, 2));
+      await fs.promises.writeFile(account_path, /*JSON.stringify(encrypt*/(JSON.stringify({accounts:[]})), null, 2)//);
     };
 
     //Read files
-    const account_data = await fs.promises.readFile(account_path, "utf-8"); 
+    let account_data = await fs.promises.readFile(account_path, "utf-8"); 
 
-    let accounts = JSON.parse(account_data)?.accounts;
+    account_data = decrypt(account_data); //Decrypt data
+
+    let accounts = account_data?.accounts;
 
     //Compare incoming acount data to records
     const found_account = accounts.find((account) => account.email === user_email);
@@ -363,9 +375,11 @@ router.post("/account/signup/complete", async (req, res) =>
   try
   {
     //Read files
-    const account_data = await fs.promises.readFile(account_path, "utf-8"); 
+    let account_data = await fs.promises.readFile(account_path, "utf-8"); 
 
-    let accounts = JSON.parse(account_data)?.accounts;
+    account_data = decrypt(account_data); //Decrypt data
+
+    let accounts = account_data?.accounts;
 
     account_request.id = Number(accounts[accounts.length - 1].id) + 1;
 
@@ -377,7 +391,7 @@ router.post("/account/signup/complete", async (req, res) =>
     try
     {
       //Write file
-      await fs.promises.writeFile(account_path, JSON.stringify({accounts}, null, 2))
+      await fs.promises.writeFile(account_path, encrypt({accounts}), null, 2);
     }
     finally
     {
