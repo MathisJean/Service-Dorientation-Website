@@ -61,36 +61,48 @@ app.use(express.json());
 //Set view engine
 app.set("view engine", "ejs");
 
+//----HTTP Encryption---//
+
+const {server_public_key, server_private_key, get_client_public_key, set_client_public_key, } = require("./lib/keys.js");
+
+//Send public key
+app.get("/public_key/serverside", (req, res) =>
+{
+    return res.send({key: server_public_key})
+})
+  
+//Receive public key
+app.post("/public_key/clientside", (req, res) =>
+{
+    set_client_public_key(req.body.key);
+
+    return res.send({msg: "Successful"})
+})
+
 //----Using Routers----//
 
 //Accueil
 const accueilRouter = require('./routes/accueil');
-
 app.use('/', accueilRouter);
 
 //Expériences
 const experiencesRouter = require('./routes/experiences');
-
 app.use('/experiences', experiencesRouter);
 
 //Cours
 const coursRouter = require('./routes/cours');
-
 app.use('/cours', coursRouter);
 
 //Bourses
 const boursesRouter = require('./routes/bourses');
-
 app.use('/bourses', boursesRouter);
 
 //Resources
 const resourcesRouter = require('./routes/resources');
-
 app.use('/resources', resourcesRouter);
 
 //Blogues
 const bloguesRouter = require('./routes/blogues');
-
 app.use('/blogues', bloguesRouter)
 
 //Error

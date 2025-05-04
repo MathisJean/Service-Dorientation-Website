@@ -33,13 +33,13 @@ const POST = async (resource, json_data) => //Data must be in object form
 {
     const config =
     {
-    method: "POST",
-    headers: 
-    {
-        "Accept": "application/json",
-        "Content-type": "application/json"
-    },
-    body: json_data
+        method: "POST",
+        headers: 
+            {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            },
+        body: json_data
     };
 
     const response = await fetch(resource, config);
@@ -66,13 +66,13 @@ const PUT = async (resource, json_data) => //Data must be in object form
 {
     const config =
     {
-    method: "PUT",
-    headers: 
-    {
-        "Accept": "application/json",
-        "Content-type": "application/json"
-    },
-    body: json_data
+        method: "PUT",
+        headers: 
+            {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            },
+        body: json_data
     };
 
     const response = await fetch(resource, config);
@@ -99,13 +99,13 @@ const DELETE = async (resource, json_data) => //Data must be in object form
 {
     const config =
     {
-    method: "DELETE",
-    headers: 
-    {
-        "Accept": "application/json",
-        "Content-type": "application/json"
-    },
-    body: json_data
+        method: "DELETE",
+        headers: 
+            {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            },
+        body: json_data
     };
 
     const response = await fetch(resource, config);
@@ -127,6 +127,145 @@ const DELETE = async (resource, json_data) => //Data must be in object form
     return data;
 }
 
+//----HTTP Encryption----//
+
+let serverside_public_key;
+let clientside_private_key;
+
+window.key_exchange_complete = 
+(
+    //Initialize keys and communicate public key from server and client
+    async function ()
+    {
+        //Generate private and public key
+        const keyPair = await window.crypto.subtle.generateKey
+        (
+            {
+                name: "RSA-OAEP",
+                modulusLength: 2048, //Key size
+                publicExponent: new Uint8Array([1, 0, 1]),
+                hash: "SHA-256"
+            },
+
+            true,
+            ["encrypt", "decrypt"]
+        );
+
+        clientside_private_key = keyPair.privateKey; //Set private key to the generated key
+
+        //Send Clientside public key to server
+        POST("/public_key/clientside", JSON.stringify({key: await export_key_to_pem(keyPair.publicKey)}))
+        .then(data =>
+        {
+            //Successful
+        })
+        .catch(err =>
+        {
+            console.error(err)
+        });
+
+        //Get Serverside public key
+        GET("/public_key/serverside")
+        .then(data =>
+        {
+            serverside_public_key = data.key;
+        })
+        .catch(err =>
+        {
+            console.error(err)
+        });
+    
+        //Exchange is done
+        return true
+    }
+)();
+
+window.key_exchange_complete;
+
+//Decrypt incoming data from server
+async function decrypt_data(data, encrypted_aes_key, debug_mode)
+{
+    if(!debug_mode)
+    {
+        //Converte base64 str to encrypted bytes
+        const bytes = Uint8Array.from(atob(encrypted_aes_key), c => c.charCodeAt(0));
+        
+        //Decrypt AES key with the RSA private key
+        const raw_aes_key = await window.crypto.subtle.decrypt(
+            {
+            name: "RSA-OAEP"
+            },
+            clientside_private_key,
+            bytes
+        );
+
+        //Import AES key for decryption
+        const aes_key = await window.crypto.subtle.importKey(
+            "raw",
+            raw_aes_key,
+            { name: "AES-CBC" }, //AES-GCM if you’re using that
+            false,
+            ["decrypt"]
+        );
+
+        //Decode IV and encrypted content from hex to Uint8Array
+        const iv = hex_to_bytes(data.iv);
+        const content = hex_to_bytes(data.content);
+
+        //Decrypt content
+        const decrypted_buffer = await crypto.subtle.decrypt(
+            {
+                name: "AES-CBC",
+                iv: iv
+            },
+            aes_key,
+            content
+        );
+
+        //Convert decrypted buffer to JSON object
+        const decrypted_text = new TextDecoder().decode(decrypted_buffer);
+        return JSON.parse(decrypted_text);
+    }
+    else
+    {
+        return Promise.resolve(JSON.parse(data));
+    }
+};
+
+//Convert hex string to Uint8Array
+function hex_to_bytes(hex)
+{
+    const bytes = new Uint8Array(hex.length / 2);
+
+    for (let i = 0; i < bytes.length; i++)
+    {
+        bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+    }
+
+    return bytes;
+}
+
+async function export_key_to_pem(key) 
+{
+    //Export the key to ArrayBuffer
+    const exported = await window.crypto.subtle.exportKey(
+        "spki",
+        key
+    );
+
+    //Convert ArrayBuffer to base64
+    const string_key = String.fromCharCode(...new Uint8Array(exported));
+    const base64_key = btoa(string_key);
+
+    //Format as PEM
+    const pem_header = "-----BEGIN PUBLIC KEY-----";
+    const pem_footer = "-----END PUBLIC KEY-----";
+
+    const pem_body = base64_key.match(/.{1,64}/g).join('\n');
+
+    return `${pem_header}\n${pem_body}\n${pem_footer}`;
+}
+
 //----Global Variables----//
 
 //Media Queries
@@ -134,8 +273,11 @@ const reduced_motion_query = window.matchMedia("(prefers-reduced-motion: reduce)
 const medium_screen_width_query = window.matchMedia("(max-width: 1024px)");
 
 //Initialize admin from localStorage or default to false
-let logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
-let is_admin = JSON.parse(localStorage.getItem("is_admin")) || false;
+let logged_in = localStorage.getItem("logged_in") === "true";
+let is_admin = localStorage.getItem("is_admin")  === "true";
+
+console.log(localStorage.getItem("logged_in") === "true")
+console.log(localStorage.getItem("is_admin")  === "true")
 
 let user_name = localStorage.getItem("user_name") || undefined;
 let user_email = localStorage.getItem("user_email") || undefined;
@@ -181,6 +323,7 @@ hidden_elements.forEach(element => {scroll_observer.observe(element)});
 
 
 //----Global Script----//
+
 
 document.removeEventListener("scroll", update_gradient); // Ensure it starts without event listener
 
@@ -382,7 +525,7 @@ function close_popup()
 //Hides or shows elements based on .admin and .user class
 function admin(parent)
 {
-    is_admin = JSON.parse(localStorage.getItem("is_admin")) || false;
+    is_admin = localStorage.getItem("is_admin")  === "true";
     
     Array.from(parent.querySelectorAll(".admin")).forEach(element => //Shows Elements if Admin
     {
@@ -436,19 +579,27 @@ function login(event, popup)
     });
 
     POST("/account/login", obj)
-    .then(data => 
+    .then(encrypted_data => 
     {
-        close_popup() //Close login popup
+        decrypt_data(encrypted_data.data, encrypted_data.aes_key, encrypted_data.debug_mode)
+        .then(user_profil => 
+        {
+            close_popup() //Close login popup
 
-        //Store in localStorage
-        localStorage.setItem("logged_in", JSON.stringify(true));
-        localStorage.setItem("is_admin", JSON.stringify(data.admin));
-        localStorage.setItem("user_name", JSON.stringify(data.name));
-        localStorage.setItem("user_email", JSON.stringify(user_email));
+            //Store in localStorage
+            localStorage.setItem("logged_in", JSON.stringify(true));
+            localStorage.setItem("is_admin", JSON.stringify(user_profil.admin));
+            localStorage.setItem("user_name", JSON.stringify(user_profil.name));
+            localStorage.setItem("user_email", JSON.stringify(user_email));
 
-        user_name = data.name;
+            user_name = user_profil.name;
 
-        location.reload()
+            location.reload()
+        })
+        .catch(err =>
+        {
+            throw new Error("Decryption failed: " + err.message);
+        })
     })
     .catch(err => 
     {
@@ -490,16 +641,24 @@ function signup(event, popup)
 function send_email(popup)
 {
     POST("/account/signup/authentication", obj)
-    .then(code => 
+    .then(encrypted_data => 
     {
-        authentication_code = code;
+        decrypt_data(encrypted_data.data, encrypted_data.aes_key, encrypted_data.debug_mode)
+        .then(data => 
+        {
+            authentication_code = data;
 
-        //Resets the authentication code after 3 minutes
-        setTimeout(() => {authentication_code = ""}, 180000)
+            //Resets the authentication code after 3 minutes
+            setTimeout(() => {authentication_code = ""}, 180000)
 
-        close_popup()
+            close_popup()
 
-        show_popup(".authentication_popup", "");
+            show_popup(".authentication_popup", "");
+        })
+        .catch(err =>
+        {
+            throw new Error("Decryption failed: " + err.message);
+        })
     })
     .catch(err => 
     {
@@ -537,17 +696,25 @@ function authenticate(event, popup)
     if(Number(input_code) === Number(authentication_code))
     {
         POST("/account/signup/complete", null)
-        .then(data => 
+        .then(encrypted_data => 
         {
-            close_popup()
-            
-            //Store in localStorage        
-            localStorage.setItem("logged_in", JSON.stringify(true));
-            localStorage.setItem("is_admin", JSON.stringify(data.admin));
-            localStorage.setItem("user_name", JSON.stringify(data.name));
-            localStorage.setItem("user_email", JSON.stringify(user_email));
+            decrypt_data(encrypted_data.data, encrypted_data.aes_key, encrypted_data.debug_mode)
+            .then(user_profil => 
+            {
+                close_popup()
+                
+                //Store in localStorage        
+                localStorage.setItem("logged_in", JSON.stringify(true));
+                localStorage.setItem("is_admin", JSON.stringify(user_profil.admin));
+                localStorage.setItem("user_name", JSON.stringify(user_profil.name));
+                localStorage.setItem("user_email", JSON.stringify(user_email));
 
-            location.reload()
+                location.reload()
+            })
+            .catch(err =>
+            {
+                throw new Error("Decryption failed: " + err.message);
+            })
         })
         .catch(err => 
         {

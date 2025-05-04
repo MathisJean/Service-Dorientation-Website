@@ -16,7 +16,10 @@ let edited_scholarship_values = {id: 0, name: "", date: {day: null, month: "", t
 //TODO: Add event listener that sends you back to your scrolling position
 //----Script----//
 
-update_table();
+window.key_exchange_complete.then(() => //Wait for public keys to be exchanged
+{
+    update_table();
+})
 
 //----Functions----//
 
@@ -25,97 +28,105 @@ function update_table()
 {
   //Get data from json database to populate scholarships
   GET("/bourses/scholarship")
-  .then(scholarships => 
+  .then(encrypted_data => 
   {
-    //Creates month headers and containers
-    months.forEach(month =>
+    decrypt_data(encrypted_data.data, encrypted_data.aes_key, encrypted_data.debug_mode)
+    .then(scholarships => 
     {
-      let month_header = document.createElement("div");
-      let month_container = document.createElement("div");
-
-      month_header.classList.add("month_header");
-      month_header.id = "month_header_" + String(month.replaceSpecialChar());
-      month_container.classList.add("month_container");
-      month_container.id = "month_container_" + String(month.replaceSpecialChar()) ;
-      month_container.style.backgroundColor = "transparent";
-
-      month_header.innerHTML =
-      `
-        <div>
-          <h2>${month}</h2>
-        </div>
-      `;
-
-      //Adds header and container to table
-      table.appendChild(month_header);
-      table.appendChild(month_container);
-    })
-
-    //Remove autres from array
-    months.shift();
-
-    //Sort scholarships by first numbers in date element
-    scholarships.sort((a, b) =>
-    {
-      dayA = Number(a.date.day)
-      dayB = Number(b.date.day)
-
-      return dayA - dayB;
-    });
-
-    //Sort scholarships by month
-    scholarships.forEach(scholarship => 
-    {
-      let month = scholarship.date.month.replaceSpecialChar(); //Replaces characters from a list with others, method declared in global script
-
-      let container_id;
-
-      for(m = 0; m < 12; m++)
+      //Creates month headers and containers
+      months.forEach(month =>
       {
-        if(month.replaceSpecialChar() == months[m].replaceSpecialChar())
-        {
-          container_id = "month_container_" + month;
-          break;
-        }
+        let month_header = document.createElement("div");
+        let month_container = document.createElement("div");
 
-        //If there is no month in date element
-        else if(m == 11)
+        month_header.classList.add("month_header");
+        month_header.id = "month_header_" + String(month.replaceSpecialChar());
+        month_container.classList.add("month_container");
+        month_container.id = "month_container_" + String(month.replaceSpecialChar()) ;
+        month_container.style.backgroundColor = "transparent";
+
+        month_header.innerHTML =
+        `
+          <div>
+            <h2>${month}</h2>
+          </div>
+        `;
+
+        //Adds header and container to table
+        table.appendChild(month_header);
+        table.appendChild(month_container);
+      })
+
+      //Remove autres from array
+      months.shift();
+
+      //Sort scholarships by first numbers in date element
+      scholarships.sort((a, b) =>
+      {
+        dayA = Number(a.date.day)
+        dayB = Number(b.date.day)
+
+        return dayA - dayB;
+      });
+
+      //Sort scholarships by month
+      scholarships.forEach(scholarship => 
+      {
+        let month = scholarship.date.month.replaceSpecialChar(); //Replaces characters from a list with others, method declared in global script
+
+        let container_id;
+
+        for(m = 0; m < 12; m++)
         {
-          container_id = "month_container_autres";
+          if(month.replaceSpecialChar() == months[m].replaceSpecialChar())
+          {
+            container_id = "month_container_" + month;
+            break;
+          }
+
+          //If there is no month in date element
+          else if(m == 11)
+          {
+            container_id = "month_container_autres";
+          };
         };
-      };
 
-      let new_scholarship = initiate_scholarship(scholarship)
+        let new_scholarship = initiate_scholarship(scholarship)
 
-      //Add scholarships to containers
-      document.getElementById(container_id).appendChild(new_scholarship);
-      
-      let logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
-      let user_email = localStorage.getItem("user_email");
+        //Add scholarships to containers
+        document.getElementById(container_id).appendChild(new_scholarship);
+        
+        let logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
+        let user_email = localStorage.getItem("user_email");
 
-      try 
-      {
-        user_email = user_email ? JSON.parse(user_email) : undefined;
-      } 
-      catch(err) 
-      {
-        user_email = undefined; //If parsing fails, set to undefined
-      };
+        try 
+        {
+          user_email = user_email ? JSON.parse(user_email) : undefined;
+        } 
+        catch(err) 
+        {
+          user_email = undefined; //If parsing fails, set to undefined
+        };
 
-      //Check subscription
-      if(logged_in && user_email && scholarship.subscribedUsers.includes(user_email)) 
-      {
-        document.getElementById("subscribe_checkbox_" + scholarship.id).checked = true;
-      };
+        //Check subscription
+        if(logged_in && user_email && scholarship.subscribedUsers.includes(user_email)) 
+        {
+          document.getElementById("subscribe_checkbox_" + scholarship.id).checked = true;
+        };
+      });
+
+      //Hide and shows elements based on "is_admin" var
+      admin(document);
+
+      //Hides month header and containers without any children
+      hide_month_headers();
+
+      load();
+    })
+    .catch(err =>
+    {
+        throw new Error("Decryption failed: " + err.message);
     });
-
-    //Hide and shows elements based on "is_admin" var
-    admin(document);
-
-    //Hides month header and containers without any children
-    hide_month_headers();
-
-    load();
   })
   .catch(err => {show_popup(".error_popup", "Impossible de récupérer les enregistrements de bourses") ; console.error(err)});
 };
@@ -142,29 +153,37 @@ function add_scholarship(id)
 
   //Adds scholarship to json database
   POST("/bourses/scholarship", obj)
-  .then(scholarships => 
+  .then(encrypted_data => 
   {      
-    //Adds new scholarship to container
-    let scholarship = document.getElementById("scholarship_" + String(id));
-    let pos = scholarships.length - 1
-    let new_scholarship = initiate_scholarship(scholarships[pos]);
+    decrypt_data(encrypted_data.data, encrypted_data.aes_key, encrypted_data.debug_mode)
+    .then(scholarships => 
+    {
+      //Adds new scholarship to container
+      let scholarship = document.getElementById("scholarship_" + String(id));
+      let pos = scholarships.length - 1
+      let new_scholarship = initiate_scholarship(scholarships[pos]);
 
-    scholarship.after(new_scholarship);
+      scholarship.after(new_scholarship);
 
-    new_scholarship.classList.add("scroll_show");
+      new_scholarship.classList.add("scroll_show");
 
-    //Sets the scholarship in edit mode
-    checkbox = new_scholarship.querySelector(".edit_checkbox");
-    checkbox.checked = true;
+      //Sets the scholarship in edit mode
+      checkbox = new_scholarship.querySelector(".edit_checkbox");
+      checkbox.checked = true;
 
-    edit_scholarship(checkbox, new_scholarship);
+      edit_scholarship(checkbox, new_scholarship);
 
-    //Set date appropriatly for the month and previous day
-    new_scholarship.querySelector(".scholarship_date div > select").value = scholarship.querySelector(".scholarship_date div > select").value
-    new_scholarship.querySelector(".scholarship_date div > input[type='text']").value = scholarship.querySelector(".scholarship_date div > input[type='text']").value
+      //Set date appropriatly for the month and previous day
+      new_scholarship.querySelector(".scholarship_date div > select").value = scholarship.querySelector(".scholarship_date div > select").value
+      new_scholarship.querySelector(".scholarship_date div > input[type='text']").value = scholarship.querySelector(".scholarship_date div > input[type='text']").value
 
-    //Hides user elements
-    admin(new_scholarship);
+      //Hides user elements
+      admin(new_scholarship);
+    })
+    .catch(err =>
+    {
+        throw new Error("Decryption failed: " + err.message);
+    })
   })
   .catch(err => {show_popup(".error_popup", "Impossible d'ajouter l'enregistrement de la bourse")});
 }

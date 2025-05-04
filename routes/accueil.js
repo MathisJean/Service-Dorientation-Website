@@ -10,7 +10,8 @@ const router = express.Router()
 
 const handle_api_error = require("../lib/error_handler.js");
 const email_authentication = require("../lib/email_authentication.js");
-const {encrypt, decrypt} = require("../lib/encryption.js");
+const {encrypt, decrypt, http_encryption, http_decryption} = require("../lib/encryption.js");
+const {server_public_key, server_private_key, get_client_public_key} = require("../lib/keys.js");
 
 //Setup Router
 router.get('/', (req, res) => 
@@ -40,7 +41,7 @@ router.get("/orienter", async (req, res) =>
     let orienters = orienter_data?.orienters;
 
     //Return response
-    return res.send(orienters) 
+    return res.send(http_encryption(JSON.stringify(orienters), get_client_public_key())) 
   }
   catch(err)
   {
@@ -102,8 +103,9 @@ router.post("/orienter", async (req, res) =>
         console.error("Unlock failed")
       };
     };
+
     //Return response
-    return res.send(orienters)
+    return res.send(http_encryption(JSON.stringify(orienters), get_client_public_key())) 
   }
   catch(err)
   {
@@ -188,7 +190,7 @@ router.put("/orienter", async (req, res) =>
       }
     };
     //Return response
-    return res.send(orienters) 
+    return res.send({msg: "Successful"});
   }
   catch(err)
   {
@@ -256,7 +258,7 @@ router.delete("/orienter/:id", async (req, res) =>
       }
     };
     //Return response
-    return res.send(orienters) 
+    return res.send({msg: "Successful"}) 
   }
   catch(err)
   {
@@ -288,12 +290,12 @@ router.post("/account/login", async (req, res) =>
     let accounts = account_data?.accounts;
 
     //Compare incoming acount data to records
-    const found_account = accounts.find((account) => account.email === user_email && account.password === user_password);
+    const found_account_info = accounts.find((account) => account.email === user_email && account.password === user_password);
 
-    if(found_account)
+    if(found_account_info)
     {
       //Return response
-      return res.send(found_account);
+      return res.send(http_encryption(JSON.stringify(found_account_info), get_client_public_key()));
     }
     else
     {
@@ -350,7 +352,7 @@ router.post("/account/signup/authentication", async (req, res) =>
       email_authentication(account_request, accounts[0], authentication_code)
 
       //Return response
-      return res.send(authentication_code);
+      return res.send(http_encryption(JSON.stringify(authentication_code), get_client_public_key()));
     }
     else
     {
@@ -406,7 +408,7 @@ router.post("/account/signup/complete", async (req, res) =>
     };
 
     //Return response
-    return res.send(account_request);
+    return res.send(http_encryption(JSON.stringify(account_path), get_client_public_key()));
   }
   catch(err)
   {

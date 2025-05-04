@@ -7,7 +7,10 @@ let edited_values = [];
 
 //----Script---//
 
-update_orienters();
+window.key_exchange_complete.then(() => //Wait for public keys to be exchanged
+{
+    update_orienters();
+})
 
 //----Functions---//
 
@@ -82,69 +85,77 @@ function clear_img(id)
 function update_orienters()
 {
     GET("/orienter")
-    .then(orienters => 
+    .then(encrypted_data => 
     {
-        const orientation_container = document.querySelector(".orienters_orientation");
-        const vie_carriere_container = document.querySelector(".orienters_vie_carriere");
-
-        if(orienters.length == 0)
+        decrypt_data(encrypted_data.data, encrypted_data.aes_key, encrypted_data.debug_mode)
+        .then(orienters => 
         {
-            let orientation_sibling = document.createElement("div");
-            let vie_carriere_sibling = document.createElement("div");
+            const orientation_container = document.querySelector(".orienters_orientation");
+            const vie_carriere_container = document.querySelector(".orienters_vie_carriere");
 
-            orientation_container.append(orientation_sibling)
-            vie_carriere_container.append(vie_carriere_sibling)
+            if(orienters.length == 0)
+            {
+                let orientation_sibling = document.createElement("div");
+                let vie_carriere_sibling = document.createElement("div");
 
-            add_orienter(orientation_sibling);
-            add_orienter(vie_carriere_sibling);
+                orientation_container.append(orientation_sibling)
+                vie_carriere_container.append(vie_carriere_sibling)
 
-        };
+                add_orienter(orientation_sibling);
+                add_orienter(vie_carriere_sibling);
 
-        orienters.forEach(orienter =>
-        {
-            const profil = initialize_orienter(orienter)
-
-            if(orienter.position.includes("orientation"))
-            {                
-                orientation_container.appendChild(profil);
-            }
-            else
-            {                
-                vie_carriere_container.appendChild(profil);
             };
 
-            let input_file = profil.querySelector(".input_file")
-            let drop_area = profil.querySelector(".drop_area")
-
-            input_file.addEventListener("change", event => 
+            orienters.forEach(orienter =>
             {
-                upload_img(event, event.target, profil)
-            });        
-            
-            //Drag and drop functionality
-            drop_area.addEventListener("dragover", event => 
-            {
-                event.preventDefault();
+                const profil = initialize_orienter(orienter)
 
-                event.dataTransfer.dropEffect = "copy"; //Change effect to "copy"
+                if(orienter.position.includes("orientation"))
+                {                
+                    orientation_container.appendChild(profil);
+                }
+                else
+                {                
+                    vie_carriere_container.appendChild(profil);
+                };
+
+                let input_file = profil.querySelector(".input_file")
+                let drop_area = profil.querySelector(".drop_area")
+
+                input_file.addEventListener("change", event => 
+                {
+                    upload_img(event, event.target, profil)
+                });        
+                
+                //Drag and drop functionality
+                drop_area.addEventListener("dragover", event => 
+                {
+                    event.preventDefault();
+
+                    event.dataTransfer.dropEffect = "copy"; //Change effect to "copy"
+                });
+
+                drop_area.addEventListener("drop", event => 
+                {
+                    event.preventDefault();
+
+                    event.target.files = event.dataTransfer.files;
+
+                    upload_img(event, event.target, profil)
+                });
             });
 
-            drop_area.addEventListener("drop", event => 
-            {
-                event.preventDefault();
+            admin(orientation_container);
+            admin(vie_carriere_container);
 
-                event.target.files = event.dataTransfer.files;
+            let radio = document.querySelector("#orientation").checked ? document.querySelector("#orientation") : document.querySelector("#vie_carriere");
 
-                upload_img(event, event.target, profil)
-            });
-        });
-
-        admin(orientation_container);
-        admin(vie_carriere_container);
-
-        let radio = document.querySelector("#orientation").checked ? document.querySelector("#orientation") : document.querySelector("#vie_carriere");
-
-        services(radio)
+            services(radio)
+        })
+        .catch(err =>
+        {
+            throw new Error("Decryption failed: " + err.message);
+        })
     })
     .catch(err => 
     {
@@ -168,13 +179,21 @@ function add_orienter(sibling)
     });
 
     POST("/orienter", obj)
-    .then(orienters => 
+    .then(encrypted_data => 
     {
-        let index = orienters.length - 1; 
+        decrypt_data(encrypted_data.data, encrypted_data.aes_key, encrypted_data.debug_mode)
+        .then(orienters => 
+        {
+            let index = orienters.length - 1;
 
-        let profil = initialize_orienter(orienters[index]);
+            let profil = initialize_orienter(orienters[index]);
 
-        sibling.after(profil);
+            sibling.after(profil);
+        })
+        .catch(err =>
+        {
+            throw new Error("Decryption failed: " + err.message);
+        })
     })
     .catch(err => 
     {
@@ -254,7 +273,10 @@ function edit_orienter(checkbox, parent)
     
         //Send a request to edit the data
         PUT("/orienter", obj)
-        .then(data => {})
+        .then(data => 
+        {
+            //Succesful request
+        })
         .catch(err => 
         {
             show_popup(".error_popup", "Impossible de changer l'enregistrement de l'orienteur")

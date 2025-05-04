@@ -4,13 +4,14 @@ const fs = require('fs');
 const path = require('path');
 
 const lockfile = require('proper-lockfile');
-const {writeFile, readFile} = require('fs');
 
 const express = require('express')
 const router = express.Router()
 
 const handle_api_error = require("../lib/error_handler.js");
-const {encrypt, decrypt} = require("../lib/encryption.js");
+const email_authentication = require("../lib/email_authentication.js");
+const {encrypt, decrypt, http_encryption, http_decryption} = require("../lib/encryption.js");
+const {server_public_key, server_private_key, get_client_public_key} = require("../lib/keys.js");
 
 //Setup Router
 router.get('/', (req, res) => 
@@ -40,7 +41,7 @@ router.get("/scholarship", async (req, res) =>
     let scholarships = scholarship_data?.scholarships;
 
     //Return response
-    return res.send(scholarships) 
+    return res.send(http_encryption(JSON.stringify(scholarships), get_client_public_key()));
   }
   catch(err)
   {
@@ -93,7 +94,7 @@ router.post("/scholarship", async (req, res) =>
       };
     };
     //Return response
-    return res.send(scholarships)
+    return res.send(http_encryption(JSON.stringify(scholarships), get_client_public_key())) 
   }
   catch(err)
   {
@@ -173,7 +174,7 @@ router.put("/scholarship", async (req, res) =>
       }
     };
     //Return response
-    return res.send(scholarships) 
+    return res.send({msg: "Successful"}) 
   }
   catch(err)
   {
@@ -241,7 +242,7 @@ router.delete("/scholarship/:id", async (req, res) =>
       }
     };
     //Return response
-    return res.send(scholarships) 
+    return res.send({msg: "Successful"}) 
   }
   catch(err)
   {
@@ -264,9 +265,9 @@ router.post("/subscribe/:id", async (req, res) =>
     //Read file
     let scholarship_data = await fs.promises.readFile(scholarship_path, "utf-8");
 
-    scholarship_data = decrypt(JSON.parse(scholarship_data)); //Decrypt data
+    scholarship_data = decrypt(scholarship_data); //Decrypt data
 
-    let scholarships = JSON.parse(scholarship_data)?.scholarships;
+    let scholarships = scholarship_data?.scholarships;
     let scholarship_found = false;
 
     //Update scholarship subscriptions
@@ -315,7 +316,7 @@ router.post("/subscribe/:id", async (req, res) =>
       };
     };
     //Return response
-    return res.send(scholarships);
+    return res.send({msg: "Successful"});
   } 
   catch(err) 
   {
@@ -333,10 +334,12 @@ router.delete("/subscribe/:id", async (req, res) =>
 
   try
   {
-    //Read files
-    const scholarship_data = await fs.promises.readFile(scholarship_path, "utf-8") 
+    //Read file
+    let scholarship_data = await fs.promises.readFile(scholarship_path, "utf-8");
 
-    let scholarships = JSON.parse(scholarship_data)?.scholarships;
+    scholarship_data = decrypt(scholarship_data); //Decrypt data
+
+    let scholarships = scholarship_data?.scholarships;
     let scholarship_found = false;
 
     //Update scholarship subscriptions
@@ -383,7 +386,7 @@ router.delete("/subscribe/:id", async (req, res) =>
       }
     };
     //Return response
-    return res.send(scholarships);
+    return res.send({msg: "Successful"});
   } 
   catch(err) 
   {
