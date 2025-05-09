@@ -115,24 +115,6 @@ h2
 #salon_emploi_expand:checked ~ label > img, #orient_action_expand:checked ~ label > img
 {
     rotate: 180deg;
-} 
-
-#salon_emploi_expand:checked ~ .list
-{
-    height: 300px;
-
-    padding: 2em;
-
-    opacity: 1;
-}
-
-#orient_action_expand:checked ~ .list
-{
-    height: 500px;
-
-    padding: 2em;
-
-    opacity: 1;
 }
 
 .list
@@ -143,26 +125,88 @@ h2
     justify-items: center;
     align-content: center;
 
-    gap: 5%;
-
-    height: 0px;
-    width: 100%;
-
-    padding: 0 2em;
-
+    overflow: hidden;
     opacity: 0;
 
-    transition: 
-        height 0.5s ease-in-out,
-        opacity 0.5s ease-in-out,
-        padding 0.5s ease-in-out;
+    max-height: 0;
+    width: 100%;
 
-    overflow: hidden;
+    margin: 0 2em;
+
+    transition:
+      max-height 0.5s ease,
+      opacity 0.5s ease,
+      margin 0.5s ease;
 }
 
-.list a
+.admin_buttons
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: end;
+
+    width: 100%;
+
+    padding-right: 4em;
+    margin-bottom: -1.25em;
+
+    grid-area: 1 / 1 / 1 / 4;
+}
+
+input[type="checkbox"]:checked + label > .unactive_checkbox
+{
+    display: none;
+}
+
+input[type="checkbox"]:checked + label > .active_checkbox
+{
+    display: block;
+}
+
+.active_checkbox
+{
+    display: none;
+}
+
+.exhibitor
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    
+    margin: 0.75em 0;
+}
+
+.exhibitor h6
+{
+    outline: none;
+}
+
+.exhibitor a
 {
     color: var(--link--color);
+
+    text-decoration: none;
+    font-style: italic;
+}
+
+.exhibitor input
+{
+    color: var(--link--color);
+    background-color: transparent;
+
+    text-align: center;
+
+    width: 100%;
+
+    border: none;
+    outline: none;
 }
 
 /* Mobile users */
@@ -201,19 +245,7 @@ h2
     .list
     {
         grid-template-columns: 1fr 1fr;
-
-        row-gap: 5%;
     }
-
-    #salon_emploi_expand:checked ~ .list
-    {
-        height: 250px;
-    }    
-    
-    #orient_action_expand:checked ~ .list
-    {
-        height: 400px;
-    }    
 
     .list a
     {

@@ -276,9 +276,6 @@ const medium_screen_width_query = window.matchMedia("(max-width: 1024px)");
 let logged_in = localStorage.getItem("logged_in") === "true";
 let is_admin = localStorage.getItem("is_admin")  === "true";
 
-console.log(localStorage.getItem("logged_in") === "true")
-console.log(localStorage.getItem("is_admin")  === "true")
-
 let user_name = localStorage.getItem("user_name") || undefined;
 let user_email = localStorage.getItem("user_email") || undefined;
 
@@ -425,7 +422,6 @@ function change_cell_focus(event)
   {
     event.preventDefault()
 
-    // Example: Move focus to the next element (optional)
     let next = document.activeElement.nextElementSibling ? document.activeElement.nextElementSibling : document.activeElement.parentElement.nextElementSibling
 
     if(Array.from(next.classList).includes("scholarship_link")) 

@@ -155,29 +155,27 @@
         
         <input type="checkbox" id="salon_emploi_expand" style="display: none;">
 
-        <label for="salon_emploi_expand" class="btn">        
+        <label for="salon_emploi_expand" class="btn" onclick="toggle_dropdown('salon_emploi', 'salon_emploi_expand')">
           <p>Exposants</p>
-          
-          <img src="/icons/arrow_down.svg" class="nav_icon no_select svg" draggable="false"></img>
+          <img src="/icons/arrow_down.svg">
         </label>
 
         <div class="list">
-          <a href="https://legumesadaniel.com/" target="_blank">Les légumes à Daniel</a>
-          <a href="https://www.st-hubert.com/fr/carrieres.html" target="_blank">St-Hubert</a>
-          <a href="https://forces.ca/fr/carrieres" target="_blank">Forces armées canadiennes</a>
-          <a href="https://www.st-isidoreasphalte.ca/" target="_blank">Saint-Isidore Asphalte Ltée</a>
-          <a href="https://interfor.com/fr/location/bathurst/" target="_blank">Interfor</a>
-          <a href="https://www.rcmp-grc.gc.ca/fr" target="_blank">Gendarmerie royale du Canada (GRC)</a>
-          <a href="https://www.bathurst.ca/fr/services/1/force-policiere-de-bathurst" target="_blank">Force policière de Bathurst</a>
-          <a href="#" target="_blank">Unicare Home Health Care Inc</a>
-          <a href="https://www.vitalitenb.ca/" target="_blank">Vitalité</a>
-          <a href="https://www.dsfne.ca/" target="_blank">District scolaire francophone Nord-Est</a>
-          <a href="https://www.canada.ca/fr/services/emplois/opportunites/gouvernement.html" target="_blank">Service Canada</a>
-          <a href="https://ckle.fm/" target="_blank">Radio de la Baie Ltée</a>
-          <a href="https://travailnb.ca/" target="_blank">Travail NB</a>
-          <a href="/">Services vie-carrière ESN</a>
+          <div class="admin_buttons">          
+            <input type="button" id="add_button_salon_emploi" onclick="add_exhibitor('salon_emploi')" style="display: none;">
+  
+            <label for="add_button_salon_emploi" class="add_button admin icon">
+              <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
+            </label>
+  
+            <input type="checkbox" id="edit_checkbox_salon_emploi" class="edit_checkbox" onchange="edit_exhibitor(this, this.parentNode.parentNode)" style="display: none;">
+  
+            <label for="edit_checkbox_salon_emploi" class="admin icon">
+              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+            </label>
+          </div>          
         </div>
-        
         
         <div class="description">
           <h2>Ces quoi?</h2>
@@ -192,45 +190,27 @@
         
         <input type="checkbox" id="orient_action_expand" style="display: none;">
 
-        <label for="orient_action_expand" class="btn">        
+        <label for="orient_action_expand" class="btn" onclick="toggle_dropdown('orient_action', 'orient_action_expand')">
           <p>Exposants</p>
-          
-          <img src="/icons/arrow_down.svg" class="nav_icon no_select svg" draggable="false"></img>
+          <img src="/icons/arrow_down.svg">
         </label>
 
         <div class="list">
-          <a href="https://ccnb.ca/schools/ecole-des-tic-technologies-et-du-transport/" target="_blank">CCNB - TIC, Technologies & Transports</a>
-          <a href="https://ccnb.ca/schools/ecole-des-peches-et-des-ressources-naturelles/" target="_blank">CCNB - Ressources naturelles</a>
-          <a href="https://ccnb.ca/cnfs/#:~:text=Le%20Consortium%20national%20de%20formation%20en%20sant%C3%A9%20(CNFS)%20regroupe%2016" target="_blank">CCNB - CNFS</a>
-          <a href="https://ccnb.ca/schools/ecole-des-sciences-de-la-sante/" target="_blank">CCNB - Sciences de la santé</a>
-          <a href="https://www.collegedelile.ca/#:~:text=Choisir%20le%20Coll%C3%A8ge%20de%20l%E2%80%99%C3%8Ele,%20c%E2%80%99est%20choisir%20des%20programmes%20de" target="_blank">Collège de l'Île</a>
-          <a href="https://www.mcft.ca/fr/home-fr/#:~:text=CTFM.%20Choisir%20le%20bon%20coll%C3%A8ge%20et%20le%20meilleur%20programme%20pour" target="_blank">CTFM</a>
-          <a href="https://nbcc.ca/" target="_blank">NBCC</a>
-          <a href="https://mckenzie.edu/#:~:text=McKenzie%20College%20offers%20students%20a%20high-quality%20education%20in%20a%20vibrant" target="_blank">Collège McKenzie</a>
-          <a href="https://www.umoncton.ca/shippagan" target="_blank">UdeM - Campus Shippagan</a>
-          <a href="https://www.umoncton.ca/edmundston" target="_blank">UdeM - Campus Edmundston</a>
-          <a href="https://www.umoncton.ca/umcm-fsssc-scienceinfirmiere/#:~:text=Le%208%20mai%20dernier,%20nous%20avons%20c%C3%A9l%C3%A9br%C3%A9%20avec%20fiert%C3%A9%20et" target="_blank">UdeM - Sciences infirmières (Bathurst)</a>
-          <a href="https://carrieresante.ca/etudiants#:~:text=Le%20Consortium%20national%20de%20formation%20en%20sant%C3%A9%20(CNFS)%20%E2%80%93%20Volet" target="_blank">UdeM - CNFS</a>
-          <a href="https://www.usainteanne.ca/#:~:text=L'Universit%C3%A9%20Sainte-Anne%20reconnait%20que%20ses%20cinq%20campus%20sont%20situ%C3%A9s%20en" target="_blank">Université Sainte-Anne</a>
-          <a href="https://www.stu.ca/" target="_blank">St. Thomas University</a>
-          <a href="https://mta.ca/" target="_blank">Mount Allison University</a>
-          <a href="https://www.ubishops.ca/fr/#:~:text=Bishop%E2%80%99s%20est%20une%20universit%C3%A9%20principalement%20r%C3%A9sidentielle%20fortement%20ax%C3%A9e%20sur%20les" target="_blank">Université Bishop’s</a>
-          <a href="https://forces.ca/fr/carrieres#:~:text=Lancez%20une%20recherche%20pour%20voir%20les%20possibilit%C3%A9s%20d%E2%80%99emploi%20dans%20les" target="_blank">Forces armées canadiennes</a>
-          <a href="https://www.canada.ca/fr/armee/organisation/reserve.html" target="_blank">Réserve de l'armée canadienne</a>
-          <a href="https://www.bathurst.ca/fr/services/1/force-policiere-de-bathurst#:~:text=Force%20polici%C3%A8re%20de%20Bathurst.%20Votre%20s%C3%A9curit%C3%A9%20nous%20tient%20%C3%A0%20c%C5%93ur." target="_blank">Force policière de Bathurst</a>
-          <a href="https://www.rcmp-grc.gc.ca/fr/la-formation-des-cadets" target="_blank">GRC</a>
-          <a href="https://www.canada.ca/fr/service-correctionnel/services/scc-vous/travailler-scc.html" target="_blank">Services correctionnels du Canada</a>
-          <a href="https://www.bathurst.ca/fr/services/service-de-protection-incendie-de-bathurst/11/une-carriere-avec-le-service-d-incendie-de-bathurst" target="_blank">Incendie Bathurst</a>
-          <a href="https://ambulancenb.ca/fr/" target="_blank">Ambulance NB</a>
-          <a href="https://www.medaviehealthed.com/fr/medavie-edusante/" target="_blank">Médavie Édu Santé</a>
-          <a href="https://www.vitalitenb.ca/fr/emplois" target="_blank">Réseau de santé Vitalité</a>
-          <a href="https://interfor.com/fr/carrieres/opportunites-demploi/" target="_blank">Interfor</a>
-          <a href="https://www.st-isidoreasphalte.ca/" target="_blank">St-Isidore Asphalte Ltée</a>
-          <a href="https://travailnb.ca/" target="_blank">Travail NB</a>
-          <a href="https://www.cbdc.ca/fr/programmes/chaleur-ma-region-mon-futur" target="_blank">CBDC Chaleur</a>
-          <a href="/">Services vie-carrière ESN</a>
-        </div>
-               
+          <div class="admin_buttons">          
+            <input type="button" id="add_button_orient_action" onclick="add_exhibitor('orient_action')" style="display: none;">
+  
+            <label for="add_button_orient_action" class="add_button admin icon">
+              <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
+            </label>
+  
+            <input type="checkbox" id="edit_checkbox_orient_action" class="edit_checkbox" onchange="edit_exhibitor(this, this.parentNode.parentNode)" style="display: none;">
+  
+            <label for="edit_checkbox_orient_action" class="admin icon">
+              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+            </label>
+          </div>    
+        </div>           
 
         <div class="description">
           <h2>Ces quoi?</h2>

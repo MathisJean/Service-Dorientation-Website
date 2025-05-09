@@ -217,9 +217,8 @@ html
 {
     color: var(--link--color);
 
+    text-decoration: none;
     font-style: italic;
-
-    outline: none;
 }
 
 .services

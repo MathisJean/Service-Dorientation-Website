@@ -10,7 +10,7 @@ const router = express.Router()
 
 const handle_api_error = require("../lib/error_handler.js");
 const email_authentication = require("../lib/email_authentication.js");
-const {encrypt, decrypt, http_encryption, http_decryption} = require("../lib/encryption.js");
+const {encrypt, decrypt, http_encryption} = require("../lib/encryption.js");
 const {server_public_key, server_private_key, get_client_public_key} = require("../lib/keys.js");
 
 //Setup Router
