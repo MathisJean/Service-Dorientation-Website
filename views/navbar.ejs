@@ -71,12 +71,13 @@
     </nav>  
 
     <!--Beta Testing-->
-
+    <!-- 
     <div class="dev_nav">
       <img src="/icons/warning.svg" class="nav_icon no_select svg" draggable="false"></img>
       Site web en dévelopment
       <img src="/icons/warning.svg" class="nav_icon no_select svg" draggable="false"></img>
     </div>
+    -->
 
     <input type="button" id="close_btn" style="display: none;" onclick="close_popup()">
   
@@ -155,6 +156,18 @@
       </form>
 
       <input type="button" value="Renvoyer le E-mail" class="switch_popup_btn" onclick="send_email(this.parentNode)">
+    </div>
+
+    <div class="delete_popup popup">
+      <label for="close_btn" class="close_btn no_select icon">
+        <img src="/icons/close.svg" class="svg">
+      </label>
+
+      <h4>Supprimer</h4>
+
+      <p>Voulez-vous vraiment supprimer ce record?</p>
+
+      <input type="button" value="Confirmer" class="btn confirm_btn" onclick="close_popup()">
     </div>
   </body>
   

@@ -518,6 +518,48 @@ function close_popup()
     document.body.classList.remove("no_input")
 };
 
+//Function for delete confirmation popups
+function confirm_popup() 
+{
+    return new Promise((resolve) => 
+    {
+        close_popup(); //Hide other popups
+
+        const popup = document.querySelector(".delete_popup");
+
+        popup.style.top = "50%";
+        popup.style.opacity = "1";
+        document.body.style.overflow = "hidden";
+        document.body.classList.add("no_input");
+
+        const confirm_btn = popup.querySelector(".confirm_btn");
+        const close_btn = popup.querySelector(".close_btn");
+
+        const cleanup = () => 
+        {
+            close_popup();
+            confirm_btn.removeEventListener("click", onConfirm);
+            close_btn.removeEventListener("click", onCancel);
+        };
+
+        const onConfirm = () => 
+        {
+            cleanup();
+            resolve(true);
+        };
+
+        const onCancel = () => 
+        {
+            cleanup();
+            resolve(false);
+        };
+
+        confirm_btn.addEventListener("click", onConfirm);
+        close_btn.addEventListener("click", onCancel);
+    });
+}
+
+
 //Hides or shows elements based on .admin and .user class
 function admin(parent)
 {

@@ -27,6 +27,77 @@
     <div class="content">
       <img src="/img/divider.svg" class="no_select divider" draggable="false"></img>
 
+      <div class="salon_emploi exposition">
+        
+        <input type="checkbox" id="salon_emploi_expand" style="display: none;">
+
+        <label for="salon_emploi_expand" class="btn" onclick="toggle_dropdown('salon_emploi', 'salon_emploi_expand')">
+          <p>Exposants</p>
+          <img src="/icons/arrow_down.svg">
+        </label>
+
+        <div class="list">
+          <div class="admin_buttons">          
+            <input type="button" id="add_button_salon_emploi" onclick="add_exhibitor('salon_emploi')" style="display: none;">
+  
+            <label for="add_button_salon_emploi" class="add_button admin icon">
+              <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
+            </label>
+  
+            <input type="checkbox" id="edit_checkbox_salon_emploi" class="edit_checkbox" onchange="edit_exhibitor(this, this.parentNode.parentNode)" style="display: none;">
+  
+            <label for="edit_checkbox_salon_emploi" class="admin icon">
+              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+            </label>
+          </div>          
+        </div>
+        
+        <div class="description">
+          <h2>Ces quoi?</h2>
+          
+          <p>Le salon de l'emploi permet aux élèves de la 9e à la 12e année de découvrir des entreprises locales, d'explorer des opportunités d'emploi, de réseauter et de potentiellement décrocher un emploi. Il est organisé grâce à la collaboration de plusieurs acteurs scolaires.</p>
+        </div>
+
+        <h2>Salon de l'emploi</h2>
+      </div>
+
+      <div class="orient_action exposition"> 
+        
+        <input type="checkbox" id="orient_action_expand" style="display: none;">
+
+        <label for="orient_action_expand" class="btn" onclick="toggle_dropdown('orient_action', 'orient_action_expand')">
+          <p>Exposants</p>
+          <img src="/icons/arrow_down.svg">
+        </label>
+
+        <div class="list">
+          <div class="admin_buttons">          
+            <input type="button" id="add_button_orient_action" onclick="add_exhibitor('orient_action')" style="display: none;">
+  
+            <label for="add_button_orient_action" class="add_button admin icon">
+              <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
+            </label>
+  
+            <input type="checkbox" id="edit_checkbox_orient_action" class="edit_checkbox" onchange="edit_exhibitor(this, this.parentNode.parentNode)" style="display: none;">
+  
+            <label for="edit_checkbox_orient_action" class="admin icon">
+              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+            </label>
+          </div>    
+        </div>           
+
+        <div class="description">
+          <h2>Ces quoi?</h2>
+          
+          <p>La Journée Orient'Action ESN est un salon carrière visant à élargir les options de formation et de carrière des élèves de la 9e à la 12e année. Plus de 40 exposants y participent, incluant des établissements postsecondaires, des employeurs et des services d’aide à l’emploi.</p>
+        </div>
+
+        <h2>Orient'Action</h2>
+      </div>
+    </div>
+
       <div class="experiences">
         <h2>Vie-Carrière</h2>
 
@@ -150,77 +221,6 @@
           <input type="button" class="btn" value="Préparation" onclick="window.location.href='/resources'">
         </div>
       </div>
-
-      <div class="salon_emploi exposition">
-        
-        <input type="checkbox" id="salon_emploi_expand" style="display: none;">
-
-        <label for="salon_emploi_expand" class="btn" onclick="toggle_dropdown('salon_emploi', 'salon_emploi_expand')">
-          <p>Exposants</p>
-          <img src="/icons/arrow_down.svg">
-        </label>
-
-        <div class="list">
-          <div class="admin_buttons">          
-            <input type="button" id="add_button_salon_emploi" onclick="add_exhibitor('salon_emploi')" style="display: none;">
-  
-            <label for="add_button_salon_emploi" class="add_button admin icon">
-              <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
-            </label>
-  
-            <input type="checkbox" id="edit_checkbox_salon_emploi" class="edit_checkbox" onchange="edit_exhibitor(this, this.parentNode.parentNode)" style="display: none;">
-  
-            <label for="edit_checkbox_salon_emploi" class="admin icon">
-              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
-            </label>
-          </div>          
-        </div>
-        
-        <div class="description">
-          <h2>Ces quoi?</h2>
-          
-          <p>Le salon de l'emploi permet aux élèves de la 9e à la 12e année de découvrir des entreprises locales, d'explorer des opportunités d'emploi, de réseauter et de potentiellement décrocher un emploi. Il est organisé grâce à la collaboration de plusieurs acteurs scolaires.</p>
-        </div>
-
-        <h2>Salon de l'emploi</h2>
-      </div>
-
-      <div class="orient_action exposition"> 
-        
-        <input type="checkbox" id="orient_action_expand" style="display: none;">
-
-        <label for="orient_action_expand" class="btn" onclick="toggle_dropdown('orient_action', 'orient_action_expand')">
-          <p>Exposants</p>
-          <img src="/icons/arrow_down.svg">
-        </label>
-
-        <div class="list">
-          <div class="admin_buttons">          
-            <input type="button" id="add_button_orient_action" onclick="add_exhibitor('orient_action')" style="display: none;">
-  
-            <label for="add_button_orient_action" class="add_button admin icon">
-              <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
-            </label>
-  
-            <input type="checkbox" id="edit_checkbox_orient_action" class="edit_checkbox" onchange="edit_exhibitor(this, this.parentNode.parentNode)" style="display: none;">
-  
-            <label for="edit_checkbox_orient_action" class="admin icon">
-              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
-            </label>
-          </div>    
-        </div>           
-
-        <div class="description">
-          <h2>Ces quoi?</h2>
-          
-          <p>La Journée Orient'Action ESN est un salon carrière visant à élargir les options de formation et de carrière des élèves de la 9e à la 12e année. Plus de 40 exposants y participent, incluant des établissements postsecondaires, des employeurs et des services d’aide à l’emploi.</p>
-        </div>
-
-        <h2>Orient'Action</h2>
-      </div>
-    </div>
   </body>
 
   <script defer src="../js/global_script.js"></script>

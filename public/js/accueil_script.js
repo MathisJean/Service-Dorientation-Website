@@ -284,8 +284,12 @@ function edit_orienter(checkbox, parent)
     };
 };
 
-function delete_orienter(id)
+async function delete_orienter(id)
 {
+    const confirmed = await confirm_popup();
+
+    if(!confirmed) return
+
     //Request to delete orienter from json database based on specified id
     DELETE(`/orienter/${id}`, null)
     .then(data => 

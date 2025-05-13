@@ -149,8 +149,7 @@ h2
 
     width: 100%;
 
-    padding-right: 4em;
-    margin-bottom: -1.25em;
+    padding-right: calc(5% / 3);
 
     grid-area: 1 / 1 / 1 / 4;
 }
@@ -178,6 +177,8 @@ input[type="checkbox"]:checked + label > .active_checkbox
     justify-content: center;
     align-items: center;
 
+    position: relative;
+
     width: 100%;
     
     margin: 0.75em 0;
@@ -185,28 +186,57 @@ input[type="checkbox"]:checked + label > .active_checkbox
 
 .exhibitor h6
 {
+    text-align: center;
+
+    width: 90%;
+    height: 2em;
+
+    padding: 0;
+    border: none;
     outline: none;
 }
 
 .exhibitor a
 {
     color: var(--link--color);
-
+    
     text-decoration: none;
     font-style: italic;
+
+    text-align: center;
+    
+    width: 90%;
+    height: 2em;
+
+    padding: 0;
+    border: none;
+    outline: none;
 }
 
 .exhibitor input
 {
+    font-size: 1em;
+    font-weight: 600;
+
     color: var(--link--color);
     background-color: transparent;
 
     text-align: center;
 
-    width: 100%;
+    width: 90%;
+    height: 2em;
 
+    padding: 0;
     border: none;
     outline: none;
+}
+
+.exhibitor .delete_button
+{
+    position: absolute;
+
+    right: 5%;
+    bottom: 50%;
 }
 
 /* Mobile users */

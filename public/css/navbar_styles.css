@@ -255,7 +255,7 @@ body
     text-align: center;
 }
 
-.error_popup p
+.error_popup p, .delete_popup p
 {
     margin-top: 1.5em;
 

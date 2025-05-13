@@ -421,8 +421,12 @@ function edit_scholarship(checkbox, parent, event)
 };
 
 //Admin function to delete scholarship
-function delete_scholarship(scholarship_id)
+async function delete_scholarship(scholarship_id)
 {
+  const confirmed = await confirm_popup();
+
+  if(!confirmed) return
+
   //Request to delete scholarship from json database based on sepcified id
   DELETE(`/bourses/scholarship/${scholarship_id}`, null)
   .then(data => 
