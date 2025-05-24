@@ -613,4 +613,9 @@ h6, a
         height: 16px;
         width: 16px;
     }
+
+    .admin, .admin_input
+    {
+        display: none;
+    }
 }

@@ -333,6 +333,11 @@ input[type="checkbox"]:checked + label > .active_checkbox
     animation-delay: 1.8s;
 }
 
+.option:nth-child(21)
+{
+    animation-delay: 2.0s;
+}
+
 .option p
 {
     font-weight: 700;
@@ -389,21 +394,6 @@ input[type="checkbox"]:checked + label > .active_checkbox
         --background--radial--leap: 10%;
     }
 
-    .slideshow
-    {
-        min-width: 75%;  
-    }
-
-    .slide div h3
-    {
-        font-size: 1.25em;
-    }
-
-    .slide div p
-    {
-        font-size: 0.75em;
-    }
-    
     .description > h2
     {
         display: none;
@@ -411,16 +401,29 @@ input[type="checkbox"]:checked + label > .active_checkbox
 
     .description > p
     {
-        text-align: center;
+        text-align: justify;
     }
 
-    .list
+    .list h6
+    {
+        font-size: 0.75em;
+
+        height: auto;
+        min-height: 2em;
+    }
+    
+    .list a
+    {
+        font-size: 0.75em;
+    }
+
+    .options
     {
         grid-template-columns: 1fr 1fr;
     }
 
-    .list a
+    .option
     {
-        font-size: 0.75em;
+        animation-delay: 0s !important;
     }
 }

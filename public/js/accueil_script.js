@@ -335,7 +335,7 @@ function initialize_orienter(orienter)
             <input type="file" id="input_file_${orienter.id}" class="input_file admin_input" accept="image/*" hidden>
 
             <div id="img_view" class="admin">
-                <img src="/icons/add_img.svg" class="no_select" draggable="false"></img>
+                <img src="/icons/add_img.svg" class="no_select svg" draggable="false"></img>
             </div>
         </label>
 
@@ -350,26 +350,26 @@ function initialize_orienter(orienter)
             <input type="button" id="add_button_${orienter.id}" onclick="add_orienter(this.parentNode.parentNode)" style="display: none;">
 
             <label for="add_button_${orienter.id}" class="add_button admin icon">
-                <img src="/icons/add.svg" class="no_select" draggable="false"></img>
+                <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
             </label>
 
             <input type="checkbox" id="edit_checkbox_${orienter.id}" onchange="edit_orienter(this, this.parentNode.parentNode)" style="display: none;">
 
             <label for="edit_checkbox_${orienter.id}" class="admin icon">
-                <img src="/icons/edit.svg" class="unactive_checkbox no_select" draggable="false"></img>
-                <img src="/icons/save.svg" class="active_checkbox no_select" draggable="false"></img>
+                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
             </label>
 
             <input type="button" id="delete_button_${orienter.id}" onclick="delete_orienter(${orienter.id})" style="display: none;">
 
             <label for="delete_button_${orienter.id}" class="admin icon">
-                <img src="/icons/delete.svg" class="no_select" draggable="false"></img>
+                <img src="/icons/delete.svg" class="no_select svg" draggable="false"></img>
             </label>
 
             <input type="button" id="clear_button_${orienter.id}" onclick="clear_img(${orienter.id})" style="display: none;">
 
             <label for="clear_button_${orienter.id}" class="add_button admin icon">
-                <img src="/icons/remove_img.svg" class="no_select" draggable="false"></img>
+                <img src="/icons/remove_img.svg" class="no_select svg" draggable="false"></img>
             </label>
         </div>
     `;
