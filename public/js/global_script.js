@@ -272,36 +272,14 @@ async function export_key_to_pem(key)
 const reduced_motion_query = window.matchMedia("(prefers-reduced-motion: reduce)");
 const medium_screen_width_query = window.matchMedia("(max-width: 1024px)");
 
-//Initialize admin from localStorage or default to false
-let logged_in = localStorage.getItem("logged_in") === "true";
-let is_admin = localStorage.getItem("is_admin")  === "true";
+//Initialize admin from sessionStorage or default to false
+let logged_in = sessionStorage.getItem("logged_in") === "true";
+let is_admin = sessionStorage.getItem("is_admin")  === "true";
 
-let user_name = localStorage.getItem("user_name") || undefined;
-let user_email = localStorage.getItem("user_email") || undefined;
+let user_name = sessionStorage.getItem("user_name");
+let user_email = sessionStorage.getItem("user_email");
 
 let authentication_code;
-
-const style = window.getComputedStyle(document.body)
-
-const background = document.querySelector("#background_gradient");
-const background_pos_x = style.getPropertyValue("--background--pos--x");
-const background_pos_y = style.getPropertyValue("--background--pos--y");
-const background_angle = parseInt(style.getPropertyValue("--background--angle"), 10);
-
-const background_observer = new IntersectionObserver((entries) => 
-{
-    entries.forEach(entry => 
-    {
-        if(entry.isIntersecting) 
-        {
-            window.addEventListener("scroll", update_gradient)
-        }
-        else 
-        {
-            window.removeEventListener("scroll", update_gradient)
-        };
-    });
-});
 
 //Scroll animations
 const scroll_observer = new IntersectionObserver(elements =>
@@ -321,42 +299,16 @@ hidden_elements.forEach(element => {scroll_observer.observe(element)});
 
 //----Global Script----//
 
-
-document.removeEventListener("scroll", update_gradient); // Ensure it starts without event listener
-
 window.onload = function () 
 {
     setTimeout(function() {document.body.style.display = "";}, 200);
 }
-
-let ticking = false;
-
-window.addEventListener("scroll", function()
-{
-    if(!ticking)
-    {
-        requestAnimationFrame(() =>
-        {
-            let scrollPosition = window.scrollY;
-            document.getElementById("background_gradient").style.transform = `translateY(${scrollPosition * 0.5}px)`;
-
-            ticking = false;
-        })
-
-        ticking = true;
-    }
-});
 
 //Waits for website to be loaded
 window.addEventListener("load", load)
 
 function load()
 {
-    //Verifies if background is in viewport
-    background_observer.observe(background);
-
-    update_gradient() //Sets the background to the right starting amount
-
     //Show onscroll animations
     const hidden_elements = Array.from(document.querySelectorAll(".scroll_hide"));
     hidden_elements.forEach(element => {scroll_observer.observe(element)});
@@ -434,21 +386,6 @@ function change_cell_focus(event)
     };
   };
 }
-
-//Update the background
-function update_gradient(event)
-{
-    const y = window.scrollY / window.innerHeight * 120 + background_angle;
-    
-    background.style.background = 
-    `
-        conic-gradient(from ${y}deg at ${background_pos_x} ${background_pos_y},
-        rgb(255, 255, 255),
-        rgb(100, 100, 100)  200deg,
-        rgb(255, 255, 255)
-        )
-    `;
-};
 
 //Scrolls to specified element
 function scroll_to(query_selector, event)
@@ -563,7 +500,7 @@ function confirm_popup()
 //Hides or shows elements based on .admin and .user class
 function admin(parent)
 {
-    is_admin = localStorage.getItem("is_admin")  === "true";
+    is_admin = sessionStorage.getItem("is_admin") === "true";
     
     Array.from(parent.querySelectorAll(".admin")).forEach(element => //Shows Elements if Admin
     {
@@ -586,7 +523,7 @@ function admin(parent)
 //Changes account icon if logged in
 function account_icon()
 {
-    logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
+    logged_in = sessionStorage.getItem("logged_in") === "true";
 
     if(logged_in)
     {
@@ -624,11 +561,11 @@ function login(event, popup)
         {
             close_popup() //Close login popup
 
-            //Store in localStorage
-            localStorage.setItem("logged_in", JSON.stringify(true));
-            localStorage.setItem("is_admin", JSON.stringify(user_profil.admin));
-            localStorage.setItem("user_name", JSON.stringify(user_profil.name));
-            localStorage.setItem("user_email", JSON.stringify(user_email));
+            //Store in sessionStorage
+            sessionStorage.setItem("logged_in", JSON.stringify(true));
+            sessionStorage.setItem("is_admin", JSON.stringify(user_profil.admin));
+            sessionStorage.setItem("user_name", JSON.stringify(user_profil.name));
+            sessionStorage.setItem("user_email", JSON.stringify(user_email));
 
             user_name = user_profil.name;
 
@@ -710,11 +647,11 @@ function send_email(popup)
 //Logout
 function logout()
 {
-    //Store in localStorage
-    localStorage.setItem("logged_in", JSON.stringify(false));
-    localStorage.setItem("is_admin", JSON.stringify(false));
-    localStorage.setItem("user_name", JSON.stringify(undefined));
-    localStorage.setItem("user_email", JSON.stringify(undefined));
+    //Store in sessionStorage
+    sessionStorage.setItem("logged_in", JSON.stringify(false));
+    sessionStorage.setItem("is_admin", JSON.stringify(false));
+    sessionStorage.setItem("user_name", JSON.stringify(undefined));
+    sessionStorage.setItem("user_email", JSON.stringify(undefined));
 
     location.reload();
 };
@@ -741,11 +678,11 @@ function authenticate(event, popup)
             {
                 close_popup()
                 
-                //Store in localStorage        
-                localStorage.setItem("logged_in", JSON.stringify(true));
-                localStorage.setItem("is_admin", JSON.stringify(user_profil.admin));
-                localStorage.setItem("user_name", JSON.stringify(user_profil.name));
-                localStorage.setItem("user_email", JSON.stringify(user_email));
+                //Store in sessionStorage        
+                sessionStorage.setItem("logged_in", JSON.stringify(true));
+                sessionStorage.setItem("is_admin", JSON.stringify(user_profil.admin));
+                sessionStorage.setItem("user_name", JSON.stringify(user_profil.name));
+                sessionStorage.setItem("user_email", JSON.stringify(user_email));
 
                 location.reload()
             })
@@ -818,7 +755,38 @@ function showSlides(n)
 
     slides[slideIndex-1].style.display = "block";
     dots[slideIndex-1].className += " active";
-} 
+}
+
+function toggle_dropdown(container_class, checkbox_id)
+{
+    const checkbox = document.getElementById(checkbox_id);
+    const container = document.querySelector(`.${container_class} .list`);
+    
+    if(checkbox.checked)
+    {
+        container.style.maxHeight = "none"; //Temporarily unset
+
+        const scrollHeight = container.scrollHeight; //Set height to max height
+
+        container.style.maxHeight = "0px";
+        container.style.opacity = "0";
+        container.style.margin = "0 2em";
+
+        //Animate in the next frame
+        requestAnimationFrame(() => 
+        {
+            container.style.maxHeight = scrollHeight + "px";
+            container.style.opacity = "1";
+            container.style.margin = "2em";
+        });   
+    }
+    else
+    {
+        container.style.maxHeight = "0";
+        container.style.opacity = "0";
+        container.style.margin = "0 2em";
+    };
+};
 
 //----Global Methods----//
 

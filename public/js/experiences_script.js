@@ -249,38 +249,4 @@ function initialize_exhibitor(exhibitor)
     `;
     
     return new_element;
-};
-
-function toggle_dropdown(container_class, checkbox_id)
-{
-    const checkbox = document.getElementById(checkbox_id);
-    const container = document.querySelector(`.${container_class} .list`);
-    
-    if(checkbox.checked)
-    {
-        container.style.maxHeight = "none"; //Temporarily unset
-
-        const scrollHeight = container.scrollHeight; //Set height to max height
-
-        container.style.maxHeight = "0px";
-        container.style.opacity = "0";
-        container.style.margin = "0 2em";
-
-        //Animate in the next frame
-        requestAnimationFrame(() => 
-        {
-            container.style.maxHeight = scrollHeight + "px";
-            container.style.opacity = "1";
-            container.style.margin = "2em";
-        });   
-    }
-    else
-    {
-        container.style.maxHeight = "0";
-        container.style.opacity = "0";
-        container.style.margin = "0 2em";
-    };
-};
-
-
-  
+}; 

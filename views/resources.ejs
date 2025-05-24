@@ -30,71 +30,273 @@
         <input type="radio" name="services" id="academique" style="display: none;" onchange="services()" checked>
 
         <label for="academique" class="no_select select academique">
-            <div>Postsecondaire</div>
+            <div>Postsecondaire et Bourses</div>
         </label>
 
         <input type="radio" name="services" id="vie_carriere" style="display: none;" onchange="services()">
 
         <label for="vie_carriere" class="no_select select vie_carriere">
-            <div>Vie-Carrière</div>
+            <div>Autres ressources</div>
         </label>
       </div>
 
       <div class="academique_container">
-        <div class="postsecondaire">
-          <h2>Ton futur</h2>
-          <div class="options">
-            <div class="option scroll_hide">
-              <img src="/icons/futur.svg" class="no_select svg" draggable="false"></img>
-              <p>Congé sabatique</p>
-            </div>
-        
-            <div class="option scroll_hide">
-              <img src="/icons/manual_work.svg" class="no_select svg" draggable="false"></img>
-              <p>Apprentissage</p>
-            </div>
-            <div class="option scroll_hide">
-              <img src="/icons/military.svg" class="no_select svg" draggable="false"></img>
-              <p>Domaine militaire</p>
-            </div>
-            <div class="option scroll_hide">
-              <img src="/icons/formation.svg" class="no_select svg" draggable="false"></img>
-              <p>Formation privée</p>
-            </div>
-            <div class="option scroll_hide">
-              <img src="/icons/college.svg" class="no_select svg" draggable="false"></img>
-              <p>Collège</p>
-            </div>
-            <div class="option scroll_hide">
-              <img src="/icons/school.svg" class="no_select svg" draggable="false"></img>
-              <p>Université</p>
-            </div>
-            <div class="option scroll_hide">
-              <img src="/icons/buisness.svg" class="no_select svg" draggable="false"></img>
-              <p>Entrepreneuriat</p>
-            </div>
-            <div class="option scroll_hide">
-              <img src="/icons/work.svg" class="no_select svg" draggable="false"></img>
-              <p>Marché du travail</p>
-            </div>
+        <div class="guides">
+          <h2>Postsecondaire</h2>
+
+          <div class="title">
+            <h2>À propos:</h2>
+            <p>Ces guides PDF te présentent des informations utiles sur plusieurs domaines professionnels. Tu y trouveras des conseils pratiques, des témoignages, ainsi que des pistes pour mieux comprendre certains métiers. Ils peuvent t'aider à choisir un cheminement qui correspond à tes intérêts et à mieux te préparer pour le marché du travail.</p>
+          </div>
+
+          <div class="links">
+            <div><input type="button" class="btn" value="&nbsp;Métier&nbsp;" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_cf3f61b86d7c4c878ef35114933430aa.pdf', '_blank')"></div>
+            <div><input type="button" class="btn" value="&nbsp;Foresterie&nbsp;" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_0e0afa4e767c40deae2019d4da885c4e.pdf', '_blank')"></div>
+            <div><input type="button" class="btn" value="Santé" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b240319043774ce8b203c1faa539f081.pdf', '_blank')"></div>
+            <div><input type="button" class="btn" value="Petite enfance" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b03f666a7e514c909f88d37f418a6639.pdf', '_blank')"></div>
+            <div><input type="button" class="btn" value="Tourisme" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_9c8701cfe6c1417990eb5af56c49528b.pdf', '_blank')"></div>
           </div>
         </div>
 
-        <div class="guides">
-          <h2>Guides</h2>
+        <div class="postsecondaire">
+          <div class="options">
+            <div class="option scroll_hide">
+              <img src="/icons/futur.svg" class="no_select svg" draggable="false">
+              <p>Congé sabbatique</p>
+            </div>   
+            <div class="info">
+              <img src="/icons/futur.svg" class="no_select svg" draggable="false">
 
-          <div>
-            <input type="button" class="btn" value="&nbsp;Métier&nbsp;" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_cf3f61b86d7c4c878ef35114933430aa.pdf', '_blank')">
-            <input type="button" class="btn" value="&nbsp;Foresterie&nbsp;" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_0e0afa4e767c40deae2019d4da885c4e.pdf', '_blank')">
-            <input type="button" class="btn" value="Santé" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b240319043774ce8b203c1faa539f081.pdf', '_blank')">
-            <input type="button" class="btn" value="Petite enfance" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b03f666a7e514c909f88d37f418a6639.pdf', '_blank')">
-            <input type="button" class="btn" value="Tourisme" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_9c8701cfe6c1417990eb5af56c49528b.pdf', '_blank')">
+              Tu peux prendre une pause après le secondaire.  
+              <br> C'est une chance pour apprendre, voyager ou faire du bénévolat.  
+              <br> Va voir le site Canadian Gap Year pour plus d'info.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/manual_work.svg" class="no_select svg" draggable="false">
+              <p>Apprentissage</p>
+            </div>
+            <div class="info">
+              <img src="/icons/manual_work.svg" class="no_select svg" draggable="false">
+
+              Tu apprends un métier en travaillant (80%) et en étudiant (20%).  
+              <br> Tu peux obtenir un certificat dans un métier spécialisé au NB.  
+              <br> Le programme dure 2 à 4 ans.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/military.svg" class="no_select svg" draggable="false">
+              <p>Domaine militaire</p>
+            </div>
+            <div class="info">
+              <img src="/icons/military.svg" class="no_select svg" draggable="false">
+              
+              Plusieurs façons de joindre les Forces armées canadiennes.  
+              <br> Études payées, bon salaire et avantages offerts.  
+              <br> Explore les carrières sur leur site web.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/formation.svg" class="no_select svg" draggable="false">
+              <p>Formation privée</p>
+            </div>
+            <div class="info">
+              <img src="/icons/formation.svg" class="no_select svg" draggable="false">
+
+              Des écoles privées offrent des cours pratiques
+              <br> (ex. : esthétique, animaux, massage).  
+              <br> Consulte la liste des écoles enregistrées au NB.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/college.svg" class="no_select svg" draggable="false">
+              <p>Collège</p>
+            </div>
+            <div class="info">
+              <img src="/icons/college.svg" class="no_select svg" draggable="false">
+
+              Le collège enseigne comment faire un métier.  
+              <br> Tu obtiens un diplôme ou un certificat.  
+              <br> Les programmes durent de quelques semaines à 3 ans.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/school.svg" class="no_select svg" draggable="false">
+              <p>Université</p>
+            </div>
+            <div class="info">
+              <img src="/icons/school.svg" class="no_select svg" draggable="false">
+
+              L'université enseigne à réfléchir et résoudre des problèmes.  
+              <br> Baccalauréat : 3 à 5 ans
+              <br> Maîtrise : 1 à 2 ans
+              <br> Doctorat : 4 à 8 ans.  
+              <br> Plusieurs programmes selon tes intérêts.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/buisness.svg" class="no_select svg" draggable="false">
+              <p>Entrepreneuriat</p>
+            </div>
+            <div class="info">
+              <img src="/icons/buisness.svg" class="no_select svg" draggable="false">
+              
+              Tu veux lancer ton entreprise?  
+              <br> La FCJE aide les jeunes de 18 à 39 ans à démarrer leur projet.  
+              <br> Ils offrent du soutien et des ressources.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/work.svg" class="no_select svg" draggable="false">
+              <p>Marché du travail</p>
+            </div>
+            <div class="info">
+              <img src="/icons/work.svg" class="no_select svg" draggable="false">
+              
+              Tu peux commencer à travailler après le secondaire.  
+              <br> Certains emplois seront limités sans diplôme.  
+              <br> Pense à tes objectifs avant de te lancer.
+            </div>          
+          </div>
+        </div>
+
+        <h2>Bourses</h2>
+
+        <div class="conseils">
+          <div class="conseil scroll_hide">
+            <img src="/icons/futur.svg" class="no_select svg" draggable="false"></img>
+
+            <p>Sois organisé</p>
+          </div>
+          
+          <div class="conseil scroll_hide">
+            <img src="/icons/formation.svg" class="no_select svg" draggable="false"></img>
+
+            <p>Suis les critères</p>
+          </div>
+
+          <div class="conseil scroll_hide">
+            <img src="/icons/choix.svg" class="no_select svg" draggable="false"></img>
+
+            <p>Bonne référence</p>
+          </div>
+
+          <div class="conseil scroll_hide">
+            <img src="/icons/college.svg" class="no_select svg" draggable="false"></img>
+
+            <p>Relis-toi</p>
+          </div>
+
+          <div class="conseil scroll_hide">
+            <img src="/icons/forces.svg" class="no_select svg" draggable="false"></img>
+
+            <p>Vante-toi</p>
+          </div>
+        </div>
+
+        <div class="recherche">           
+          <input type="checkbox" id="recherche_expand" style="display: none;">
+
+          <label for="recherche_expand" class="btn" onclick="toggle_dropdown('recherche', 'recherche_expand')">
+            <p>Resources</p>
+            <img src="/icons/arrow_down.svg">
+          </label>
+
+          <div class="list">
+            <div><input type="button" class="btn" value="Planificateur" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_f2a97737a53b48259ba6390a508d2cab.pdf', '_blank')"></div>
+            
+            <h6>Tableau bourses ESN</h6>
+            <h6>Répertoire Jeunesse</h6>
+            <h6>Établissements postsecondaires</h6>
+            <h6>Plateformes en ligne</h6>
+            <h6>Outil de recherche pour Autochtones</h6>
+            <h6>Google</h6>
+            <h6>Disability Awards</h6>
+            <h6>Famille</h6>
+            <h6>LGBTQ+</h6>
+          </div>       
+
+          <div class="description">
+            <h2>À propos:</h2>
+
+            <p>Ces sites et resources t'aident à chercher et obtenir des bourses en offrant des outils de recherche, des filtres personnalisés et des conseils utiles. Ils permettent de repérer rapidement des bourses correspondant à ton profil et d'augmenter tes chances d'en recevoir.</p>
           </div>
         </div>
       </div>
 
       <div class="vie_carriere_container">
+        <div class="websites">           
+          <input type="checkbox" id="websites_expand" style="display: none;">
+
+          <label for="websites_expand" class="btn" onclick="toggle_dropdown('websites', 'websites_expand')">
+            <p>Liens</p>
+            <img src="/icons/arrow_down.svg">
+          </label>
+
+          <ul class="list">
+            <li><a href="https://www.myblueprint.ca" target="_blank">myBlueprint - Outil d'exploration et de planification de carrière</a></li>
+            <li><a href="https://www.guichetemplois.gc.ca/" target="_blank">Guichet-Emplois - Recherche d'emploi et planification de carrière</a></li>
+            <li><a href="#" target="_blank">Métiers spécialisés - Découvre les métiers et la formation d'apprenti</a></li>
+            <li><a href="https://www.welcomenb.ca/content/wel-bien/fr/emplois-et-carrieres/carrieres-dans-les-soins-de-sante.html" target="_blank">Carrières dans les soins de santé GNB</a></li>
+            <li><a href="https://www.cangap.ca/" target="_blank">Canadian Gap Year Association (en anglais seulement)</a></li>
+            <li><a href="#" target="_blank">Services financiers pour étudiants - Prêts et bourses au Canada et au NB</a></li>
+            <li><a href="https://www.nbjobs.ca/" target="_blank">EmploisNB - Carrières, formation et marché du travail</a></li>
+            <li><a href="https://forces.ca/fr/" target="_blank">Forces armées canadiennes - Recherche de carrières militaires</a></li>
+            <li><a href="https://www2.gnb.ca/content/gnb/fr/ministeres/edt/apprentissage.html" target="_blank">Apprentissage et Certification professionnelle - Professions désignées</a></li>
+            <li><a href="#" target="_blank">Foyers de soins au NB - Guide sur les professions dans les foyers</a></li>
+            <li><a href="https://www.canada.ca/fr/immigration-refugies-citoyennete/services/travailler-canada/experience-internationale.html" target="_blank">Expérience internationale Canada - Travailler et voyager à l'étranger</a></li>
+            <li><a href="https://emploie-toi.ca/" target="_blank">Emploie-toi - Identifier ses compétences et préparer son CV</a></li>
+            <li><a href="https://www.grc-rcmp.gc.ca/fr/carrieres" target="_blank">Carrière policière (GRC) - Gendarmerie royale du Canada</a></li>
+            <li><a href="https://www.cliquezjustice.ca/" target="_blank">Carrières en justice - CliquezJustice</a></li>
+            <li><a href="https://www.cicic.ca/868/Repertoire_canadien_des_etablissements_postsecondaires/index.canada" target="_blank">Établissements d'enseignement agréés - Liste nationale</a></li>
+            <li><a href="https://katimavik.org/" target="_blank">Katimavik - Programme jeunesse d'engagement communautaire</a></li>
+          </ul>       
+
+          <div class="description">
+            <h2>À propos:</h2>
+            
+            <p>Ces sites web offrent des ressources pour t'aider à planifier ta carrière, trouver un emploi ou explorer des domaines d'étude. Ils comprennent des outils interactifs, des informations sur les métiers, les études et des programmes de soutien aux étudiants.</p>
+          </div>
+
+          <h2>Site webs</h2>
+        </div>
+
+        <div class="guides">
+
+          <h2>Méthodes d'études</h2>
+
+          <div class="title">
+            <h2>À propos:</h2>
+            <p>Voir le document "Je veux réussir mes études : guide pratique pour les élèves du secondaire" les versions PDF ci-dessous pour des méthodes d'étude. Le document a été créé par en ancien conseiller en orientation de l'ESN, M. Michel Ouellette.</p>
+          </div>
+
+          <div class="links">
+            <div><input type="button" class="btn" value="Partie 1" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_5cc49bc43e764eb98283ec1a039f6efc.pdf', '_blank')"></div>
+            <div><input type="button" class="btn" value="Partie 2" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_de5d6a66b3e6475ea60eb7cbb7b69267.pdf', '_blank')"></div>
+          </div>
+        </div>
+
+        <div class="guides">
+
+          <h2>Emplois</h2>
+
+          <div class="title">
+            <h2>À propos:</h2>
+
+            <p>Ces documents t'offrent des outils concrets pour trouver un emploi : CV, préparation aux entrevues et plus. Ils te guideront à chaque étape du processus de recherche d'emploi.</p>
+          </div>
+
+          <div class="links">
+            <div><input type="button" class="btn" value="Curriculum vitae" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_484485b1c1424efb93bf73c0edd865a1.pdf', '_blank')"></div>
+            <div><input type="button" class="btn" value="Recherche" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_1299fbd023844cafbf1bbea71dd74c67.pdf', '_blank')"></div>
+            <div><input type="button" class="btn" value="Guide d'entrevues" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_2932064b437345dea3e9e76e5e15bffb.pdf', '_blank')"></div>
+            <div><input type="button" class="btn" value="Questions d'entrevues" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b0263accc1d140e8864ad747ddec4a1e.pdf', '_blank')"></div>
+          </div>
+        </div>
+
         <div class="capsules">
+          <h2>Capsules Video</h2>
+
           <div class="slideshow scroll_hide">
             <div class="slide fade">
               <iframe

@@ -13,7 +13,6 @@ const months =  ["Autres", "Septembre", "Octobre", "Novembre", "Décembre", "Jan
 let scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
 let edited_scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
 
-//TODO: Add event listener that sends you back to your scrolling position
 //----Script----//
 
 window.key_exchange_complete.then(() => //Wait for public keys to be exchanged
@@ -96,8 +95,8 @@ function update_table()
         //Add scholarships to containers
         document.getElementById(container_id).appendChild(new_scholarship);
         
-        let logged_in = JSON.parse(localStorage.getItem("logged_in")) || false;
-        let user_email = localStorage.getItem("user_email");
+        let logged_in = sessionStorage.getItem("logged_in") === "true";
+        let user_email = sessionStorage.getItem("user_email");
 
         try 
         {
@@ -188,7 +187,6 @@ function add_scholarship(id)
   .catch(err => {show_popup(".error_popup", "Impossible d'ajouter l'enregistrement de la bourse")});
 }
 
-//TODO: Capitalise Titles and start of Paragraphs
 //Admin feature to edit scholarship data
 function edit_scholarship(checkbox, parent, event)
 {
@@ -447,7 +445,7 @@ function subscribe_scholarship(scholarship_id, checkbox)
   if(checkbox.checked)
   {
     //Request to add scholarship subscription to specified id
-    POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: localStorage.getItem("user_email") || undefined}))
+    POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email")}))
     .then(data => 
     {
       checkbox.disabled = false
@@ -457,7 +455,7 @@ function subscribe_scholarship(scholarship_id, checkbox)
   else
   {
     //Request to remove scholarship subscription to specified id
-    DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: localStorage.getItem("user_email") || undefined}))
+    DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email")}))
     .then(data => 
     {
       checkbox.disabled = false

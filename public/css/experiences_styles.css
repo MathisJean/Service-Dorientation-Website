@@ -239,6 +239,148 @@ input[type="checkbox"]:checked + label > .active_checkbox
     bottom: 50%;
 }
 
+.options
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+
+    margin: 2em 0;
+    padding: 0;
+
+    width: 100%;
+}
+
+.option
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    border-radius: var(--border--radius);
+
+    box-shadow: var(--inset--shadow);
+
+    margin-bottom: 0.5em;
+
+    min-width: 75%;
+
+    aspect-ratio: 1;
+
+    transition: 
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+.option:hover
+{
+    box-shadow: var(--drop--shadow);
+
+    transform: translateY(-5px);
+
+    z-index: 3;
+}
+
+.option:nth-child(3)
+{
+    animation-delay: 0.2s;
+}
+
+.option:nth-child(5)
+{
+    animation-delay: 0.4s;
+}
+
+.option:nth-child(7)
+{
+    animation-delay: 0.6s;
+}
+
+.option:nth-child(9)
+{
+    animation-delay: 0.8s;
+}
+
+.option:nth-child(11)
+{
+    animation-delay: 1.0s;
+}
+
+.option:nth-child(13)
+{
+    animation-delay: 1.2s;
+}
+
+.option:nth-child(15)
+{
+    animation-delay: 1.4s;
+}
+
+.option:nth-child(17)
+{
+    animation-delay: 1.6s;
+}
+
+.option:nth-child(19)
+{
+    animation-delay: 1.8s;
+}
+
+.option p
+{
+    font-weight: 700;
+
+    margin-top: 0.5em;
+}
+
+.option:hover + .info
+{
+    opacity: 1;
+}
+
+.info
+{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+
+    backdrop-filter: blur(5px);
+
+    text-align: center;
+
+    top: 50%;
+    left: 50%;
+
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+
+    padding: 2em;
+
+    width: 100%;
+    height: 100%;
+
+    transform: translate(-50%, -50%);
+
+    opacity: 0;
+
+    word-break: break-word;
+    pointer-events: none;
+    z-index: 3;
+
+    transition: opacity 0.5s ease;
+}
+
 /* Mobile users */
 @media only screen and (max-width: 480px) 
 {

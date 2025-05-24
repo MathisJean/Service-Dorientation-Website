@@ -1,6 +1,9 @@
 
 services()
 
+document.querySelector("#websites_expand").checked = true;
+document.querySelector("#recherche_expand").checked = true;
+
 function services()
 {
     radio_vie_carriere = document.querySelector("#vie_carriere")
