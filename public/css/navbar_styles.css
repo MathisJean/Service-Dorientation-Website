@@ -120,12 +120,6 @@ body
     z-index: 2;
 }
 
-/*Temp Icon*/
-.nav_right > .nav_icon_background > .nav_icon
-{
-    transform: rotate(180deg);
-}
-
 .nav_icon
 {
     display: flex;
@@ -199,7 +193,8 @@ body
 
 .nav_sidebar > ul
 {
-    display: block;
+    display: flex;
+    flex-direction: column;
 
     list-style-type: none;
 

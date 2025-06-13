@@ -2,7 +2,7 @@
 html
 {
     --background--pos--x: right;
-    --background--pos--y: top;
+    --background--pos--y: bottom;
     --background--angle: 200deg;
 
     --background--radial--start: 10%;

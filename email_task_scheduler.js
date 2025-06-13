@@ -2,6 +2,8 @@
 //node email_task_scheduler.js
 
 //Set up libraries
+require('dotenv').config();
+
 const fs = require('fs');
 const path = require('path');
 
@@ -32,6 +34,8 @@ String.prototype.replaceSpecialChar = function()
 };
 
 //----Email Task Scheduling----//
+
+const password = process.env.EMAIL_PASS
 
 let scholarship_path = "database/bourses_data.json" //Path to data file
 let account_path = "database/compte_data.json" //Path to account data file
@@ -172,9 +176,21 @@ async function email_reminder(recipient, sender, scholarship, days)
         auth: 
         {
             user: sender.email,
-            pass: "wmcw jeso nuhc xmlx", // TODO: Encrypt in future
+            pass: password,
         },
     });
+
+    /*
+    const transporter = nodemailer.createTransport({
+        host: "smtp.office365.com",
+        port: 587,
+        secure: false,
+        auth: {
+            user: sender.email,
+            pass: "your_password",
+        },
+    });
+    */
 
     try 
     {

@@ -1,6 +1,3 @@
-//Admin Account
-//password: debug109
-//email: orientation.esn.testing@gmail.com
 
 //Set up libraries
 const https = require('https');
@@ -55,7 +52,7 @@ app.use(express.static('public'));
 //Security features
 //app.use(helmet());
 //app.use(cors({ origin: 'https://yourfrontend.com', credentials: true })); //TODO: change URL
-app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+//app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 app.use(express.json());
 
 //Set view engine
@@ -101,9 +98,9 @@ app.use('/bourses', boursesRouter);
 const resourcesRouter = require('./routes/resources');
 app.use('/resources', resourcesRouter);
 
-//Blogues
-const bloguesRouter = require('./routes/blogues');
-app.use('/blogues', bloguesRouter)
+//Rencontre
+const rencontreRouter = require('./routes/rencontre');
+app.use('/rencontre', rencontreRouter);
 
 //Error
 app.use((req, res) => 

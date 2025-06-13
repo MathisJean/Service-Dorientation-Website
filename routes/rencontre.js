@@ -10,7 +10,7 @@ const router = express.Router()
 //Setup Router
 router.get('/', (req, res) => 
 {
-  res.render("blogues")
+  res.render("rencontre")
   res.end()
 })
 
