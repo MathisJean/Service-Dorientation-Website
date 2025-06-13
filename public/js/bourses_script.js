@@ -90,6 +90,7 @@ function update_table()
           };
         };
 
+<<<<<<< Updated upstream
         let new_scholarship = initiate_scholarship(scholarship)
 
         //Add scholarships to containers
@@ -97,6 +98,20 @@ function update_table()
         
         let logged_in = sessionStorage.getItem("logged_in") === "true";
         let user_email = sessionStorage.getItem("user_email");
+=======
+      //Check subscription
+      let logged_in = sessionStorage.getItem("logged_in") === "true" || sessionStorage.getItem("logged_in") === true;
+      let user_email;
+
+      try 
+      {
+        user_email = sessionStorage.getItem("user_email");
+      } 
+      catch 
+      {
+        user_email = undefined;
+      }
+>>>>>>> Stashed changes
 
         try 
         {
@@ -199,20 +214,35 @@ function edit_scholarship(checkbox, parent, event)
     parent.style.backgroundColor = "rgb(245, 245, 245)";
 
     document.addEventListener("keydown", change_cell_focus);
+<<<<<<< Updated upstream
   }
   //Save mode
+=======
+
+    var current_values = { id: 0, name: "", date: { day: "", month: "", time: "" }, criteria: "", value: "", link: "", subscribedUsers: [] };
+  } 
+>>>>>>> Stashed changes
   else
   {
     //Reset value
     edited_scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
 
     parent.style.backgroundColor = "white";
+<<<<<<< Updated upstream
 
     document.removeEventListener("keydown", change_cell_focus)
   }
 
   //Get every element with information in scholarship
   Array.from(parent.querySelectorAll("input, a, h6, .date, .admin_edit, .id")).forEach(element =>
+=======
+    document.removeEventListener("keydown", change_cell_focus);
+
+    var updated_values = { id: 0, name: "", date: { day: "", month: "", time: "" }, criteria: "", value: "", link: "", subscribedUsers: [] };
+  }
+
+  Array.from(parent.querySelectorAll("input, a, h6, .date, .admin_edit, .id")).forEach(element => 
+>>>>>>> Stashed changes
   {
     //Edit mode
     if(checkbox.checked)
@@ -339,8 +369,14 @@ function edit_scholarship(checkbox, parent, event)
     };
   });
 
+<<<<<<< Updated upstream
   //Compare values before and after edit
   if(JSON.stringify(scholarship_values) !== JSON.stringify(edited_scholarship_values) && !checkbox.checked)
+=======
+  console.log(current_values, updated_values)
+
+  if(mode === "save" && JSON.stringify(current_values) !== JSON.stringify(updated_values)) 
+>>>>>>> Stashed changes
   {
     //If edited, create object with the new values
     obj = JSON.stringify({scholarships:[edited_scholarship_values]});
@@ -445,7 +481,11 @@ function subscribe_scholarship(scholarship_id, checkbox)
   if(checkbox.checked)
   {
     //Request to add scholarship subscription to specified id
+<<<<<<< Updated upstream
     POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email")}))
+=======
+    POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined}))
+>>>>>>> Stashed changes
     .then(data => 
     {
       checkbox.disabled = false
@@ -455,7 +495,11 @@ function subscribe_scholarship(scholarship_id, checkbox)
   else
   {
     //Request to remove scholarship subscription to specified id
+<<<<<<< Updated upstream
     DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email")}))
+=======
+    DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined}))
+>>>>>>> Stashed changes
     .then(data => 
     {
       checkbox.disabled = false

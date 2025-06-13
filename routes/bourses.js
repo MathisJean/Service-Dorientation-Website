@@ -258,7 +258,7 @@ router.post("/subscribe/:id", async (req, res) =>
 {
   //Define incoming data
   const scholarship_id = req.params.id;
-  const scholarship_email = JSON.parse(req.body.email);
+  const scholarship_email = req.body.email;
 
   try
   {
@@ -330,7 +330,7 @@ router.delete("/subscribe/:id", async (req, res) =>
 {
   //define incoming data
   const scholarship_id = req.params.id;
-  const scholarship_email = JSON.parse(req.body.email);
+  const scholarship_email = req.body.email;
 
   try
   {
