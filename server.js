@@ -98,10 +98,6 @@ app.use('/bourses', boursesRouter);
 const resourcesRouter = require('./routes/resources');
 app.use('/resources', resourcesRouter);
 
-//Rencontre
-const rencontreRouter = require('./routes/rencontre');
-app.use('/rencontre', rencontreRouter);
-
 //Error
 app.use((req, res) => 
 {
