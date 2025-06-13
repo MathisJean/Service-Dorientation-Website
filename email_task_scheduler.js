@@ -180,18 +180,6 @@ async function email_reminder(recipient, sender, scholarship, days)
         },
     });
 
-    /*
-    const transporter = nodemailer.createTransport({
-        host: "smtp.office365.com",
-        port: 587,
-        secure: false,
-        auth: {
-            user: sender.email,
-            pass: "your_password",
-        },
-    });
-    */
-
     try 
     {
         const info = await transporter.sendMail(
