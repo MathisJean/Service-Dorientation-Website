@@ -1,12 +1,4 @@
 
-process.on("unhandledRejection", err => {
-  console.error("Unhandled rejection:", err);
-});
-process.on("uncaughtException", err => {
-  console.error("Uncaught exception:", err);
-});
-
-
 //Set up libraries
 const http = require('http');
 const os = require('os');
@@ -56,13 +48,8 @@ app.use(express.json());
 //Set view engine
 app.set("view engine", "ejs");
 
-app.get("/health", (req, res) => res.status(200).send("Healthy"));
-
-//Health check route for Railway
-app.get("/", (req, res) => {
-  res.send("OK - Root alive");
-});
-
+app.get('/', (req, res) => res.send('OK'));
+app.get('/health', (req, res) => res.send('OK'));
 
 //----HTTP Encryption---//
 
@@ -112,6 +99,27 @@ app.use((req, res) =>
 
 //Create https server
 const server = http.createServer(app);
+
+process.on("unhandledRejection", err => {
+  console.error("Unhandled rejection:", err);
+});
+process.on("uncaughtException", err => {
+  console.error("Uncaught exception:", err);
+});
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received: shutting down gracefully');
+  // e.g. close database connections, stop timers, etc.
+  server.close(() => {
+    console.log('Server closed. Exiting now.');
+    process.exit(0);
+  });
+
+  // If server.close() hangs, force exit after some timeout
+  setTimeout(() => {
+    console.error('Forcing exit after timeout');
+    process.exit(1);
+  }, 10000); // 10 seconds
+});
 
 server.listen(port, host, () => {
   console.log("Starting email task scheduler...");
