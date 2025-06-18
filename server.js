@@ -1,4 +1,12 @@
 
+process.on("unhandledRejection", err => {
+  console.error("Unhandled rejection:", err);
+});
+process.on("uncaughtException", err => {
+  console.error("Uncaught exception:", err);
+});
+
+
 //Set up libraries
 const http = require('http');
 const os = require('os');
@@ -17,6 +25,10 @@ const rateLimit = require('express-rate-limit');
 
 let host = "0.0.0.0";
 let port = process.env.PORT || 3000;
+
+setInterval(() => {
+  console.log("Keep-alive ping", new Date().toISOString());
+}, 60_000); // every 60 seconds
 
 //Set static middleware
 app.use((req, res, next) => 
@@ -43,6 +55,8 @@ app.use(express.json());
 
 //Set view engine
 app.set("view engine", "ejs");
+
+app.get("/health", (req, res) => res.status(200).send("Healthy"));
 
 //Health check route for Railway
 app.get("/", (req, res) => {
