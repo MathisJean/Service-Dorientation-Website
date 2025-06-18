@@ -1,6 +1,6 @@
 
 //Set up libraries
-const https = require('https');
+const http = require('http');
 const os = require('os');
 
 const fs = require('fs');
@@ -105,17 +105,9 @@ app.use((req, res) =>
 });
 
 //Create https server
-const sslServer = https.createServer(
-  {
-    key: fs.readFileSync(path.join(__dirname, "cert", "key.pem")),
-    cert: fs.readFileSync(path.join(__dirname, "cert", "cert.pem"))
-  }, app)
+const server = http.createServer(app);
 
-//Start up server
-sslServer.listen(port, host, () =>  
-{
-  console.log(`Server running at https://${host}:${port} close it with CTRL + C`);
-  
-  //Start scholarship reminder schedule
+server.listen(port, host, () => {
+  console.log(`Server running at http://${host}:${port}`);
   require("./email_task_scheduler");
 });
