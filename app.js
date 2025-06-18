@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express');
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = 8080;
 const host = '0.0.0.0';
 
 // Create server first
