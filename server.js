@@ -18,10 +18,6 @@ const rateLimit = require('express-rate-limit');
 let host = "0.0.0.0";
 let port = 8080;
 
-setInterval(() => {
-  console.log("Keep-alive ping", new Date().toISOString());
-}, 60_000); // every 60 seconds
-
 //Set static middleware
 app.use((req, res, next) => 
   {
@@ -47,9 +43,6 @@ app.use(express.json());
 
 //Set view engine
 app.set("view engine", "ejs");
-
-app.get('/', (req, res) => res.send('OK'));
-app.get('/health', (req, res) => res.send('OK'));
 
 //----HTTP Encryption---//
 
