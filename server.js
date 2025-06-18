@@ -44,6 +44,12 @@ app.use(express.json());
 //Set view engine
 app.set("view engine", "ejs");
 
+//Health check route for Railway
+app.get("/", (req, res) => {
+  res.send("OK - Root alive");
+});
+
+
 //----HTTP Encryption---//
 
 const {server_public_key, server_private_key, get_client_public_key, set_client_public_key, } = require("./lib/keys.js");
