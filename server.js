@@ -15,22 +15,8 @@ const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
-let host = "Localhost";
+let host = "0.0.0.0";
 let port = process.env.PORT || 3000;
-
-//Get dymamic IP address
-const networkInterfaces = os.networkInterfaces();
-
-for (const iface of Object.values(networkInterfaces))
-{
-  for (const ifaceInfo of iface) 
-  {
-    if (ifaceInfo.family === "IPv4" && !ifaceInfo.internal) 
-    {
-      host = ifaceInfo.address;
-    };
-  };
-};
 
 //Set static middleware
 app.use((req, res, next) => 
