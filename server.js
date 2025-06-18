@@ -94,6 +94,15 @@ app.use((req, res) =>
 const server = http.createServer(app);
 
 server.listen(port, host, () => {
-  console.log(`Server running at http://${host}:${port}`);
-  require("./email_task_scheduler");
+  console.log("Starting email task scheduler...");
+  try
+  {
+    require("./email_task_scheduler");
+    console.log("Email scheduler loaded.");
+  } 
+  catch 
+  (err) 
+  {
+    console.error("Email scheduler failed to load:", err);
+  }
 });
