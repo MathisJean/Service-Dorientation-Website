@@ -215,9 +215,12 @@ function edit_scholarship(checkbox, parent, event)
 
     document.addEventListener("keydown", change_cell_focus);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   }
   //Save mode
 =======
+=======
+>>>>>>> Stashed changes
 
     var current_values = { id: 0, name: "", date: { day: "", month: "", time: "" }, criteria: "", value: "", link: "", subscribedUsers: [] };
   } 
@@ -229,6 +232,7 @@ function edit_scholarship(checkbox, parent, event)
 
     parent.style.backgroundColor = "white";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
     document.removeEventListener("keydown", change_cell_focus)
   }
@@ -238,6 +242,10 @@ function edit_scholarship(checkbox, parent, event)
 =======
     document.removeEventListener("keydown", change_cell_focus);
 
+=======
+    document.removeEventListener("keydown", change_cell_focus);
+
+>>>>>>> Stashed changes
     var updated_values = { id: 0, name: "", date: { day: "", month: "", time: "" }, criteria: "", value: "", link: "", subscribedUsers: [] };
   }
 
@@ -370,9 +378,12 @@ function edit_scholarship(checkbox, parent, event)
   });
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   //Compare values before and after edit
   if(JSON.stringify(scholarship_values) !== JSON.stringify(edited_scholarship_values) && !checkbox.checked)
 =======
+=======
+>>>>>>> Stashed changes
   console.log(current_values, updated_values)
 
   if(mode === "save" && JSON.stringify(current_values) !== JSON.stringify(updated_values)) 
@@ -482,7 +493,11 @@ function subscribe_scholarship(scholarship_id, checkbox)
   {
     //Request to add scholarship subscription to specified id
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email")}))
+=======
+    POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined}))
+>>>>>>> Stashed changes
 =======
     POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined}))
 >>>>>>> Stashed changes
@@ -496,7 +511,11 @@ function subscribe_scholarship(scholarship_id, checkbox)
   {
     //Request to remove scholarship subscription to specified id
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email")}))
+=======
+    DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined}))
+>>>>>>> Stashed changes
 =======
     DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined}))
 >>>>>>> Stashed changes
