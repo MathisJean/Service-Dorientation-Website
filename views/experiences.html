@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Orientation ESN | Expériences</title>
+    <link rel="stylesheet" href="../css/experiences_styles.css">
+  </head>
+
+  <body>
+    <%- include("navbar.ejs") %>
+
+    <div id="background_gradient">
+      <div id="background_img">
+          <div class="page_head">
+              <h1>Expériences</h1> 
+              <h3>Vivre des expériences pour te diriger dans ton parcours</h3> 
+              
+              <div>
+                <input type="button" value="Explorer" class="btn" onclick="scroll_to('.content' , event)">
+              </div>
+          </div>
+      </div>
+    </div> 
+    
+    <div class="content">
+      <img src="/img/divider.svg" class="no_select divider" draggable="false"></img>
+
+      <div class="salon_emploi exposition">
+        
+        <input type="checkbox" id="salon_emploi_expand" style="display: none;">
+
+        <label for="salon_emploi_expand" class="btn" onclick="toggle_dropdown('salon_emploi', 'salon_emploi_expand')">
+          <p>Exposants</p>
+          <img class="no_select svg" draggable="false" src="/icons/arrow_down.svg">
+        </label>
+
+        <div class="list">
+          <div class="admin_buttons">          
+            <input type="button" id="add_button_salon_emploi" onclick="add_exhibitor('salon_emploi')" style="display: none;">
+  
+            <label for="add_button_salon_emploi" class="add_button admin icon">
+              <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
+            </label>
+  
+            <input type="checkbox" id="edit_checkbox_salon_emploi" class="edit_checkbox" onchange="edit_exhibitor(this, this.parentNode.parentNode)" style="display: none;">
+  
+            <label for="edit_checkbox_salon_emploi" class="admin icon">
+              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+            </label>
+          </div>          
+        </div>
+        
+        <div class="description">
+          <h2>À propos:</h2>
+          
+          <p>Le salon de l'emploi permet aux élèves de la 9e à la 12e année de découvrir des entreprises locales, d'explorer des opportunités d'emploi, de réseauter et de potentiellement décrocher un emploi. Il est organisé grâce à la collaboration de plusieurs acteurs scolaires.</p>
+        </div>
+
+        <h2>Salon de l'emploi</h2>
+      </div>
+
+      <div class="orient_action exposition"> 
+        
+        <input type="checkbox" id="orient_action_expand" style="display: none;">
+
+        <label for="orient_action_expand" class="btn" onclick="toggle_dropdown('orient_action', 'orient_action_expand')">
+          <p>Exposants</p>
+          <img class="no_select svg" draggable="false" src="/icons/arrow_down.svg">
+        </label>
+
+        <div class="list">
+          <div class="admin_buttons">          
+            <input type="button" id="add_button_orient_action" onclick="add_exhibitor('orient_action')" style="display: none;">
+  
+            <label for="add_button_orient_action" class="add_button admin icon">
+              <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
+            </label>
+  
+            <input type="checkbox" id="edit_checkbox_orient_action" class="edit_checkbox" onchange="edit_exhibitor(this, this.parentNode.parentNode)" style="display: none;">
+  
+            <label for="edit_checkbox_orient_action" class="admin icon">
+              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+            </label>
+          </div>    
+        </div>           
+
+        <div class="description">
+          <h2>À propos:</h2>
+          
+          <p>La Journée Orient'Action ESN est un salon carrière visant à élargir les options de formation et de carrière des élèves de la 9e à la 12e année. Plus de 40 exposants y participent, incluant des établissements postsecondaires, des employeurs et des services d'aide à l'emploi.</p>
+        </div>
+
+        <h2>Orient'Action</h2>
+      </div>
+
+      <div class="experiences">
+        <h2>Programmes</h2>
+
+        <div class="options">
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/construction.svg">
+            <p>Nos jeunes au travail</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/construction.svg">
+            Nos élèves ont accès à deux conseillères d'orientation.
+            <br>Celles-ci les accompagnent dans leur cheminement scolaire et personnel,
+            <br>tout en leur présentant les options qui s'offrent à eux.
+          </div>
+
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/manual_work.svg">
+            <p>Journées carrières</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/manual_work.svg">
+            Des ateliers sont organisés tout au long de l'année
+            <br>pour aider les élèves à mieux se connaître,
+            <br>explorer les métiers,
+            <br>et comprendre le fonctionnement des études postsecondaires.
+          </div>
+
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/college.svg">
+            <p>Éducation COOP</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/college.svg">
+            Nous offrons des outils numériques
+            <br>et des ressources pour t'aider à découvrir des carrières
+            <br>qui correspondent à tes intérêts et compétences.
+          </div>
+
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/conseil.svg">
+            <p>Entrevue d'information</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/conseil.svg">
+            Nos conseillères collaborent avec toi et tes enseignants
+            <br>pour adapter ton parcours selon ton profil,
+            <br>tes ambitions et tes besoins.
+          </div>
+
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/teams.svg">
+            <p>Bénévolat</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/teams.svg">
+            Nos conseillères d'orientation sont en contact avec des organismes communautaires
+            <br>(emploi, santé mentale, hébergement, etc.)
+            <br>afin d'accompagner les jeunes qui en ont besoin.
+          </div>
+
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/buisness.svg">
+            <p>Salon carrière</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/buisness.svg">
+            Nous organisons régulièrement des visites d'institutions postsecondaires
+            <br>et participons à divers salons d'information
+            <br>pour aider les jeunes à faire un choix éclairé.
+          </div>
+
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/formation.svg">
+            <p>Étudiant d'un jour</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/formation.svg">
+            Nos élèves ont accès à de l'information pertinente
+            <br>sur les collèges, universités et autres formations.
+            <br>Nous les aidons à s'orienter selon leurs forces, intérêts et objectifs.
+          </div>
+
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/school.svg">
+            <p>Journée portes ouvertes</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/school.svg">
+            On t'aide à préparer tes demandes d'admission,
+            <br>à rédiger des lettres de motivation
+            <br>et à soumettre tes documents à temps.
+          </div>
+
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/work.svg">
+            <p>Emploi</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/work.svg">
+            Tu peux obtenir de l'aide pour trouver,
+            <br>comprendre et postuler aux bourses, prêts et aides financières disponibles.
+          </div>
+
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/interets.svg">
+            <p>Programmes</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/interets.svg">
+            Chaque élève peut bénéficier d'un suivi individuel
+            <br>pour discuter de ses projets,
+            <br>ajuster son plan,
+            <br>ou surmonter des obstacles personnels et scolaires.
+          </div>
+
+          <div class="option scroll_hide">
+            <img class="no_select svg" draggable="false" src="/icons/choix.svg">
+            <p>Vie scolaire</p>
+          </div>
+          <div class="info">
+            <img class="no_select svg" draggable="false" src="/icons/choix.svg">
+            Chaque élève peut bénéficier d'un suivi individuel
+            <br>pour discuter de ses projets,
+            <br>ajuster son plan,
+            <br>ou surmonter des obstacles personnels et scolaires.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script defer src="../js/global_script.js"></script>
+  <script defer src="../js/experiences_script.js"></script>
+
+</html>

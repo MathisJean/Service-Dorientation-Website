@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Orientation ESN | Resources</title>
+    <link rel="stylesheet" href="../css/resources_styles.css">
+  </head>
+
+  <body>
+    <%- include("navbar.ejs") %>
+
+    <div id="background_gradient">
+        <div id="background_img">
+            <div class="page_head">
+                <h1>Resources</h1> 
+                <h3>Aider à ta réussite ainsi qu'à ton parcours</h3> 
+                
+                <div>
+                  <input type="button" value="Explorer" class="btn" onclick="scroll_to('.content' , event)">
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="content">
+      <div class="select_container">
+        <input type="radio" name="services" id="academique" style="display: none;" onchange="services()" checked>
+
+        <label for="academique" class="no_select select academique">
+            <div>Postsecondaire et Bourses</div>
+        </label>
+
+        <input type="radio" name="services" id="vie_carriere" style="display: none;" onchange="services()">
+
+        <label for="vie_carriere" class="no_select select vie_carriere">
+            <div>Autres ressources</div>
+        </label>
+      </div>
+
+      <div class="academique_container">
+        <div class="guides">
+          <h2>Postsecondaire</h2>
+
+          <!--
+          <div class="description">
+            <h2>À propos:</h2>
+            <p>Ces guides PDF te présentent des informations utiles sur plusieurs domaines professionnels. Tu y trouveras des conseils pratiques, des témoignages, ainsi que des pistes pour mieux comprendre certains métiers. Ils peuvent t'aider à choisir un cheminement qui correspond à tes intérêts et à mieux te préparer pour le marché du travail.</p>
+          </div>
+
+          <div class="links">
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Métier" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_cf3f61b86d7c4c878ef35114933430aa.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_cf3f61b86d7c4c878ef35114933430aa.pdf">
+            </div>
+
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Foresterie" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_0e0afa4e767c40deae2019d4da885c4e.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_0e0afa4e767c40deae2019d4da885c4e.pdf">
+            </div>
+
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Santé" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b240319043774ce8b203c1faa539f081.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b240319043774ce8b203c1faa539f081.pdf">
+            </div>
+
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Petite enfance" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b03f666a7e514c909f88d37f418a6639.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b03f666a7e514c909f88d37f418a6639.pdf">
+            </div>
+
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Tourisme" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_9c8701cfe6c1417990eb5af56c49528b.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_9c8701cfe6c1417990eb5af56c49528b.pdf">
+            </div>
+
+            <div class="admin_buttons">            
+              <input type="checkbox" id="postsecondaire_edit_checkbox" class="edit_checkbox" onchange="edit_link(this, this.parentNode.parentNode)" style="display: none;">
+    
+              <label for="postsecondaire_edit_checkbox" class="admin icon">
+                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+              </label>
+            </div>
+          </div>
+        -->
+        </div>
+        
+
+        <div class="postsecondaire">
+          <div class="options">
+            <div class="option scroll_hide">
+              <img src="/icons/futur.svg" class="no_select svg" draggable="false">
+              <p>Congé sabbatique</p>
+            </div>   
+            <div class="info">
+              <img src="/icons/futur.svg" class="no_select svg" draggable="false">
+
+              Tu peux prendre une pause après le secondaire.  
+              <br> C'est une chance pour apprendre, voyager ou faire du bénévolat.  
+              <br> Va voir le site Canadian Gap Year pour plus d'info.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/manual_work.svg" class="no_select svg" draggable="false">
+              <p>Apprentissage</p>
+            </div>
+            <div class="info">
+              <img src="/icons/manual_work.svg" class="no_select svg" draggable="false">
+
+              Tu apprends un métier en travaillant (80%) et en étudiant (20%).  
+              <br> Tu peux obtenir un certificat dans un métier spécialisé au NB.  
+              <br> Le programme dure 2 à 4 ans.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/military.svg" class="no_select svg" draggable="false">
+              <p>Domaine militaire</p>
+            </div>
+            <div class="info">
+              <img src="/icons/military.svg" class="no_select svg" draggable="false">
+              
+              Plusieurs façons de joindre les Forces armées canadiennes.  
+              <br> Études payées, bon salaire et avantages offerts.  
+              <br> Explore les carrières sur leur site web.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/formation.svg" class="no_select svg" draggable="false">
+              <p>Formation privée</p>
+            </div>
+            <div class="info">
+              <img src="/icons/formation.svg" class="no_select svg" draggable="false">
+
+              Des écoles privées offrent des cours pratiques
+              <br> (ex. : esthétique, animaux, massage).  
+              <br> Consulte la liste des écoles enregistrées au NB.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/college.svg" class="no_select svg" draggable="false">
+              <p>Collège</p>
+            </div>
+            <div class="info">
+              <img src="/icons/college.svg" class="no_select svg" draggable="false">
+
+              Le collège enseigne comment faire un métier.  
+              <br> Tu obtiens un diplôme ou un certificat.  
+              <br> Les programmes durent de quelques semaines à 3 ans.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/school.svg" class="no_select svg" draggable="false">
+              <p>Université</p>
+            </div>
+            <div class="info">
+              <img src="/icons/school.svg" class="no_select svg" draggable="false">
+
+              L'université enseigne à réfléchir et résoudre des problèmes.  
+              <br> Baccalauréat : 3 à 5 ans
+              <br> Maîtrise : 1 à 2 ans
+              <br> Doctorat : 4 à 8 ans.  
+              <br> Plusieurs programmes selon tes intérêts.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/buisness.svg" class="no_select svg" draggable="false">
+              <p>Entrepreneuriat</p>
+            </div>
+            <div class="info">
+              <img src="/icons/buisness.svg" class="no_select svg" draggable="false">
+              
+              Tu veux lancer ton entreprise?  
+              <br> La FCJE aide les jeunes de 18 à 39 ans à démarrer leur projet.  
+              <br> Ils offrent du soutien et des ressources.
+            </div>
+
+            <div class="option scroll_hide">
+              <img src="/icons/work.svg" class="no_select svg" draggable="false">
+              <p>Marché du travail</p>
+            </div>
+            <div class="info">
+              <img src="/icons/work.svg" class="no_select svg" draggable="false">
+              
+              Tu peux commencer à travailler après le secondaire.  
+              <br> Certains emplois seront limités sans diplôme.  
+              <br> Pense à tes objectifs avant de te lancer.
+            </div>          
+          </div>
+        </div>
+
+        <h2>Bourses</h2>
+
+        <div class="conseils">
+          <div class="conseil scroll_hide">
+            <img src="/icons/futur.svg" class="no_select svg" draggable="false"></img>
+
+            <p>Sois organisé</p>
+          </div>
+          
+          <div class="conseil scroll_hide">
+            <img src="/icons/formation.svg" class="no_select svg" draggable="false"></img>
+
+            <p>Suis les critères</p>
+          </div>
+
+          <div class="conseil scroll_hide">
+            <img src="/icons/choix.svg" class="no_select svg" draggable="false"></img>
+
+            <p>Bonne référence</p>
+          </div>
+
+          <div class="conseil scroll_hide">
+            <img src="/icons/college.svg" class="no_select svg" draggable="false"></img>
+
+            <p>Relis-toi</p>
+          </div>
+
+          <div class="conseil scroll_hide">
+            <img src="/icons/forces.svg" class="no_select svg" draggable="false"></img>
+
+            <p>Vante-toi</p>
+          </div>
+        </div>
+
+        <div class="recherche">           
+          <input type="checkbox" id="recherche_expand" style="display: none;">
+
+          <label for="recherche_expand" class="btn" onclick="toggle_dropdown('recherche', 'recherche_expand')">
+            <p>Resources</p>
+            <img class="no_select svg" draggable="false" src="/icons/arrow_down.svg">
+          </label>
+
+          <div class="list">
+            <div class="admin_buttons">          
+              <input type="button" id="add_button_list" onclick="add_record('scholarship')" style="display: none;">
+    
+              <label for="add_button_list" class="add_button admin icon">
+                <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
+              </label>
+    
+              <input type="checkbox" id="edit_checkbox_list" class="edit_checkbox" onchange="edit_record(this, this.parentNode.parentNode)" style="display: none;">
+    
+              <label for="edit_checkbox_list" class="admin icon">
+                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+              </label>
+            </div>          
+          </div>       
+
+          <div class="description">
+            <h2>À propos:</h2>
+
+            <p>Ces sites et resources t'aident à chercher et obtenir des bourses en offrant des outils de recherche, des filtres personnalisés et des conseils utiles. Ils permettent de repérer rapidement des bourses correspondant à ton profil et d'augmenter tes chances d'en recevoir.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="vie_carriere_container">
+        <div class="websites">           
+          <input type="checkbox" id="websites_expand" style="display: none;">
+
+          <label for="websites_expand" class="btn" onclick="toggle_dropdown('websites', 'websites_expand')">
+            <p>Liens</p>
+            <img class="no_select svg" draggable="false" src="/icons/arrow_down.svg">
+          </label>
+
+          <div class="list">
+            <div class="admin_buttons">          
+              <input type="button" id="add_button_website" onclick="add_record('resource')" style="display: none;">
+    
+              <label for="add_button_website" class="add_button admin icon">
+                <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
+              </label>
+    
+              <input type="checkbox" id="edit_checkbox_website" class="edit_checkbox" onchange="edit_record(this, this.parentNode.parentNode)" style="display: none;">
+    
+              <label for="edit_checkbox_website" class="admin icon">
+                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+              </label>
+            </div>          
+          </div>     
+
+          <div class="description">
+            <h2>À propos:</h2>
+            
+            <p>Ces sites web ou documents offrent des ressources pour t'aider à planifier ta carrière, trouver un emploi ou explorer des domaines d'étude. Ils comprennent des outils interactifs, des informations sur les métiers, les études et des programmes de soutien aux étudiants.</p>
+          </div>
+
+          <h2>Sites et ressources</h2>
+        </div>
+
+        <div class="guides">
+
+          <h2>Méthodes d'études</h2>
+
+          <div class="description">
+            <h2>À propos:</h2>
+
+            <p>Voir le document "Je veux réussir mes études : guide pratique pour les élèves du secondaire" les versions PDF ci-dessous pour des méthodes d'étude. Le document a été créé par en ancien conseiller en orientation de l'ESN, M. Michel Ouellette.</p>
+          </div>
+
+          <div class="links">
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Partie 1" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_5cc49bc43e764eb98283ec1a039f6efc.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_5cc49bc43e764eb98283ec1a039f6efc.pdf">
+            </div>
+
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Partie 2" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_de5d6a66b3e6475ea60eb7cbb7b69267.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_de5d6a66b3e6475ea60eb7cbb7b69267.pdf">
+            </div>
+
+            <div class="admin_buttons">            
+              <input type="checkbox" id="etude_edit_checkbox" class="edit_checkbox" onchange="edit_link(this, this.parentNode.parentNode)" style="display: none;">
+    
+              <label for="etude_edit_checkbox" class="admin icon">
+                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="guides">
+
+          <h2>Emplois</h2>
+
+          <div class="description">
+            <h2>À propos:</h2>
+
+            <p>Ces documents t'offrent des outils concrets pour trouver un emploi : CV, préparation aux entrevues et plus. Ils te guideront à chaque étape du processus de recherche d'emploi.</p>
+          </div>
+
+          <div class="links">
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Curriculum vitae" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_484485b1c1424efb93bf73c0edd865a1.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_484485b1c1424efb93bf73c0edd865a1.pdf">
+            </div>
+
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Recherche" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_1299fbd023844cafbf1bbea71dd74c67.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_1299fbd023844cafbf1bbea71dd74c67.pdf">
+            </div>
+
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Guide d'entrevue" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_2932064b437345dea3e9e76e5e15bffb.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_2932064b437345dea3e9e76e5e15bffb.pdf">
+            </div>
+
+            <div class="links_column">
+              <input type="button" class="btn input_link" value="Questions" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b0263accc1d140e8864ad747ddec4a1e.pdf', '_blank')">
+              <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b0263accc1d140e8864ad747ddec4a1e.pdf">
+            </div>
+
+            <div class="admin_buttons">            
+              <input type="checkbox" id="emplois_edit_checkbox" class="edit_checkbox" onchange="edit_link(this, this.parentNode.parentNode)" style="display: none;">
+    
+              <label for="emplois_edit_checkbox" class="admin icon">
+                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="capsules">
+          <h2>Capsules Video</h2>
+
+          <div class="slideshow scroll_hide">
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/eqkNKSDpCqU"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/JySfJUWPgKI"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/GsCihe-R_Bo"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/aY1et6mlSGo"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/I2d1g7tYU5o"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/1_rljwUvu1o"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/3lCze2h3a9k"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="slide fade">
+              <iframe
+                src="https://www.youtube.com/embed/1eQVsRjhf4I"
+                title="YouTube video player"
+                frameborder="0"
+                sandbox="allow-scripts allow-same-origin"
+                allowfullscreen>
+              </iframe>
+            </div>                
+
+            <!--Next and previous buttons-->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          </div>
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
+            <span class="dot" onclick="currentSlide(8)"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script defer src="../js/global_script.js"></script>
+  <script defer src="../js/resources_script.js"></script>
+
+</html>
