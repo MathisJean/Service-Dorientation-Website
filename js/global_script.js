@@ -30,16 +30,6 @@ const scroll_observer = new IntersectionObserver(elements =>
 const hidden_elements = Array.from(document.querySelectorAll(".scroll_hide"));
 hidden_elements.forEach(element => {scroll_observer.observe(element)});
 
-fetch("navbar.html")
-.then(res => res.text())
-.then(html =>
-{
-    document.getElementById("navbar_placeholder") = html;
-})
-.catch(err =>
-{
-    console.log(err)
-});
 
 
 //----Global Script----//
