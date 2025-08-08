@@ -1,0 +1,431 @@
+
+html
+{
+    --background--pos--x: 30%;
+    --background--pos--y: -5%;
+    --background--angle: 30deg;
+
+    --background--radial--start: 15%;
+    --background--radial--leap: 10%;
+
+    --divider--offset: 8%;
+}
+
+.page_head > div
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    margin-top: 6rem;
+
+    transition: 
+        padding 0.1s ease;
+}
+
+.page_head > div:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.page_head > div:hover > input
+{
+    box-shadow: var(--drop--shadow);
+}
+
+.page_head > div:active
+{
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
+
+.page_head input
+{
+    margin: 0% !important;
+}
+
+h2
+{
+    padding: 0.5em;
+}
+
+.experiences
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.exposition
+{
+    display: flex;
+    flex-direction: column-reverse;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 2em 0;
+}
+
+.description
+{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    
+    width: 90%;
+}
+
+.exposition > div h2
+{
+    align-items: baseline;
+
+    height: 100%;
+    min-width: 8ch;
+
+    padding: 0%;
+    margin: 0%;
+    margin-right: 1em;
+}
+
+#salon_emploi_expand + label, #orient_action_expand + label
+{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    margin: 1em;
+
+    cursor: pointer;
+} 
+
+#salon_emploi_expand + label > img, #orient_action_expand + label > img
+{
+    margin: 0%;
+
+    transition: 
+        rotate 0.1s ease;
+} 
+
+#salon_emploi_expand:checked ~ label > img, #orient_action_expand:checked ~ label > img
+{
+    rotate: 180deg;
+}
+
+.list
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    justify-items: center;
+    align-content: center;
+
+    overflow: hidden;
+    opacity: 0;
+
+    max-height: 0;
+    width: 100%;
+
+    margin: 0 2em;
+
+    transition:
+      max-height 0.5s ease,
+      opacity 0.5s ease,
+      margin 0.5s ease;
+}
+
+.admin_buttons
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: end;
+
+    width: 100%;
+
+    padding-right: calc(5% / 3);
+
+    grid-area: 1 / 1 / 1 / 4;
+}
+
+input[type="checkbox"]:checked + label > .unactive_checkbox
+{
+    display: none;
+}
+
+input[type="checkbox"]:checked + label > .active_checkbox
+{
+    display: block;
+}
+
+.active_checkbox
+{
+    display: none;
+}
+
+.exhibitor
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    width: 100%;
+    
+    margin: 0.75em 0;
+}
+
+.exhibitor h6
+{
+    text-align: center;
+
+    width: 90%;
+    height: 2em;
+
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.exhibitor a
+{
+    color: var(--link--color);
+    
+    text-decoration: none;
+    font-style: italic;
+
+    text-align: center;
+    
+    width: 90%;
+    height: 2em;
+
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.exhibitor input
+{
+    font-size: 1em;
+    font-weight: 600;
+
+    color: var(--link--color);
+    background-color: transparent;
+
+    text-align: center;
+
+    width: 90%;
+    height: 2em;
+
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.exhibitor .delete_button
+{
+    position: absolute;
+
+    right: 5%;
+    bottom: 50%;
+}
+
+.options
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+
+    margin: 2em 0;
+    padding: 0;
+
+    width: 100%;
+}
+
+.option
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    border-radius: var(--border--radius);
+
+    box-shadow: var(--inset--shadow);
+
+    margin-bottom: 0.5em;
+
+    min-width: 75%;
+
+    aspect-ratio: 1;
+
+    transition: 
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+.option:hover
+{
+    box-shadow: var(--drop--shadow);
+
+    transform: translateY(-5px);
+
+    z-index: 3;
+}
+
+.option:nth-child(3)
+{
+    animation-delay: 0.2s;
+}
+
+.option:nth-child(5)
+{
+    animation-delay: 0.4s;
+}
+
+.option:nth-child(7)
+{
+    animation-delay: 0.6s;
+}
+
+.option:nth-child(9)
+{
+    animation-delay: 0.8s;
+}
+
+.option:nth-child(11)
+{
+    animation-delay: 1.0s;
+}
+
+.option:nth-child(13)
+{
+    animation-delay: 1.2s;
+}
+
+.option:nth-child(15)
+{
+    animation-delay: 1.4s;
+}
+
+.option:nth-child(17)
+{
+    animation-delay: 1.6s;
+}
+
+.option:nth-child(19)
+{
+    animation-delay: 1.8s;
+}
+
+.option:nth-child(21)
+{
+    animation-delay: 2.0s;
+}
+
+.option p
+{
+    font-weight: 700;
+
+    margin-top: 0.5em;
+}
+
+.option:hover + .info
+{
+    opacity: 1;
+}
+
+.info
+{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+
+    text-align: center;
+
+    top: 50%;
+    left: 50%;
+
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+
+    padding: 2em;
+
+    width: 100%;
+    height: 100%;
+
+    transform: translate(-50%, -50%);
+
+    opacity: 0;
+
+    word-break: break-word;
+    pointer-events: none;
+    z-index: 3;
+
+    transition: opacity 0.5s ease;
+}
+
+/* Mobile users */
+@media only screen and (max-width: 480px) 
+{
+    html
+    {
+        --background--radial--leap: 10%;
+    }
+
+    .description > h2
+    {
+        display: none;
+    }
+
+    .description > p
+    {
+        text-align: justify;
+    }
+
+    .list h6
+    {
+        font-size: 0.75em;
+
+        height: auto;
+        min-height: 2em;
+    }
+    
+    .list a
+    {
+        font-size: 0.75em;
+    }
+
+    .options
+    {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .option
+    {
+        animation-delay: 0s !important;
+    }
+}

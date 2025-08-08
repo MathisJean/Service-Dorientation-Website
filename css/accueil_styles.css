@@ -1,0 +1,427 @@
+
+html
+{
+    --background--pos--x: right;
+    --background--pos--y: top;
+    --background--angle: 200deg;
+
+    --background--radial--start: 10%;
+    --background--radial--leap: 5%;
+}
+
+.page_head > div
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    margin-top: 6rem;
+
+    transition: 
+        padding 0.1s ease;
+}
+
+.page_head > div:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.page_head > div:hover > input
+{
+    box-shadow: var(--drop--shadow);
+}
+
+.page_head > div:active
+{
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
+
+.page_head input
+{
+    margin: 0% !important;
+}
+
+.select_container
+{
+    display: flex;
+
+    width: 100%;
+}
+
+.select
+{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    color: black;
+
+    font-size: 1.5em;
+    font-weight: 700;
+
+    border: none;
+    border-radius: var(--border--radius);
+
+    box-shadow: 1px 3px 2.5px rgba(0, 0, 0, 0.1);
+
+    padding: 0.75em 0.5em;
+    margin-top: -1em;
+
+    width: 50%;
+
+    z-index: 3;
+
+    transition:
+        box-shadow 0.1s ease-in,
+        background-color 0.1s ease,
+        color 0.1s ease;
+
+    cursor: pointer;
+}
+
+.select:hover
+{
+    box-shadow: var(--drop--shadow);
+}
+
+#orientation:checked + .orientation
+{
+    background-color: var(--secondary--bg--color);
+    color: var(--bg--text--color);
+
+    cursor: default;
+}
+
+#vie_carriere:checked + .vie_carriere
+{
+    background-color: var(--secondary--bg--color);
+    color: var(--bg--text--color);
+    
+    cursor: default;
+}
+
+.info
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.orienters
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.orienters > div
+{
+    position: relative;
+}
+
+.admin_btn
+{
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    padding: 4em;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.orienters > div
+{
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+
+    padding: 1em;
+    padding-top: 3em;
+}
+
+.orienters > div div
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: baseline;
+}
+
+.orienters input
+{
+    border: none;
+
+    outline: none;
+}
+
+.drop_area
+{
+    display: flex;
+
+    justify-self: center;
+    align-self: center;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(245, 245, 245);
+
+    background-position: center;
+    background-size: cover;
+
+    border-radius: 500px;
+
+    min-width: 16em;
+    min-height: 16em;
+
+    aspect-ratio: 1/1;
+
+    cursor: copy;
+}
+
+#img_view
+{
+    background-color: rgba(245, 245, 245, 0.15);
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    border-radius: var(--border--radius);
+
+    padding: 0.5em;
+}
+
+.orienters
+{
+    width: 60%;
+}
+
+.orienter_name
+{
+    font-weight: 600;
+
+    outline: none;
+}
+
+.orienter_role
+{
+    font-style: italic;
+
+    outline: none;
+}
+
+.orienters a
+{
+    color: var(--link--color);
+
+    text-decoration: none;
+    font-style: italic;
+}
+
+.services
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.services > div
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 3em 0;
+}
+
+.services > div > h3
+{
+    font-weight: 600;
+}
+
+.services > div > h6
+{
+    font-weight: 500;
+    font-style: italic;
+
+    padding: 0.5em
+}
+
+.orienters label
+{
+    width: 24px;
+    height: 28px;
+}
+
+input[type="checkbox"]:checked + label > .unactive_checkbox
+{
+    display: none;
+}
+
+input[type="checkbox"]:checked + label > .active_checkbox
+{
+    display: block;
+}
+
+.active_checkbox
+{
+    display: none;
+}
+
+.contacts
+{
+    display: flex;
+}
+
+.contacts > ul
+{
+    display: flex;
+    flex-direction: row;
+    
+    flex-wrap: wrap;
+
+    justify-content: space-evenly;
+    align-items: center;
+
+    margin-top: 3em;
+    padding: 0;
+
+    width: 100%;
+}
+
+.contacts > ul > li
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: var(--border--radius);
+
+    box-shadow: var(--inset--shadow);
+
+    margin-bottom: 0.5em;
+    padding: 1em;
+
+    min-width: 15%;
+
+    aspect-ratio: 1;
+
+    transition: 
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+.contacts > ul > li:hover
+{
+    transform: translateY(-5px);
+
+    box-shadow: var(--drop--shadow);
+}
+
+.contacts > ul > li:nth-child(2)
+{
+    animation-delay: 0.2s;
+}
+
+.contacts > ul > li:nth-child(3)
+{
+    animation-delay: 0.4s;
+}
+
+.contacts > ul > li:nth-child(4)
+{
+    animation-delay: 0.6s;
+}
+
+.contacts > ul > li:nth-child(5)
+{
+    animation-delay: 0.8s;
+}
+
+.contacts > ul > li > h5
+{
+    font-weight: 700;
+
+    margin-top: 0.5em;    
+}
+
+@media only screen and (max-width: 768px) 
+{
+    html
+    {
+        --background--radial--leap: 10%;
+    }
+
+    .info
+    {
+        display: flex;
+        flex-direction: column;
+    }
+        
+    .orienters
+    {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 480px) 
+{
+    .select
+    {
+        font-size: 1.10em;
+
+        padding: 1em 0.5em;
+    }
+
+    .info
+    {
+        display: flex;
+        flex-direction: column;
+    }
+        
+    .orienters
+    {
+        width: 100%;
+    }
+        
+    .orienters h3
+    {
+        font-size: 1.5em;
+    }
+
+    .drop_area
+    {
+        min-width: 12em;
+        min-height: 12em;
+
+        margin-right: 1em;
+    }
+
+    .services h3
+    {
+        font-weight: 900;
+    }
+
+    .contacts > ul > li
+    {
+        min-width: 10em;
+    }
+}

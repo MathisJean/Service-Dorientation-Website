@@ -1,0 +1,351 @@
+
+html
+{
+    --background--pos--x: left;
+    --background--pos--y: 60%;
+    --background--angle: 50deg;
+
+    --background--radial--start: 10%;
+    --background--radial--leap: 5%;
+
+    --divider--offset: 5%;
+}
+
+.scholarship_nav
+{
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 6rem;
+
+    width: 100%;
+}
+
+.scholarship_nav > ul
+{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-evenly;
+
+    list-style-type: none;
+
+    margin: 0%;
+    padding: 0%;
+
+    width: 100%;
+}
+
+.scholarship_nav input
+{
+    background-color: var(--secondary--bg--color);
+    color: var(--bg--text--color);
+
+    border: none;
+    border-radius: var(--border--radius);
+
+    font-weight: 700;
+    
+    margin-top: 0 !important;
+
+    transition: 
+        box-shadow 0.1s ease;
+
+    cursor: pointer;
+}
+
+.scholarship_nav li
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    transition: 
+        padding 0.1s ease;
+}
+
+.scholarship_nav li:hover
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.8em;
+}
+
+.scholarship_nav li:hover > input
+{
+    box-shadow: var(--drop--shadow);
+}
+
+.scholarship_nav li:active
+{
+    padding-top: 0.4em;
+    padding-bottom: 0.6em;
+}
+
+.scholarship_nav li:active > input
+{
+    box-shadow: var(--drop--shadow);
+}
+
+#table 
+{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.month_header > div
+{
+    display: flex;
+    position: relative;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 6em;
+}
+
+.month_header h2
+{
+    margin: 0%;
+}
+
+.month_header img
+{
+    color: var(--bg--text--color)
+}
+
+.month_container
+{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(400px, 1fr));
+
+    gap: 2em 0.5em;
+
+    padding: 2em 1em;
+
+    width: 100%;
+}
+
+.scholarship:nth-child(even)
+{
+    animation-delay: 0.2s;
+}
+
+.scholarship
+{
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(4, minmax(40px, auto)); 
+
+    background-color: white;
+
+    border: none;
+    border-radius: var(--border--radius);
+
+    box-shadow: var(--inset--shadow);
+
+    padding: 3em 2em;
+
+    height: auto;
+    width: 100%;
+
+    transition: 
+        box-shadow 0.2s ease,
+        transform 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.scholarship:hover, .scholarship:focus-within
+{
+    transform: translateY(-5px);
+
+    box-shadow: var(--drop--shadow);
+}
+
+.scholarship > h6, .scholarship > h5, .scholarship > h4, .scholarship > p
+{
+    display: flex;
+
+    align-items: center;
+
+    margin: 0%;
+
+    outline: none;
+}
+
+.scholarship_name
+{
+    grid-area: 1 / 1 / 2 / 4;
+}
+
+.scholarship_value
+{
+    grid-area: 2 / 1 / 3 / 4;
+
+    padding-left: 0.5em;
+
+    align-self: baseline;
+}
+
+.scholarship_date
+{
+    display: flex;
+    flex-direction: row;
+
+    grid-area: 3 / 1 / 4 / 3;
+
+    justify-content: baseline;
+    align-items: center;
+
+    height: 100%;
+}
+
+.scholarship_date .date
+{
+    display: none;
+
+    background-color: transparent;
+
+    border: none;
+
+    outline: none;
+}
+
+.scholarship_date input
+{
+    background-color: transparent;
+
+    text-align: center;
+    
+    border: none;
+    outline: none;
+}
+
+.scholarship_date input[type="text"]
+{
+    width: 3ch;
+}
+
+.scholarship_date select
+{
+    background-color: transparent;
+
+    border: none;
+}
+
+.scholarship_criteria
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-self: baseline;
+
+    text-align: center;
+
+    grid-area: 4 / 1 / -1 / -1;
+
+    word-break: break-word;
+
+    height: auto;
+    width: 100%;
+}
+
+.scholarship_buttons
+{
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+
+    justify-self: end;
+    align-self: baseline;
+
+    grid-area: 1 / 4 / 3 / -1;
+}
+
+input[type="checkbox"]:checked + label > .unactive_checkbox
+{
+    display: none;
+}
+
+input[type="checkbox"]:checked + label > .active_checkbox
+{
+    display: block;
+}
+
+.active_checkbox
+{
+    display: none;
+}
+
+.scholarship_link
+{
+    display: flex;
+
+    justify-content: end;
+    align-items: center;
+
+    grid-area: 3 / 3 / 4 / -1;
+}
+
+.scholarship_link > a, .scholarship_link > input
+{
+    display: flex;
+
+    justify-content: end;
+    align-items: baseline;
+
+    color: var(--link--color);
+    background-color: transparent;
+
+    text-decoration: none;
+    font-style: italic;
+}
+
+.scholarship_link > input
+{
+    border: none;
+
+    font-style: italic;
+
+    width: 100%;
+
+    outline: none;
+}
+
+@media only screen and (max-width: 768px) 
+{
+    .scholarship_nav > ul
+    {
+        flex-wrap: wrap;
+
+        padding: 0 4em;
+    }
+
+    .month_container
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .scholarship
+    {
+        width: 100%;
+
+        padding: 1.5em 2em;
+    }
+    
+    .scholarship
+    {
+        animation-delay: 0.0s !important;
+    }
+}
+
+@media only screen and (max-width: 480px) 
+{
+    html
+    {
+        --background--radial--leap: 10%;
+    }
+}
