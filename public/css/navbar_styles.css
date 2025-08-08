@@ -104,6 +104,8 @@ body
 
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
 }
 
 .nav_logout
@@ -234,6 +236,8 @@ body
     text-decoration: none;
 
     transition: text-shadow 0.1s ease;
+
+    cursor: pointer;
 }
 
 .nav_sidebar > ul > li:hover > p
@@ -250,7 +254,7 @@ body
     text-align: center;
 }
 
-.error_popup p, .delete_popup p
+.error_popup p, .delete_popup p, .logout_popup p
 {
     margin-top: 1.5em;
 
@@ -327,6 +331,8 @@ body
 
     padding: 0.5em;
     margin: 0%;
+
+    cursor: pointer;
 }
 
 .switch_popup_btn:active
@@ -358,7 +364,7 @@ body
 {
     .nav_sidebar > ul > li
     {
-        margin: 2em 0;
+        margin: 1em 0;
     }
 }
 

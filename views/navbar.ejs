@@ -53,7 +53,7 @@
 
       <div class="nav_right">
         <div>
-          <div class="nav_icon_background nav_logout" onclick="logout()">
+          <div class="nav_icon_background nav_logout" onclick="show_popup('.logout_popup', 'Voulez-vous vraiment vous déconnecter?')">
             <img src="/icons/account.svg" class="nav_icon no_select svg" draggable="false"></img>
           </div>
           <div class="nav_icon_background nav_login" onclick="show_popup('.login_popup', '')">
@@ -156,6 +156,18 @@
       <p>Voulez-vous vraiment supprimer ce record?</p>
 
       <input type="button" value="Confirmer" class="btn confirm_btn" onclick="close_popup()">
+    </div>
+
+    <div class="logout_popup popup">
+      <label for="close_btn" class="close_btn no_select icon">
+        <img src="/icons/close.svg" class="svg">
+      </label>
+
+      <h4>Déconnexion</h4>
+
+      <p></p>
+
+      <input type="button" value="Confirmer" class="btn confirm_btn" onclick="close_popup(); logout()">
     </div>
   </body>
   

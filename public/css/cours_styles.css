@@ -133,8 +133,10 @@ h2
     margin-top: 0.5em;
 }
 
-.guide
+.guide, .more
 {
+    position: relative;
+
     display: flex;
     flex-wrap: wrap;
 
@@ -147,8 +149,10 @@ h2
     width: 100%;
 }
 
-.guide div
+.guide_column, .more_column
 {
+    width: 13%;
+
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 
@@ -156,29 +160,37 @@ h2
         padding 0.1s ease;
 }
 
-.guide div:hover
+.guide_column:hover, .more_column:hover
 {
     padding-top: 0.2em;
     padding-bottom: 0.8em;
 }
 
-.guide div:active
+.guide_column:active, .more_column:active
 {
     padding-top: 0.4em;
     padding-bottom: 0.6em;
 }
 
-.guide div .btn
+.guide_column .btn, .more_column .btn
 {
     margin: 0% !important;
 }
 
-.guide div .btn:hover
+.guide_column .btn:hover, .more_column .btn:hover
 {
     box-shadow: var(--drop--shadow);
 
     transition:
         box-shadow 0.1s;
+}
+
+.admin_buttons
+{
+    position: absolute;
+
+    top: 0%;
+    right: 5%;
 }
 
 .parcours
@@ -193,6 +205,7 @@ h2
 
     width: 100%;
 }
+
 
 @media only screen and (max-width: 480px) 
 {

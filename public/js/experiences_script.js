@@ -13,13 +13,6 @@ let edited_values = [];
 window.key_exchange_complete.then(() => //Wait for public keys to be exchanged
 {
     update_exhibitors();
-
-    //Set checkboxes on start to avoid err
-    document.querySelector("#salon_emploi_expand").checked = true;
-    document.querySelector("#orient_action_expand").checked = true;
-
-    document.querySelector("#edit_checkbox_salon_emploi").checked = false;
-    document.querySelector("#edit_checkbox_orient_action").checked = false;
 })
 
 //----Functions----//

@@ -50,6 +50,8 @@ html
 
     transition: 
         box-shadow 0.1s ease;
+
+    cursor: pointer;
 }
 
 .scholarship_nav li

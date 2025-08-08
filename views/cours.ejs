@@ -65,22 +65,40 @@
         </div>
 
         <div class="guide">
-          <div>
-            <input type="button" class="btn" value="Guide de 9e année" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_68c3b563d2bb4f1590ef725fecd96ea9.pdf', '_blank')">
+          <div class="guide_column">
+            <input type="button" class="btn input_link" value="Guide de 9e année" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_68c3b563d2bb4f1590ef725fecd96ea9.pdf', '_blank')">
+            <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_68c3b563d2bb4f1590ef725fecd96ea9.pdf">
           </div>
-          <div>
-            <input type="button" class="btn" value="Guide de 10e année" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_3508bd9ff4d1448191f7bab50ff81052.pdf', '_blank')">
+
+          <div class="guide_column">
+            <input type="button" class="btn input_link" value="Guide de 10e année" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_3508bd9ff4d1448191f7bab50ff81052.pdf', '_blank')">
+            <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_3508bd9ff4d1448191f7bab50ff81052.pdf">
           </div>
-          <div>
-            <input type="button" class="btn" value="Guide de 11e année" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_fdc19555cc53409a8e31102d25b473b6.pdf', '_blank')">
+
+          <div class="guide_column">
+            <input type="button" class="btn input_link" value="Guide de 11e année" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_fdc19555cc53409a8e31102d25b473b6.pdf', '_blank')">
+            <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_fdc19555cc53409a8e31102d25b473b6.pdf">
           </div>
-          <div>
-            <input type="button" class="btn" value="Guide de 12e année" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_fdc19555cc53409a8e31102d25b473b6.pdf', '_blank')">
-          </div>          
-          <div>
-            <input type="button" class="btn" value="Régime pédagogique" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_809418dfa49a4d75b0c5b562ffac690d.pdf', '_blank')">
-          </div>          
-      </div>
+
+          <div class="guide_column">
+            <input type="button" class="btn input_link" value="Guide de 12e année" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_fdc19555cc53409a8e31102d25b473b6.pdf', '_blank')">
+            <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_fdc19555cc53409a8e31102d25b473b6.pdf">
+          </div>
+
+          <div class="guide_column">
+            <input type="button" class="btn input_link" value="Régime pédagogique" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_809418dfa49a4d75b0c5b562ffac690d.pdf', '_blank')">
+            <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_809418dfa49a4d75b0c5b562ffac690d.pdf">
+          </div>
+
+          <div class="admin_buttons">            
+            <input type="checkbox" id="edit_checkbox" class="edit_checkbox" onchange="edit_link(this, this.parentNode.parentNode)" style="display: none;">
+  
+            <label for="edit_checkbox" class="admin icon">
+              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+            </label>
+          </div> 
+        </div>
 
       <div class="parcours">
         <h2>Choisir ton parcours</h2>
@@ -128,16 +146,28 @@
         </div>
 
         <div class="more">
-          <div>
-            <input type="button" class="btn" value="Questionnaire" onclick="window.open('http://parcoursmath.nbed.nb.ca/', '_blank')">
+          <div class="more_column">
+            <input type="button" class="btn input_link" value="Questionnaire" onclick="window.open('http://parcoursmath.nbed.nb.ca/', '_blank')">
+            <input type="url" class="btn input_scroll" value="http://parcoursmath.nbed.nb.ca/">
           </div>
-          <div>
-            <input type="button" class="btn" value="&nbsp;Plus d'info&nbsp;" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_c31bc6554c994f598df5e2a2c0ebf97e.pptx?dn=Parcours_en_math%C3%A9matiques_au_secondaire_-_Autod%C3%A9filante_pour_parents_format_standard_(2017).pptx', '_blank')">
+          <div class="more_column">
+            <input type="button" class="btn input_link" value="Plus d'info" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_c31bc6554c994f598df5e2a2c0ebf97e.pptx?dn=Parcours_en_math%C3%A9matiques_au_secondaire_-_Autod%C3%A9filante_pour_parents_format_standard_(2017).pptx', '_blank')">
+            <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_c31bc6554c994f598df5e2a2c0ebf97e.pptx?dn=Parcours_en_math%C3%A9matiques_au_secondaire_-_Autod%C3%A9filante_pour_parents_format_standard_(2017).pptx">
           </div>
+
+          <div class="admin_buttons">            
+            <input type="checkbox" id="more_edit_checkbox" class="edit_checkbox" onchange="edit_link(this, this.parentNode.parentNode)" style="display: none;">
+  
+            <label for="more_edit_checkbox" class="admin icon">
+              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+            </label>
+          </div> 
         </div>
       </div>
     </div>
   </body>
 
   <script defer src="../js/global_script.js"></script> 
+  <script defer src="../js/cours_script.js"></script> 
 </html>

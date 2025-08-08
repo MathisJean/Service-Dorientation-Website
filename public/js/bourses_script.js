@@ -22,7 +22,7 @@ window.key_exchange_complete.then(() => //Wait for public keys to be exchanged
 
 //----Functions----//
 
-//Adds month headers an containers dynamicly based on "months" array and scholarship data
+//Adds month headers and containers dynamically based on "months" array and scholarship data
 function update_table() 
 {
   //Get data from json database to populate scholarships
@@ -41,7 +41,7 @@ function update_table()
         month_header.classList.add("month_header");
         month_header.id = "month_header_" + String(month.replaceSpecialChar());
         month_container.classList.add("month_container");
-        month_container.id = "month_container_" + String(month.replaceSpecialChar()) ;
+        month_container.id = "month_container_" + String(month.replaceSpecialChar());
         month_container.style.backgroundColor = "transparent";
 
         month_header.innerHTML =
@@ -54,64 +54,58 @@ function update_table()
         //Adds header and container to table
         table.appendChild(month_header);
         table.appendChild(month_container);
-      })
+      });
 
-      //Remove autres from array
+      //Remove "Autres" from array after headers are created
       months.shift();
 
-      //Sort scholarships by first numbers in date element
+      //Sort scholarships by day number
       scholarships.sort((a, b) =>
       {
-        dayA = Number(a.date.day)
-        dayB = Number(b.date.day)
-
+        let dayA = Number(a.date.day);
+        let dayB = Number(b.date.day);
         return dayA - dayB;
       });
 
-      //Sort scholarships by month
+      //Sort scholarships by month and add to containers
       scholarships.forEach(scholarship => 
       {
-        let month = scholarship.date.month.replaceSpecialChar(); //Replaces characters from a list with others, method declared in global script
+        let month = scholarship.date.month.replaceSpecialChar();
 
         let container_id;
 
-        for(m = 0; m < 12; m++)
+        for(let m = 0; m < 12; m++)
         {
-          if(month.replaceSpecialChar() == months[m].replaceSpecialChar())
+          if(month.replaceSpecialChar() === months[m].replaceSpecialChar())
           {
             container_id = "month_container_" + month;
             break;
           }
 
-          //If there is no month in date element
-          else if(m == 11)
+          //If no valid month found, fallback to "autres"
+          if(m === 11)
           {
             container_id = "month_container_autres";
-          };
-        };
+          }
+        }
 
-<<<<<<< Updated upstream
-        let new_scholarship = initiate_scholarship(scholarship)
+        let new_scholarship = initiate_scholarship(scholarship);
 
         //Add scholarships to containers
         document.getElementById(container_id).appendChild(new_scholarship);
         
-        let logged_in = sessionStorage.getItem("logged_in") === "true";
-        let user_email = sessionStorage.getItem("user_email");
-=======
-      //Check subscription
-      let logged_in = sessionStorage.getItem("logged_in") === "true" || sessionStorage.getItem("logged_in") === true;
-      let user_email;
+        //Check if user is logged in and parse email
+        let logged_in = sessionStorage.getItem("logged_in") === "true" || sessionStorage.getItem("logged_in") === true;
+        let user_email;
 
-      try 
-      {
-        user_email = sessionStorage.getItem("user_email");
-      } 
-      catch 
-      {
-        user_email = undefined;
-      }
->>>>>>> Stashed changes
+        try 
+        {
+          user_email = sessionStorage.getItem("user_email");
+        } 
+        catch 
+        {
+          user_email = undefined;
+        }
 
         try 
         {
@@ -120,29 +114,32 @@ function update_table()
         catch(err) 
         {
           user_email = undefined; //If parsing fails, set to undefined
-        };
+        }
 
-        //Check subscription
+        //Check subscription checkbox
         if(logged_in && user_email && scholarship.subscribedUsers.includes(user_email)) 
         {
           document.getElementById("subscribe_checkbox_" + scholarship.id).checked = true;
-        };
+        }
       });
 
-      //Hide and shows elements based on "is_admin" var
+      //Handle admin UI visibility
       admin(document);
 
-      //Hides month header and containers without any children
+      //Hide empty month headers and containers
       hide_month_headers();
 
       load();
     })
     .catch(err =>
     {
-        throw new Error("Decryption failed: " + err.message);
+      throw new Error("Decryption failed: " + err.message);
     });
   })
-  .catch(err => {show_popup(".error_popup", "Impossible de récupérer les enregistrements de bourses") ; console.error(err)});
+  .catch(err => {
+    show_popup(".error_popup", "Impossible de récupérer les enregistrements de bourses");
+    console.error(err);
+  });
 };
 
 //Admin feature to add scholarship
@@ -206,7 +203,7 @@ function add_scholarship(id)
 function edit_scholarship(checkbox, parent, event)
 {
   //Edit mode
-  if(checkbox.checked)
+  if (checkbox.checked)
   {
     //Reset value
     scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
@@ -214,43 +211,18 @@ function edit_scholarship(checkbox, parent, event)
     parent.style.backgroundColor = "rgb(245, 245, 245)";
 
     document.addEventListener("keydown", change_cell_focus);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
   }
-  //Save mode
-=======
-=======
->>>>>>> Stashed changes
-
-    var current_values = { id: 0, name: "", date: { day: "", month: "", time: "" }, criteria: "", value: "", link: "", subscribedUsers: [] };
-  } 
->>>>>>> Stashed changes
   else
   {
     //Reset value
     edited_scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
 
     parent.style.backgroundColor = "white";
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-    document.removeEventListener("keydown", change_cell_focus)
+    document.removeEventListener("keydown", change_cell_focus);
   }
 
   //Get every element with information in scholarship
   Array.from(parent.querySelectorAll("input, a, h6, .date, .admin_edit, .id")).forEach(element =>
-=======
-    document.removeEventListener("keydown", change_cell_focus);
-
-=======
-    document.removeEventListener("keydown", change_cell_focus);
-
->>>>>>> Stashed changes
-    var updated_values = { id: 0, name: "", date: { day: "", month: "", time: "" }, criteria: "", value: "", link: "", subscribedUsers: [] };
-  }
-
-  Array.from(parent.querySelectorAll("input, a, h6, .date, .admin_edit, .id")).forEach(element => 
->>>>>>> Stashed changes
   {
     //Edit mode
     if(checkbox.checked)
@@ -377,17 +349,8 @@ function edit_scholarship(checkbox, parent, event)
     };
   });
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
   //Compare values before and after edit
   if(JSON.stringify(scholarship_values) !== JSON.stringify(edited_scholarship_values) && !checkbox.checked)
-=======
-=======
->>>>>>> Stashed changes
-  console.log(current_values, updated_values)
-
-  if(mode === "save" && JSON.stringify(current_values) !== JSON.stringify(updated_values)) 
->>>>>>> Stashed changes
   {
     //If edited, create object with the new values
     obj = JSON.stringify({scholarships:[edited_scholarship_values]});
@@ -487,43 +450,33 @@ async function delete_scholarship(scholarship_id)
 
 function subscribe_scholarship(scholarship_id, checkbox)
 {
-  checkbox.disabled = true
+  checkbox.disabled = true;
 
-  if(checkbox.checked)
+  if (checkbox.checked)
   {
     //Request to add scholarship subscription to specified id
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email")}))
-=======
-    POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined}))
->>>>>>> Stashed changes
-=======
-    POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined}))
->>>>>>> Stashed changes
-    .then(data => 
-    {
-      checkbox.disabled = false
+    POST(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({
+      email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined
+    }))
+    .then(data => {
+      checkbox.disabled = false;
     })
-    .catch(err => {show_popup(".error_popup", "Impossible de s'abonner à l'enregistrement de la bourse")});
+    .catch(err => {
+      show_popup(".error_popup", "Impossible de s'abonner à l'enregistrement de la bourse");
+    });
   }
   else
   {
     //Request to remove scholarship subscription to specified id
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email")}))
-=======
-    DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined}))
->>>>>>> Stashed changes
-=======
-    DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined}))
->>>>>>> Stashed changes
-    .then(data => 
-    {
-      checkbox.disabled = false
+    DELETE(`/bourses/subscribe/${scholarship_id}`, JSON.stringify({
+      email: sessionStorage.getItem("user_email") ? sessionStorage.getItem("user_email") : undefined
+    }))
+    .then(data => {
+      checkbox.disabled = false;
     })
-    .catch(err => {show_popup(".error_popup", "Impossible de se désabonner de l'enregistrement de la bourse")});
+    .catch(err => {
+      show_popup(".error_popup", "Impossible de se désabonner de l'enregistrement de la bourse");
+    });
   }
 }
 

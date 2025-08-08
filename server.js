@@ -1,6 +1,6 @@
 
 //Set up libraries
-const http = require('http');
+const https = require('https');
 const os = require('os');
 
 const fs = require('fs');
@@ -15,7 +15,17 @@ const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
-let host = "0.0.0.0";
+function getLocalIP() {
+  const interfaces = os.networkInterfaces();
+  for (const iface of Object.values(interfaces)) {
+    for (const i of iface) {
+      if (i.family === 'IPv4' && !i.internal) return i.address;
+    }
+  }
+  return '127.0.0.1';
+}
+
+let host = getLocalIP();
 let port = 8080;
 
 //Set static middleware
@@ -91,15 +101,20 @@ app.use((req, res) =>
 });
 
 //Create https server
-const server = http.createServer(app);
+const server = https.createServer({
+  key: fs.readFileSync(path.join(__dirname, "cert", "key.pem")),
+  cert: fs.readFileSync(path.join(__dirname, "cert", "cert.pem"))
+}, app);
+
 
 server.listen(port, host, () => {
+  console.log(`Server running at https://${host}:${port}`);
+
   try
   {
     require("./email_task_scheduler");
   } 
-  catch 
-  (err) 
+  catch(err) 
   {
     console.error("Email scheduler failed to load:", err);
   }

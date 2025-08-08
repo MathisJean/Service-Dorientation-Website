@@ -78,6 +78,8 @@ html
         box-shadow 0.1s ease-in,
         background-color 0.1s ease,
         color 0.1s ease;
+
+    cursor: pointer;
 }
 
 .select:hover
@@ -89,12 +91,16 @@ html
 {
     background-color: var(--secondary--bg--color);
     color: var(--bg--text--color);
+
+    cursor: default;
 }
 
 #vie_carriere:checked + .vie_carriere
 {
     background-color: var(--secondary--bg--color);
     color: var(--bg--text--color);
+    
+    cursor: default;
 }
 
 .info
@@ -181,6 +187,8 @@ html
     min-height: 16em;
 
     aspect-ratio: 1/1;
+
+    cursor: copy;
 }
 
 #img_view
@@ -188,6 +196,7 @@ html
     background-color: rgba(245, 245, 245, 0.15);
 
     backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
 
     border-radius: var(--border--radius);
 

@@ -138,8 +138,7 @@ window.key_exchange_complete =
     async function ()
     {
         //Generate private and public key
-        const keyPair = await window.crypto.subtle.generateKey
-        (
+        const keyPair = await window.crypto.subtle.generateKey(
             {
                 name: "RSA-OAEP",
                 modulusLength: 2048, //Key size
@@ -298,6 +297,11 @@ hidden_elements.forEach(element => {scroll_observer.observe(element)});
 
 
 //----Global Script----//
+
+document.querySelectorAll("input[type='checkbox'").forEach(checkbox =>
+{
+    checkbox.checked = false;
+});
 
 window.onload = function () 
 {
@@ -496,7 +500,6 @@ function confirm_popup()
     });
 }
 
-
 //Hides or shows elements based on .admin and .user class
 function admin(parent)
 {
@@ -504,7 +507,9 @@ function admin(parent)
     
     Array.from(parent.querySelectorAll(".admin")).forEach(element => //Shows Elements if Admin
     {
-        element.style.display = is_admin ? "inline_block" : "none";
+        element.style.display = is_admin ? "flex" : "none";
+
+        console.log(element)
     });
     Array.from(parent.querySelectorAll(".user")).forEach(element => //Shows Elements if User
     {
@@ -762,7 +767,7 @@ function toggle_dropdown(container_class, checkbox_id)
     const checkbox = document.getElementById(checkbox_id);
     const container = document.querySelector(`.${container_class} .list`);
     
-    if(checkbox.checked)
+    if(!checkbox.checked)
     {
         container.style.maxHeight = "none"; //Temporarily unset
 

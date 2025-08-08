@@ -111,21 +111,22 @@ h6, a
     pointer-events: none;
 }
 
-.icon
-{
-    display: flex;
-}
-
 .img
 {
     height: 24px;
     width: 24px;
 }
 
+.icon
+{
+    display: flex;
+
+    cursor: pointer;
+}
+
 .icon:hover
 {
     filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(0%);
-
 
     transition: 
         transform 0.1s ease,
@@ -135,6 +136,11 @@ h6, a
 .icon:active
 {
     transform: translateY(-1px);
+}
+
+.admin, .user, .logged_in
+{
+    display: none; /* hidden by default */
 }
 
 .btn
@@ -147,8 +153,12 @@ h6, a
     border: none;
     border-radius: var(--border--radius);
 
+    outline: none;
+
     padding: 1.25em 1.5em;
     margin: 0.25em 0;
+
+    cursor: pointer;
 }
 
 .popup
@@ -304,6 +314,35 @@ h6, a
     bottom: 99.9%;
 
     width: 120%;
+}
+
+
+
+.edit_checkbox:checked + label > .unactive_checkbox
+{
+    display: none;
+}
+
+.edit_checkbox:checked + label > .active_checkbox
+{
+    display: block;
+}
+
+.active_checkbox
+{
+    display: none;
+}
+
+.input_link, .input_scroll
+{
+    width: 100%;
+}
+
+.input_scroll
+{
+    display: none;
+
+    text-overflow: ellipsis;
 }
 
 @keyframes scroll_show
