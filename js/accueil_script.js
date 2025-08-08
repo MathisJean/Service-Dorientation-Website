@@ -112,35 +112,7 @@ function update_orienters()
                 {                
                     vie_carriere_container.appendChild(profil);
                 };
-
-                let input_file = profil.querySelector(".input_file")
-                let drop_area = profil.querySelector(".drop_area")
-
-                input_file.addEventListener("change", event => 
-                {
-                    upload_img(event, event.target, profil)
-                });        
-                
-                //Drag and drop functionality
-                drop_area.addEventListener("dragover", event => 
-                {
-                    event.preventDefault();
-
-                    event.dataTransfer.dropEffect = "copy"; //Change effect to "copy"
-                });
-
-                drop_area.addEventListener("drop", event => 
-                {
-                    event.preventDefault();
-
-                    event.target.files = event.dataTransfer.files;
-
-                    upload_img(event, event.target, profil)
-                });
             });
-
-            admin(orientation_container);
-            admin(vie_carriere_container);
 
             let radio = document.querySelector("#orientation").checked ? document.querySelector("#orientation") : document.querySelector("#vie_carriere");
 
