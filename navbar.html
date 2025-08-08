@@ -1,147 +1,145 @@
-  <div>
-    <nav class="navbar">
-      <div class="nav_left">
-        <div class="nav_menu">   
+  <nav class="navbar">
+    <div class="nav_left">
+      <div class="nav_menu">   
+        <div>
+          <img src="icons/menu.svg" class="nav_icon no_select svg" draggable="false"></img>
+        </div>
+          
+        <aside class="nav_sidebar">
           <div>
             <img src="icons/menu.svg" class="nav_icon no_select svg" draggable="false"></img>
           </div>
-            
-          <aside class="nav_sidebar">
-            <div>
-              <img src="icons/menu.svg" class="nav_icon no_select svg" draggable="false"></img>
-            </div>
 
-            <ul>
-              <li onclick="location.href='index.html'"><p>Accueil</p></li>
-              <li onclick="location.href='experiences.html'"><p>Expériences</p></li>
-              <li onclick="location.href='cours.html'"><p>Cours</p></li>
-              <li onclick="location.href='bourses.html'"><p>Bourses</p></li>
-              <li onclick="location.href='resources.html'"><p>Resources</p></li> 
-            </ul>
-          </aside>
+          <ul>
+            <li onclick="location.href='index.html'"><p>Accueil</p></li>
+            <li onclick="location.href='experiences.html'"><p>Expériences</p></li>
+            <li onclick="location.href='cours.html'"><p>Cours</p></li>
+            <li onclick="location.href='bourses.html'"><p>Bourses</p></li>
+            <li onclick="location.href='resources.html'"><p>Resources</p></li> 
+          </ul>
+        </aside>
+      </div>
+    </div>
+
+    <div class="nav_middle">
+        <h4 class="nav_text">Orientation ESN</h4>
+    </div>
+
+    <div class="nav_right">
+      <div>
+        <div class="nav_icon_background nav_logout" onclick="show_popup('.logout_popup', 'Voulez-vous vraiment vous déconnecter?')">
+          <img src="icons/account.svg" class="nav_icon no_select svg" draggable="false"></img>
+        </div>
+        <div class="nav_icon_background nav_login" onclick="show_popup('.login_popup', '')">
+          <img src="icons/login.svg" class="nav_icon no_select svg" draggable="false"></img>
         </div>
       </div>
 
-      <div class="nav_middle">
-          <h4 class="nav_text">Orientation ESN</h4>
+      <a class="nav_icon_background" href="https://esn.nbed.nb.ca/" target="_blank">
+        <img src="img/logo_esn.png" class="nav_icon no_select img" draggable="false"></img>
+      </a>
+    </div>
+  </nav>  
+
+  <input type="button" id="close_btn" style="display: none;" onclick="close_popup()">
+
+  <div class="error_popup popup">
+    <label for="close_btn" class="close_btn no_select icon">
+      <img src="icons/close.svg" class="svg">
+    </label>
+
+    <h4>Erreur</h4>
+
+    <p>Erreur:</p>
+  </div>
+
+  <div class="login_popup popup">
+    <label for="close_btn" class="close_btn no_select icon">
+      <img src="icons/close.svg" class="svg">
+    </label>
+
+    <h4>Connexion</h4>
+
+    <form onsubmit="return login(event, this.parentNode)">
+      <div class="alert_msg"></div>
+
+      <input type="email" class="user_input" placeholder="E-mail" required autocomplete="email" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'E-mail Invalide'; popup_alert.style.visibility = 'visible';">
+      <input type="password" class="user_input" placeholder="Mot de Passe" required autocomplete="current-password" minlength="4" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'Mot de Passe Trop Court'; popup_alert.style.visibility = 'visible';">
+
+      <input type="submit" value="Se Connecter" class="btn">
+    </form>
+
+    <input type="button" value="Créer un Compte" class="switch_popup_btn" onclick="close_popup(); show_popup('.signup_popup', '')">
+  </div>
+
+  <div class="signup_popup popup">
+    <label for="close_btn" class="close_btn no_select icon">
+      <img src="icons/close.svg" class="svg">
+    </label>
+
+    <h4>Inscription</h4>
+
+    <form onsubmit="return signup(event, this.parentNode)">
+      <div class="alert_msg"></div>
+
+      <input type="text" class="user_input" id="first_name_input" placeholder="Prénom" required autocomplete="name">
+      <input type="text" class="user_input" id="last_name_input" placeholder="Nom" required autocomplete="name">
+      <input type="email" class="user_input" placeholder="E-mail" required autocomplete="email" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'E-mail Invalide'; popup_alert.style.visibility = 'visible';">
+      <input type="password" class="user_input" placeholder="Mot de Passe" required autocomplete="new-password" minlength="4" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'Mot de Passe Trop Court'; popup_alert.style.visibility = 'visible';">
+
+      <input type="submit" value="Créer un Compte" class="btn">
+    </form>
+
+    <input type="button" value="Se Connecter" class="switch_popup_btn" onclick="close_popup(); show_popup('.login_popup', '')">
+  </div>
+
+  <div class="authentication_popup popup">
+    <label for="close_btn" class="close_btn no_select icon">
+      <img src="icons/close.svg">
+    </label>
+
+    <h4>Vérification</h4>
+
+    <form onsubmit="return authenticate(event, this.parentNode)">
+      <div class="alert_msg"></div>
+
+      <div>
+        <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
+        <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
+        <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>                         
+        <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
+        <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
+        <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>              
       </div>
 
-      <div class="nav_right">
-        <div>
-          <div class="nav_icon_background nav_logout" onclick="show_popup('.logout_popup', 'Voulez-vous vraiment vous déconnecter?')">
-            <img src="icons/account.svg" class="nav_icon no_select svg" draggable="false"></img>
-          </div>
-          <div class="nav_icon_background nav_login" onclick="show_popup('.login_popup', '')">
-            <img src="icons/login.svg" class="nav_icon no_select svg" draggable="false"></img>
-          </div>
-        </div>
+      <p>Le code expire dans 3 minutes</p>
 
-        <a class="nav_icon_background" href="https://esn.nbed.nb.ca/" target="_blank">
-          <img src="img/logo_esn.png" class="nav_icon no_select img" draggable="false"></img>
-        </a>
-      </div>
-    </nav>  
+      <input type="submit" value="Valider" class="btn">
+    </form>
 
-    <input type="button" id="close_btn" style="display: none;" onclick="close_popup()">
-  
-    <div class="error_popup popup">
-      <label for="close_btn" class="close_btn no_select icon">
-        <img src="icons/close.svg" class="svg">
-      </label>
+    <input type="button" value="Renvoyer le E-mail" class="switch_popup_btn" onclick="send_email(this.parentNode)">
+  </div>
 
-      <h4>Erreur</h4>
+  <div class="delete_popup popup">
+    <label for="close_btn" class="close_btn no_select icon">
+      <img src="icons/close.svg" class="svg">
+    </label>
 
-      <p>Erreur:</p>
-    </div>
+    <h4>Supprimer</h4>
 
-    <div class="login_popup popup">
-      <label for="close_btn" class="close_btn no_select icon">
-        <img src="icons/close.svg" class="svg">
-      </label>
+    <p>Voulez-vous vraiment supprimer ce record?</p>
 
-      <h4>Connexion</h4>
+    <input type="button" value="Confirmer" class="btn confirm_btn" onclick="close_popup()">
+  </div>
 
-      <form onsubmit="return login(event, this.parentNode)">
-        <div class="alert_msg"></div>
+  <div class="logout_popup popup">
+    <label for="close_btn" class="close_btn no_select icon">
+      <img src="icons/close.svg" class="svg">
+    </label>
 
-        <input type="email" class="user_input" placeholder="E-mail" required autocomplete="email" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'E-mail Invalide'; popup_alert.style.visibility = 'visible';">
-        <input type="password" class="user_input" placeholder="Mot de Passe" required autocomplete="current-password" minlength="4" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'Mot de Passe Trop Court'; popup_alert.style.visibility = 'visible';">
+    <h4>Déconnexion</h4>
 
-        <input type="submit" value="Se Connecter" class="btn">
-      </form>
+    <p></p>
 
-      <input type="button" value="Créer un Compte" class="switch_popup_btn" onclick="close_popup(); show_popup('.signup_popup', '')">
-    </div>
-
-    <div class="signup_popup popup">
-      <label for="close_btn" class="close_btn no_select icon">
-        <img src="icons/close.svg" class="svg">
-      </label>
-
-      <h4>Inscription</h4>
-
-      <form onsubmit="return signup(event, this.parentNode)">
-        <div class="alert_msg"></div>
-
-        <input type="text" class="user_input" id="first_name_input" placeholder="Prénom" required autocomplete="name">
-        <input type="text" class="user_input" id="last_name_input" placeholder="Nom" required autocomplete="name">
-        <input type="email" class="user_input" placeholder="E-mail" required autocomplete="email" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'E-mail Invalide'; popup_alert.style.visibility = 'visible';">
-        <input type="password" class="user_input" placeholder="Mot de Passe" required autocomplete="new-password" minlength="4" oninvalid="let popup_alert = this.parentNode.querySelector('.alert_msg'); popup_alert.textContent = 'Mot de Passe Trop Court'; popup_alert.style.visibility = 'visible';">
-
-        <input type="submit" value="Créer un Compte" class="btn">
-      </form>
-
-      <input type="button" value="Se Connecter" class="switch_popup_btn" onclick="close_popup(); show_popup('.login_popup', '')">
-    </div>
-
-    <div class="authentication_popup popup">
-      <label for="close_btn" class="close_btn no_select icon">
-        <img src="icons/close.svg">
-      </label>
-
-      <h4>Vérification</h4>
-
-      <form onsubmit="return authenticate(event, this.parentNode)">
-        <div class="alert_msg"></div>
-
-        <div>
-          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
-          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
-          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>                         
-          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
-          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>               
-          <input type="text" class="user_input authentication_input" maxlength="1" placeholder="0" required>              
-        </div>
-
-        <p>Le code expire dans 3 minutes</p>
-
-        <input type="submit" value="Valider" class="btn">
-      </form>
-
-      <input type="button" value="Renvoyer le E-mail" class="switch_popup_btn" onclick="send_email(this.parentNode)">
-    </div>
-
-    <div class="delete_popup popup">
-      <label for="close_btn" class="close_btn no_select icon">
-        <img src="icons/close.svg" class="svg">
-      </label>
-
-      <h4>Supprimer</h4>
-
-      <p>Voulez-vous vraiment supprimer ce record?</p>
-
-      <input type="button" value="Confirmer" class="btn confirm_btn" onclick="close_popup()">
-    </div>
-
-    <div class="logout_popup popup">
-      <label for="close_btn" class="close_btn no_select icon">
-        <img src="icons/close.svg" class="svg">
-      </label>
-
-      <h4>Déconnexion</h4>
-
-      <p></p>
-
-      <input type="button" value="Confirmer" class="btn confirm_btn" onclick="close_popup(); logout()">
-    </div>
+    <input type="button" value="Confirmer" class="btn confirm_btn" onclick="close_popup(); logout()">
   </div>

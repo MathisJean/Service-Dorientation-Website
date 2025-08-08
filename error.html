@@ -4,11 +4,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="../css/error_styles.css">
+    <link rel="stylesheet" href="css/global_styles.css">
+    <link rel="stylesheet" href="css/navbar_styles.css">
+    <link rel="stylesheet" href="css/error_styles.css">
   </head>
 
   <body>
-    <%- include("navbar.ejs") %> 
+    <div id="navbar_placeholder"></div>
 
     <div id="background_gradient">
       <div id="background_img">
@@ -17,7 +19,7 @@
               <h3>La page n'a pas été retrouvée</h3> 
               
               <div>
-                <input type="button" value="Retour à l'accueil" class="btn" onclick="window.location.href='/'">
+                <input type="button" value="Retour à l'accueil" class="btn" onclick="location.href='index.html'">
               </div>
           </div>
       </div>
@@ -26,6 +28,6 @@
     
   </body>
 
-  <script defer src="../js/global_script.js"></script>
+  <script defer src="js/global_script.js"></script>
 
 </html>
