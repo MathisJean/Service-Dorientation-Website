@@ -6,11 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Orientation ESN | Resources</title>
-    <link rel="stylesheet" href="../css/resources_styles.css">
+    <link rel="stylesheet" href="css/global_styles.css">
+    <link rel="stylesheet" href="css/navbar_styles.css">
+    <link rel="stylesheet" href="css/resources_styles.css">
   </head>
 
   <body>
-    <%- include("navbar.ejs") %>
+    <div id="navbar_placeholder"></div>
 
     <div id="background_gradient">
         <div id="background_img">
@@ -44,7 +46,6 @@
         <div class="guides">
           <h2>Postsecondaire</h2>
 
-          <!--
           <div class="description">
             <h2>À propos:</h2>
             <p>Ces guides PDF te présentent des informations utiles sur plusieurs domaines professionnels. Tu y trouveras des conseils pratiques, des témoignages, ainsi que des pistes pour mieux comprendre certains métiers. Ils peuvent t'aider à choisir un cheminement qui correspond à tes intérêts et à mieux te préparer pour le marché du travail.</p>
@@ -80,23 +81,22 @@
               <input type="checkbox" id="postsecondaire_edit_checkbox" class="edit_checkbox" onchange="edit_link(this, this.parentNode.parentNode)" style="display: none;">
     
               <label for="postsecondaire_edit_checkbox" class="admin icon">
-                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+                <img src="icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+                <img src="icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
               </label>
             </div>
           </div>
-        -->
         </div>
         
 
         <div class="postsecondaire">
           <div class="options">
             <div class="option scroll_hide">
-              <img src="/icons/futur.svg" class="no_select svg" draggable="false">
+              <img src="icons/futur.svg" class="no_select svg" draggable="false">
               <p>Congé sabbatique</p>
             </div>   
             <div class="info">
-              <img src="/icons/futur.svg" class="no_select svg" draggable="false">
+              <img src="icons/futur.svg" class="no_select svg" draggable="false">
 
               Tu peux prendre une pause après le secondaire.  
               <br> C'est une chance pour apprendre, voyager ou faire du bénévolat.  
@@ -104,11 +104,11 @@
             </div>
 
             <div class="option scroll_hide">
-              <img src="/icons/manual_work.svg" class="no_select svg" draggable="false">
+              <img src="icons/manual_work.svg" class="no_select svg" draggable="false">
               <p>Apprentissage</p>
             </div>
             <div class="info">
-              <img src="/icons/manual_work.svg" class="no_select svg" draggable="false">
+              <img src="icons/manual_work.svg" class="no_select svg" draggable="false">
 
               Tu apprends un métier en travaillant (80%) et en étudiant (20%).  
               <br> Tu peux obtenir un certificat dans un métier spécialisé au NB.  
@@ -116,11 +116,11 @@
             </div>
 
             <div class="option scroll_hide">
-              <img src="/icons/military.svg" class="no_select svg" draggable="false">
+              <img src="icons/military.svg" class="no_select svg" draggable="false">
               <p>Domaine militaire</p>
             </div>
             <div class="info">
-              <img src="/icons/military.svg" class="no_select svg" draggable="false">
+              <img src="icons/military.svg" class="no_select svg" draggable="false">
               
               Plusieurs façons de joindre les Forces armées canadiennes.  
               <br> Études payées, bon salaire et avantages offerts.  
@@ -128,11 +128,11 @@
             </div>
 
             <div class="option scroll_hide">
-              <img src="/icons/formation.svg" class="no_select svg" draggable="false">
+              <img src="icons/formation.svg" class="no_select svg" draggable="false">
               <p>Formation privée</p>
             </div>
             <div class="info">
-              <img src="/icons/formation.svg" class="no_select svg" draggable="false">
+              <img src="icons/formation.svg" class="no_select svg" draggable="false">
 
               Des écoles privées offrent des cours pratiques
               <br> (ex. : esthétique, animaux, massage).  
@@ -140,11 +140,11 @@
             </div>
 
             <div class="option scroll_hide">
-              <img src="/icons/college.svg" class="no_select svg" draggable="false">
+              <img src="icons/college.svg" class="no_select svg" draggable="false">
               <p>Collège</p>
             </div>
             <div class="info">
-              <img src="/icons/college.svg" class="no_select svg" draggable="false">
+              <img src="icons/college.svg" class="no_select svg" draggable="false">
 
               Le collège enseigne comment faire un métier.  
               <br> Tu obtiens un diplôme ou un certificat.  
@@ -152,11 +152,11 @@
             </div>
 
             <div class="option scroll_hide">
-              <img src="/icons/school.svg" class="no_select svg" draggable="false">
+              <img src="icons/school.svg" class="no_select svg" draggable="false">
               <p>Université</p>
             </div>
             <div class="info">
-              <img src="/icons/school.svg" class="no_select svg" draggable="false">
+              <img src="icons/school.svg" class="no_select svg" draggable="false">
 
               L'université enseigne à réfléchir et résoudre des problèmes.  
               <br> Baccalauréat : 3 à 5 ans
@@ -166,11 +166,11 @@
             </div>
 
             <div class="option scroll_hide">
-              <img src="/icons/buisness.svg" class="no_select svg" draggable="false">
+              <img src="icons/buisness.svg" class="no_select svg" draggable="false">
               <p>Entrepreneuriat</p>
             </div>
             <div class="info">
-              <img src="/icons/buisness.svg" class="no_select svg" draggable="false">
+              <img src="icons/buisness.svg" class="no_select svg" draggable="false">
               
               Tu veux lancer ton entreprise?  
               <br> La FCJE aide les jeunes de 18 à 39 ans à démarrer leur projet.  
@@ -178,11 +178,11 @@
             </div>
 
             <div class="option scroll_hide">
-              <img src="/icons/work.svg" class="no_select svg" draggable="false">
+              <img src="icons/work.svg" class="no_select svg" draggable="false">
               <p>Marché du travail</p>
             </div>
             <div class="info">
-              <img src="/icons/work.svg" class="no_select svg" draggable="false">
+              <img src="icons/work.svg" class="no_select svg" draggable="false">
               
               Tu peux commencer à travailler après le secondaire.  
               <br> Certains emplois seront limités sans diplôme.  
@@ -195,31 +195,31 @@
 
         <div class="conseils">
           <div class="conseil scroll_hide">
-            <img src="/icons/futur.svg" class="no_select svg" draggable="false"></img>
+            <img src="icons/futur.svg" class="no_select svg" draggable="false"></img>
 
             <p>Sois organisé</p>
           </div>
           
           <div class="conseil scroll_hide">
-            <img src="/icons/formation.svg" class="no_select svg" draggable="false"></img>
+            <img src="icons/formation.svg" class="no_select svg" draggable="false"></img>
 
             <p>Suis les critères</p>
           </div>
 
           <div class="conseil scroll_hide">
-            <img src="/icons/choix.svg" class="no_select svg" draggable="false"></img>
+            <img src="icons/choix.svg" class="no_select svg" draggable="false"></img>
 
             <p>Bonne référence</p>
           </div>
 
           <div class="conseil scroll_hide">
-            <img src="/icons/college.svg" class="no_select svg" draggable="false"></img>
+            <img src="icons/college.svg" class="no_select svg" draggable="false"></img>
 
             <p>Relis-toi</p>
           </div>
 
           <div class="conseil scroll_hide">
-            <img src="/icons/forces.svg" class="no_select svg" draggable="false"></img>
+            <img src="icons/forces.svg" class="no_select svg" draggable="false"></img>
 
             <p>Vante-toi</p>
           </div>
@@ -230,24 +230,54 @@
 
           <label for="recherche_expand" class="btn" onclick="toggle_dropdown('recherche', 'recherche_expand')">
             <p>Resources</p>
-            <img class="no_select svg" draggable="false" src="/icons/arrow_down.svg">
+            <img class="no_select svg" draggable="false" src="icons/arrow_down.svg">
           </label>
 
           <div class="list">
-            <div class="admin_buttons">          
-              <input type="button" id="add_button_list" onclick="add_record('scholarship')" style="display: none;">
-    
-              <label for="add_button_list" class="add_button admin icon">
-                <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
-              </label>
-    
-              <input type="checkbox" id="edit_checkbox_list" class="edit_checkbox" onchange="edit_record(this, this.parentNode.parentNode)" style="display: none;">
-    
-              <label for="edit_checkbox_list" class="admin icon">
-                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
-              </label>
-            </div>          
+             <div class="record">
+                <h6>Tableau des bourses ESN</h6>
+                  <a href="/bourses" target="_blank">Plus d'information</a>
+                </div>
+                <div class="record">
+                  <h6>Répertoire Jeunesse</h6>
+                  <a href="https://www.calameo.com/books/00542510818bc12cb0dc3" target="_blank">Plus d'information</a>
+                </div>
+                <div class="record">
+                  <h6>Établissements postsecondaires (EduCanada)</h6>
+                  <a href="https://www.educanada.ca/scholarships-bourses/can/institutions/study-in-canada-sep-etudes-au-canada-pct.aspx" target="_blank">Plus d'information</a>
+                </div>
+                <div class="record">
+                  <h6>Plateforme ScholarshipCanada</h6>
+                  <a href="https://www.scholarshipscanada.com/" target="_blank">Plus d'information</a>
+                </div>
+                <div class="record">
+                  <h6>Ressource pour Autochtones | FSC</h6>
+                  <a href="https://fsc-ccf.ca/wp-content/uploads/2024/10/les-jeunes-autochtones-dans-la-finance_sep2024.pdf" target="_blank">Plus d'information</a>
+                </div>
+                <div class="record">
+                  <h6>Recherche Google (bourses)</h6>
+                  <a href="https://www.google.com" target="_blank">Plus d'information</a>
+                </div>
+                <div class="record">
+                  <h6>Disability Awards</h6>
+                  <a href="https://disabilityawards.ca/" target="_blank">Plus d'information</a>
+                </div>
+                <div class="record">
+                  <h6>Suggestions de la famille</h6>
+                  <a href="#" target="_blank">Plus d'information</a>
+                </div>
+                <div class="record">
+                  <h6>Bourses LGBTQ+ | GrantMe</h6>
+                  <a href="https://www.grantme.ca/blog/8-scholarships-for-2slgbtq-students-in-canada" target="_blank">Plus d'information</a>
+                </div>
+                <div class="record">
+                  <h6>Bourse Bill 7 (LGBTQ+)</h6>
+                  <a href="https://bill7award.ca/" target="_blank">Plus d'information</a>
+                </div>
+                <div class="record">
+                  <h6>Fondation LOUD (LGBTQ+)</h6>
+                  <a href="https://www.grantme.ca/blog/8-scholarships-for-2slgbtq-students-in-canada" target="_blank">Plus d'information</a>
+                </div>
           </div>       
 
           <div class="description">
@@ -264,24 +294,94 @@
 
           <label for="websites_expand" class="btn" onclick="toggle_dropdown('websites', 'websites_expand')">
             <p>Liens</p>
-            <img class="no_select svg" draggable="false" src="/icons/arrow_down.svg">
+            <img class="no_select svg" draggable="false" src="icons/arrow_down.svg">
           </label>
 
           <div class="list">
-            <div class="admin_buttons">          
-              <input type="button" id="add_button_website" onclick="add_record('resource')" style="display: none;">
-    
-              <label for="add_button_website" class="add_button admin icon">
-                <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
-              </label>
-    
-              <input type="checkbox" id="edit_checkbox_website" class="edit_checkbox" onchange="edit_record(this, this.parentNode.parentNode)" style="display: none;">
-    
-              <label for="edit_checkbox_website" class="admin icon">
-                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
-              </label>
-            </div>          
+            <div class="record">
+              <h6>myBlueprint - Outil d'exploration et de planification de carrière</h6>
+              <a href="https://www.myblueprint.ca" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Guichet-Emplois - Recherche d'emploi et planification de carrière</h6>
+              <a href="https://www.guichetemplois.gc.ca/" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Métiers spécialisés - Découvre les métiers et la formation d'apprenti</h6>
+              <a href="#" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Carrières dans les soins de santé GNB</h6>
+              <a href="https://www.welcomenb.ca/content/wel-bien/fr/emplois-et-carrieres/carrieres-dans-les-soins-de-sante.html" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Canadian Gap Year Association (en anglais seulement)</h6>
+              <a href="https://www.cangap.ca/" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Services financiers pour étudiants - Prêts et bourses au Canada et au NB</h6>
+              <a href="#" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>EmploisNB - Carrières, formation et marché du travail</h6>
+              <a href="https://www.nbjobs.ca/" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Forces armées canadiennes - Recherche de carrières militaires</h6>
+              <a href="https://forces.ca/fr/" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Apprentissage et Certification professionnelle - Professions désignées</h6>
+              <a href="https://www2.gnb.ca/content/gnb/fr/ministeres/edt/apprentissage.html" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Foyers de soins au NB - Guide sur les professions dans les foyers</h6>
+              <a href="#" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Expérience internationale Canada - Travailler et voyager à l'étranger</h6>
+              <a href="https://www.canada.ca/fr/immigration-refugies-citoyennete/services/travailler-canada/experience-internationale.html" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Emploie-toi - Identifier ses compétences et préparer son CV</h6>
+              <a href="https://emploie-toi.ca/" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Carrière policière (GRC) - Gendarmerie royale du Canada</h6>
+              <a href="https://www.grc-rcmp.gc.ca/fr/carrieres" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Carrières en justice - CliquezJustice</h6>
+              <a href="https://www.cliquezjustice.ca/" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Établissements d'enseignement agréés - Liste nationale</h6>
+              <a href="https://www.cicic.ca/868/Repertoire_canadien_des_etablissements_postsecondaires/index.canada" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Katimavik - Programme jeunesse d'engagement communautaire</h6>
+              <a href="https://katimavik.org/" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Guide - Métiers</h6>
+              <a href="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_cf3f61b86d7c4c878ef35114933430aa.pdf" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Guide - Foresterie</h6>
+              <a href="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_0e0afa4e767c40deae2019d4da885c4e.pdf" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Guide - Santé</h6>
+              <a href="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b240319043774ce8b203c1faa539f081.pdf" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Guide - Petite enfance</h6>
+              <a href="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_b03f666a7e514c909f88d37f418a6639.pdf" target="_blank">Plus d'information</a>
+            </div>
+            <div class="record">
+              <h6>Guide - Tourisme</h6>
+              <a href="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_9c8701cfe6c1417990eb5af56c49528b.pdf" target="_blank">Plus d'information</a>
+            </div>
           </div>     
 
           <div class="description">
@@ -312,15 +412,6 @@
             <div class="links_column">
               <input type="button" class="btn input_link" value="Partie 2" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_de5d6a66b3e6475ea60eb7cbb7b69267.pdf', '_blank')">
               <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_de5d6a66b3e6475ea60eb7cbb7b69267.pdf">
-            </div>
-
-            <div class="admin_buttons">            
-              <input type="checkbox" id="etude_edit_checkbox" class="edit_checkbox" onchange="edit_link(this, this.parentNode.parentNode)" style="display: none;">
-    
-              <label for="etude_edit_checkbox" class="admin icon">
-                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
-              </label>
             </div>
           </div>
         </div>
@@ -360,8 +451,8 @@
               <input type="checkbox" id="emplois_edit_checkbox" class="edit_checkbox" onchange="edit_link(this, this.parentNode.parentNode)" style="display: none;">
     
               <label for="emplois_edit_checkbox" class="admin icon">
-                <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-                <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+                <img src="icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+                <img src="icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
               </label>
             </div>
           </div>
@@ -463,7 +554,7 @@
     </div>
   </body>
 
-  <script defer src="../js/global_script.js"></script>
-  <script defer src="../js/resources_script.js"></script>
+  <script defer src="js/global_script.js"></script>
+  <script defer src="js/resources_script.js"></script>
 
 </html>

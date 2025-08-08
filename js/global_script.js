@@ -125,6 +125,8 @@ function scroll_to(query_selector, event)
 {
     let elements = document.querySelectorAll(query_selector);
 
+    console.log(elements)
+
     //Confirm element is visible
     elements = Array.from(elements).filter(element =>
     {

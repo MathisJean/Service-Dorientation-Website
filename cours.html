@@ -5,11 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Orientation ESN | Cours</title>
-    <link rel="stylesheet" href="../css/cours_styles.css">
+    <link rel="stylesheet" href="css/global_styles.css">
+    <link rel="stylesheet" href="css/navbar_styles.css">
+    <link rel="stylesheet" href="css/cours_styles.css">
   </head>
 
   <body>
-    <%- include("navbar.ejs") %>
+    <div id="navbar_placeholder"></div>
 
     <div>
       <div id="background_gradient">
@@ -27,38 +29,38 @@
     </div>
     
     <div class="content">
-      <img src="/img/divider.svg" class="no_select divider" draggable="false"></img>
+      <img src="img/divider.svg" class="no_select divider" draggable="false"></img>
 
       <div class="cours">
         <h2>Choisir tes cours</h2>
 
         <div class="conseils">
           <div class="conseil scroll_hide">
-            <img src="/icons/interets.svg" class="no_select svg" draggable="false"></img>
+            <img src="icons/interets.svg" class="no_select svg" draggable="false"></img>
 
             <p>Suis tes intérets</p>
           </div>
           
           <div class="conseil scroll_hide">
-            <img src="/icons/futur.svg" class="no_select svg" draggable="false"></img>
+            <img src="icons/futur.svg" class="no_select svg" draggable="false"></img>
 
             <p>Pense à l'avenir</p>
           </div>
 
           <div class="conseil scroll_hide">
-            <img src="/icons/forces.svg" class="no_select svg" draggable="false"></img>
+            <img src="icons/forces.svg" class="no_select svg" draggable="false"></img>
 
             <p>Analyse tes forces</p>
           </div>
 
           <div class="conseil scroll_hide">
-            <img src="/icons/conseil.svg" class="no_select svg" draggable="false"></img>
+            <img src="icons/conseil.svg" class="no_select svg" draggable="false"></img>
 
             <p>Demande conseil</p>
           </div>
 
           <div class="conseil scroll_hide">
-            <img src="/icons/choix.svg" class="no_select svg" draggable="false"></img>
+            <img src="icons/choix.svg" class="no_select svg" draggable="false"></img>
 
             <p>Fais tes choix</p>
           </div>
@@ -94,8 +96,8 @@
             <input type="checkbox" id="edit_checkbox" class="edit_checkbox" onchange="edit_link(this, this.parentNode.parentNode)" style="display: none;">
   
             <label for="edit_checkbox" class="admin icon">
-              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
+              <img src="icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
+              <img src="icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
             </label>
           </div> 
         </div>
@@ -154,20 +156,11 @@
             <input type="button" class="btn input_link" value="Plus d'info" onclick="window.open('https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_c31bc6554c994f598df5e2a2c0ebf97e.pptx?dn=Parcours_en_math%C3%A9matiques_au_secondaire_-_Autod%C3%A9filante_pour_parents_format_standard_(2017).pptx', '_blank')">
             <input type="url" class="btn input_scroll" value="https://16c1a101-b281-48e3-a16a-e623867e50bf.filesusr.com/ugd/053942_c31bc6554c994f598df5e2a2c0ebf97e.pptx?dn=Parcours_en_math%C3%A9matiques_au_secondaire_-_Autod%C3%A9filante_pour_parents_format_standard_(2017).pptx">
           </div>
-
-          <div class="admin_buttons">            
-            <input type="checkbox" id="more_edit_checkbox" class="edit_checkbox" onchange="edit_link(this, this.parentNode.parentNode)" style="display: none;">
-  
-            <label for="more_edit_checkbox" class="admin icon">
-              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
-            </label>
-          </div> 
         </div>
       </div>
     </div>
   </body>
 
-  <script defer src="../js/global_script.js"></script> 
-  <script defer src="../js/cours_script.js"></script> 
+  <script defer src="js/global_script.js"></script> 
+  <script defer src="js/cours_script.js"></script> 
 </html>

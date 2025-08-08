@@ -5,11 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Orientation ESN | Expériences</title>
-    <link rel="stylesheet" href="../css/experiences_styles.css">
+    <link rel="stylesheet" href="css/global_styles.css">
+    <link rel="stylesheet" href="css/navbar_styles.css">
+    <link rel="stylesheet" href="css/experiences_styles.css">
   </head>
 
   <body>
-    <%- include("navbar.ejs") %>
+    <div id="navbar_placeholder"></div>
 
     <div id="background_gradient">
       <div id="background_img">
@@ -25,7 +27,7 @@
     </div> 
     
     <div class="content">
-      <img src="/img/divider.svg" class="no_select divider" draggable="false"></img>
+      <img src="img/divider.svg" class="no_select divider" draggable="false"></img>
 
       <div class="salon_emploi exposition">
         
@@ -33,24 +35,79 @@
 
         <label for="salon_emploi_expand" class="btn" onclick="toggle_dropdown('salon_emploi', 'salon_emploi_expand')">
           <p>Exposants</p>
-          <img class="no_select svg" draggable="false" src="/icons/arrow_down.svg">
+          <img class="no_select svg" draggable="false" src="icons/arrow_down.svg">
         </label>
 
         <div class="list">
-          <div class="admin_buttons">          
-            <input type="button" id="add_button_salon_emploi" onclick="add_exhibitor('salon_emploi')" style="display: none;">
-  
-            <label for="add_button_salon_emploi" class="add_button admin icon">
-              <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
-            </label>
-  
-            <input type="checkbox" id="edit_checkbox_salon_emploi" class="edit_checkbox" onchange="edit_exhibitor(this, this.parentNode.parentNode)" style="display: none;">
-  
-            <label for="edit_checkbox_salon_emploi" class="admin icon">
-              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
-            </label>
-          </div>          
+          <div class="exhibitor">
+            <h6>Les légumes à Daniel</h6>
+            <a href="https://legumesadaniel.com/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>St-Hubert</h6>
+            <a href="https://www.st-hubert.com/fr/carrieres.html" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Forces armées canadiennes</h6>
+            <a href="https://forces.ca/fr/carrieres" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Saint-Isidore Asphalte Ltée</h6>
+            <a href="https://www.st-isidoreasphalte.ca/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Interfor</h6>
+            <a href="https://interfor.com/fr/location/bathurst/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Gendarmerie royale du Canada (GRC)</h6>
+            <a href="https://www.rcmp-grc.gc.ca/fr" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Force policière de Bathurst</h6>
+            <a href="https://www.bathurst.ca/fr/services/1/force-policiere-de-bathurst" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Unicare Home Health Care Inc</h6>
+            <a href="#" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Vitalité</h6>
+            <a href="https://www.vitalitenb.ca/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>District scolaire francophone Nord-Est</h6>
+            <a href="https://www.dsfne.ca/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Service Canada</h6>
+            <a href="https://www.canada.ca/fr/services/emplois/opportunites/gouvernement.html" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Radio de la Baie Ltée</h6>
+            <a href="https://ckle.fm/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Travail NB</h6>
+            <a href="https://travailnb.ca/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Services vie-carrière ESN</h6>
+            <a href="/" target="_blank">Plus d'information</a>
+          </div>
         </div>
         
         <div class="description">
@@ -68,24 +125,159 @@
 
         <label for="orient_action_expand" class="btn" onclick="toggle_dropdown('orient_action', 'orient_action_expand')">
           <p>Exposants</p>
-          <img class="no_select svg" draggable="false" src="/icons/arrow_down.svg">
+          <img class="no_select svg" draggable="false" src="icons/arrow_down.svg">
         </label>
 
         <div class="list">
-          <div class="admin_buttons">          
-            <input type="button" id="add_button_orient_action" onclick="add_exhibitor('orient_action')" style="display: none;">
-  
-            <label for="add_button_orient_action" class="add_button admin icon">
-              <img src="/icons/add.svg" class="no_select svg" draggable="false"></img>
-            </label>
-  
-            <input type="checkbox" id="edit_checkbox_orient_action" class="edit_checkbox" onchange="edit_exhibitor(this, this.parentNode.parentNode)" style="display: none;">
-  
-            <label for="edit_checkbox_orient_action" class="admin icon">
-              <img src="/icons/edit.svg" class="unactive_checkbox no_select svg" draggable="false"></img>
-              <img src="/icons/save.svg" class="active_checkbox no_select svg" draggable="false"></img>
-            </label>
-          </div>    
+          <div class="exhibitor">
+            <h6>CCNB - TIC, Technologies & Transports</h6>
+            <a href="https://ccnb.ca/schools/ecole-des-tic-technologies-et-du-transport/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>CCNB - Ressources naturelles</h6>
+            <a href="https://ccnb.ca/schools/ecole-des-peches-et-des-ressources-naturelles/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>CCNB - CNFS</h6>
+            <a href="https://ccnb.ca/cnfs/#:~:text=Le%20Consortium%20national%20de%20formation%20en%20sant%C3%A9%20(CNFS)%20regroupe%2016" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>CCNB - Sciences de la santé</h6>
+            <a href="https://ccnb.ca/schools/ecole-des-sciences-de-la-sante/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Collège de l'Île</h6>
+            <a href="https://www.collegedelile.ca/#:~:text=Choisir%20le%20Coll%C3%A8ge%20de%20l%E2%80%99%C3%8Ele,%20c%E2%80%99est%20choisir%20des%20programmes%20de" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>CTFM</h6>
+            <a href="https://www.mcft.ca/fr/home-fr/#:~:text=CTFM.%20Choisir%20le%20bon%20coll%C3%A8ge%20et%20le%20meilleur%20programme%20pour" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>NBCC</h6>
+            <a href="https://nbcc.ca/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Collège McKenzie</h6>
+            <a href="https://mckenzie.edu/#:~:text=McKenzie%20College%20offers%20students%20a%20high-quality%20education%20in%20a%20vibrant" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>UdeM - Campus Shippagan</h6>
+            <a href="https://www.umoncton.ca/shippagan" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>UdeM - Campus Edmundston</h6>
+            <a href="https://www.umoncton.ca/edmundston" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>UdeM - Sciences infirmières (Bathurst)</h6>
+            <a href="https://www.umoncton.ca/umcm-fsssc-scienceinfirmiere/#:~:text=Le%208%20mai%20dernier,%20nous%20avons%20c%C3%A9l%C3%A9br%C3%A9%20avec%20fiert%C3%A9%20et" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>UdeM - CNFS</h6>
+            <a href="https://carrieresante.ca/etudiants#:~:text=Le%20Consortium%20national%20de%20formation%20en%20sant%C3%A9%20(CNFS)%20%E2%80%93%20Volet" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Université Sainte-Anne</h6>
+            <a href="https://www.usainteanne.ca/#:~:text=L'Universit%C3%A9%20Sainte-Anne%20reconnait%20que%20ses%20cinq%20campus%20sont%20situ%C3%A9s%20en" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>St. Thomas University</h6>
+            <a href="https://www.stu.ca/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Mount Allison University</h6>
+            <a href="https://mta.ca/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Université Bishop’s</h6>
+            <a href="https://www.ubishops.ca/fr/#:~:text=Bishop%E2%80%99s%20est%20une%20universit%C3%A9%20principalement%20r%C3%A9sidentielle%20fortement%20ax%C3%A9e%20sur%20les" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Forces armées canadiennes</h6>
+            <a href="https://forces.ca/fr/carrieres#:~:text=Lancez%20une%20recherche%20pour%20voir%20les%20possibilit%C3%A9s%20d%E2%80%99emploi%20dans%20les" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Réserve de l'armée canadienne</h6>
+            <a href="https://www.canada.ca/fr/armee/organisation/reserve.html" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Force policière de Bathurst</h6>
+            <a href="https://www.bathurst.ca/fr/services/1/force-policiere-de-bathurst#:~:text=Force%20polici%C3%A8re%20de%20Bathurst.%20Votre%20s%C3%A9curit%C3%A9%20nous%20tient%20%C3%A0%20c%C5%93ur." target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>GRC</h6>
+            <a href="https://www.rcmp-grc.gc.ca/fr/la-formation-des-cadets" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Services correctionnels du Canada</h6>
+            <a href="https://www.canada.ca/fr/service-correctionnel/services/scc-vous/travailler-scc.html" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Incendie Bathurst</h6>
+            <a href="https://www.bathurst.ca/fr/services/service-de-protection-incendie-de-bathurst/11/une-carriere-avec-le-service-d-incendie-de-bathurst" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Ambulance NB</h6>
+            <a href="https://ambulancenb.ca/fr/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Médavie Édu Santé</h6>
+            <a href="https://www.medaviehealthed.com/fr/medavie-edusante/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Réseau de santé Vitalité</h6>
+            <a href="https://www.vitalitenb.ca/fr/emplois" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Interfor</h6>
+            <a href="https://interfor.com/fr/carrieres/opportunites-demploi/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>St-Isidore Asphalte Ltée</h6>
+            <a href="https://www.st-isidoreasphalte.ca/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Travail NB</h6>
+            <a href="https://travailnb.ca/" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>CBDC Chaleur</h6>
+            <a href="https://www.cbdc.ca/fr/programmes/chaleur-ma-region-mon-futur" target="_blank">Plus d'information</a>
+          </div>
+
+          <div class="exhibitor">
+            <h6>Services vie-carrière ESN</h6>
+            <a href="/" target="_blank">Plus d'information</a>
+          </div>
         </div>           
 
         <div class="description">
@@ -102,22 +294,22 @@
 
         <div class="options">
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/construction.svg">
+            <img class="no_select svg" draggable="false" src="icons/construction.svg">
             <p>Nos jeunes au travail</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/construction.svg">
+            <img class="no_select svg" draggable="false" src="icons/construction.svg">
             Nos élèves ont accès à deux conseillères d'orientation.
             <br>Celles-ci les accompagnent dans leur cheminement scolaire et personnel,
             <br>tout en leur présentant les options qui s'offrent à eux.
           </div>
 
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/manual_work.svg">
+            <img class="no_select svg" draggable="false" src="icons/manual_work.svg">
             <p>Journées carrières</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/manual_work.svg">
+            <img class="no_select svg" draggable="false" src="icons/manual_work.svg">
             Des ateliers sont organisés tout au long de l'année
             <br>pour aider les élèves à mieux se connaître,
             <br>explorer les métiers,
@@ -125,87 +317,87 @@
           </div>
 
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/college.svg">
+            <img class="no_select svg" draggable="false" src="icons/college.svg">
             <p>Éducation COOP</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/college.svg">
+            <img class="no_select svg" draggable="false" src="icons/college.svg">
             Nous offrons des outils numériques
             <br>et des ressources pour t'aider à découvrir des carrières
             <br>qui correspondent à tes intérêts et compétences.
           </div>
 
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/conseil.svg">
+            <img class="no_select svg" draggable="false" src="icons/conseil.svg">
             <p>Entrevue d'information</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/conseil.svg">
+            <img class="no_select svg" draggable="false" src="icons/conseil.svg">
             Nos conseillères collaborent avec toi et tes enseignants
             <br>pour adapter ton parcours selon ton profil,
             <br>tes ambitions et tes besoins.
           </div>
 
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/teams.svg">
+            <img class="no_select svg" draggable="false" src="icons/teams.svg">
             <p>Bénévolat</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/teams.svg">
+            <img class="no_select svg" draggable="false" src="icons/teams.svg">
             Nos conseillères d'orientation sont en contact avec des organismes communautaires
             <br>(emploi, santé mentale, hébergement, etc.)
             <br>afin d'accompagner les jeunes qui en ont besoin.
           </div>
 
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/buisness.svg">
+            <img class="no_select svg" draggable="false" src="icons/buisness.svg">
             <p>Salon carrière</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/buisness.svg">
+            <img class="no_select svg" draggable="false" src="icons/buisness.svg">
             Nous organisons régulièrement des visites d'institutions postsecondaires
             <br>et participons à divers salons d'information
             <br>pour aider les jeunes à faire un choix éclairé.
           </div>
 
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/formation.svg">
+            <img class="no_select svg" draggable="false" src="icons/formation.svg">
             <p>Étudiant d'un jour</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/formation.svg">
+            <img class="no_select svg" draggable="false" src="icons/formation.svg">
             Nos élèves ont accès à de l'information pertinente
             <br>sur les collèges, universités et autres formations.
             <br>Nous les aidons à s'orienter selon leurs forces, intérêts et objectifs.
           </div>
 
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/school.svg">
+            <img class="no_select svg" draggable="false" src="icons/school.svg">
             <p>Journée portes ouvertes</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/school.svg">
+            <img class="no_select svg" draggable="false" src="icons/school.svg">
             On t'aide à préparer tes demandes d'admission,
             <br>à rédiger des lettres de motivation
             <br>et à soumettre tes documents à temps.
           </div>
 
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/work.svg">
+            <img class="no_select svg" draggable="false" src="icons/work.svg">
             <p>Emploi</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/work.svg">
+            <img class="no_select svg" draggable="false" src="icons/work.svg">
             Tu peux obtenir de l'aide pour trouver,
             <br>comprendre et postuler aux bourses, prêts et aides financières disponibles.
           </div>
 
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/interets.svg">
+            <img class="no_select svg" draggable="false" src="icons/interets.svg">
             <p>Programmes</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/interets.svg">
+            <img class="no_select svg" draggable="false" src="icons/interets.svg">
             Chaque élève peut bénéficier d'un suivi individuel
             <br>pour discuter de ses projets,
             <br>ajuster son plan,
@@ -213,11 +405,11 @@
           </div>
 
           <div class="option scroll_hide">
-            <img class="no_select svg" draggable="false" src="/icons/choix.svg">
+            <img class="no_select svg" draggable="false" src="icons/choix.svg">
             <p>Vie scolaire</p>
           </div>
           <div class="info">
-            <img class="no_select svg" draggable="false" src="/icons/choix.svg">
+            <img class="no_select svg" draggable="false" src="icons/choix.svg">
             Chaque élève peut bénéficier d'un suivi individuel
             <br>pour discuter de ses projets,
             <br>ajuster son plan,
@@ -228,7 +420,7 @@
     </div>
   </body>
 
-  <script defer src="../js/global_script.js"></script>
-  <script defer src="../js/experiences_script.js"></script>
+  <script defer src="js/global_script.js"></script>
+  <script defer src="js/experiences_script.js"></script>
 
 </html>

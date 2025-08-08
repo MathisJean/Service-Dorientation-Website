@@ -9,12 +9,6 @@ let values = [];
 let edited_values = [];
 
 //----Script----//
-
-window.key_exchange_complete.then(() => //Wait for public keys to be exchanged
-{
-    update_exhibitors();
-})
-
 //----Functions----//
 
 //Gets exhibitors and adds them to DOM
@@ -230,6 +224,7 @@ function initialize_exhibitor(exhibitor)
 
     new_element.innerHTML =
     `
+    <div class="exhibitor">
         <h6>${exhibitor.name}</h6>
         <a href="${exhibitor.link}" target="_blank">Plus d'information</a>
         <input type="text" value="${exhibitor.link}" style="display: none;">
@@ -239,6 +234,7 @@ function initialize_exhibitor(exhibitor)
         <label for="delete_button_${exhibitor.id}" class="admin icon delete_button">
             <img src="/icons/delete.svg" class="no_select svg" draggable="false"></img>
         </label>
+    </div>
     `;
     
     return new_element;

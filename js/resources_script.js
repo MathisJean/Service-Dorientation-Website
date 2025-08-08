@@ -320,15 +320,10 @@ function initialize_record(record)
 
     new_element.innerHTML =
     `
+    <div class="record">
         <h6>${record.name}</h6>
         <a href="${record.url}" target="_blank">Plus d'information</a>
-        <input type="text" value="${record.url}" style="display: none;">
-
-        <input type="button" id="delete_button_${record.id}" onclick="delete_record(${record.id})" style="display: none;">
-
-        <label for="delete_button_${record.id}" class="admin icon delete_button">
-            <img src="/icons/delete.svg" class="no_select svg" draggable="false"></img>
-        </label>
+    </div>
     `;
     
     return new_element;
