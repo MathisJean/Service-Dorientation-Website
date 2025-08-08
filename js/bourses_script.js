@@ -14,12 +14,6 @@ let scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""
 let edited_scholarship_values = {id: 0, name: "", date: {day: null, month: "", time: ""}, criteria: "", value: "", link: "", subscribedUsers: []};
 
 //----Script----//
-
-window.key_exchange_complete.then(() => //Wait for public keys to be exchanged
-{
-    update_table();
-})
-
 //----Functions----//
 
 //Adds month headers and containers dynamically based on "months" array and scholarship data
@@ -493,6 +487,7 @@ function initiate_scholarship(scholarship)
 
   new_scholarship.innerHTML = 
   ` 
+  <div class="scholarship scroll_hide">
     <div class="id" style="display: none;">${scholarship.id}</div>
     <h4 class="scholarship_name admin_edit">${scholarship.name}</h4>
     <h5 class="scholarship_value admin_edit">${scholarship.value}</h5>
@@ -556,6 +551,7 @@ function initiate_scholarship(scholarship)
         <img src="/icons/delete.svg" class="no_select svg" draggable="false"></img>
       </label>
     </div>
+  </div>
   `;
 
   new_scholarship.querySelector("#month_select").value = scholarship.date.month;
